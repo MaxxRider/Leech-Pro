@@ -1,0 +1,3 @@
+aiohttp
+https://github.com/pyrogram/pyrogram/archive/asyncio.zip
+tgcrypto
