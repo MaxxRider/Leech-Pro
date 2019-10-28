@@ -23,3 +23,5 @@ class Config(object):
     MAX_MESSAGE_LENGTH = 4096
     # set timeout for subprocess
     PROCESS_MAX_TIMEOUT = 3600
+    # real-debrid.com key
+    REAL_DEBRID_KEY = os.environ.get("REAL_DEBRID_KEY", None)

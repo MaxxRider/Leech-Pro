@@ -11,12 +11,14 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
-async def new_join_f(client, message):
-    chat_type = message.chat.type
-    if chat_type != "private":
-        # leave chat
-        await client.leave_chat(
-            chat_id=message.chat.id,
-            delete=True
-        )
-    await message.delete(revoke=True)
+import os
+import re
+
+
+MAGNETIC_LINK_REGEX = r"magnet\:\?xt\=urn\:btih\:([A-F\d]+)"
+
+
+def extract_info_hash_from_ml(magnetic_link):
+    ml_re_match = re.search(MAGNETIC_LINK_REGEX, magnetic_link)
+    if ml_re_match is not None:
+        return ml_re_match.group(1)
