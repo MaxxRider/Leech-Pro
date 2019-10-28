@@ -28,9 +28,15 @@ async def incoming_message_f(client, message):
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
-        downloadable_link, downloadable_file_name = await extract_it(dl_url, cf_name)
+        downloadable_link, downloadable_file_name = await extract_it(
+            dl_url,
+            cf_name
+        )
         LOGGER.info(downloadable_link)
         LOGGER.info(downloadable_file_name)
+        if downloadable_link is None:
+            await i_m_sefg.edit_text("unable to fetch direct download link")
+            return
         dl_requested_user = message.from_user.id
         await i_m_sefg.edit_text("trying to download")
         sagtus, err_message = await request_download(
