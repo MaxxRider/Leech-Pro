@@ -39,6 +39,7 @@ async def extract_it(restricted_link, custom_file_name):
             "link": restricted_link
         }
         html = await fetch(session, url_to_send, to_send_data)
+        LOGGER.info(html)
         downloadable_url = html.get("download")
         original_file_name = custom_file_name
         if original_file_name is None:
