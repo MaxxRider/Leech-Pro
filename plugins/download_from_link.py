@@ -25,7 +25,7 @@ else:
 
 
 async def request_download(url, file_name, r_user_id):
-    directory_path = os.path.join(Config.DOWNLOAD_LOCATION, r_user_id, str(time.time()))
+    directory_path = os.path.join(Config.DOWNLOAD_LOCATION, str(r_user_id), str(time.time()))
     # create download directory, if not exist
     if not os.path.isdir(directory_path):
         os.makedirs(directory_path)

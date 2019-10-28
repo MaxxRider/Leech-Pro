@@ -23,12 +23,12 @@ async def incoming_message_f(client, message):
     i_m_sefg = await message.reply_text("processing", quote=True)
     # LOGGER.info(message)
     dl_url, cf_name = extract_link(message.text)
-    # LOGGER.info(dl_url)
-    # LOGGER.info(cf_name)
+    LOGGER.info(dl_url)
+    LOGGER.info(cf_name)
     await i_m_sefg.edit_text("extracting links")
     downloadable_link, downloadable_file_name = await extract_it(dl_url, cf_name)
-    # LOGGER.info(downloadable_link)
-    # LOGGER.info(downloadable_file_name)
+    LOGGER.info(downloadable_link)
+    LOGGER.info(downloadable_file_name)
     dl_requested_user = message.from_user.id
     await i_m_sefg.edit_text("trying to download")
     sagtus, err_message = await request_download(
