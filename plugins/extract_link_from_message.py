@@ -16,11 +16,13 @@ import re
 from plugins.magnetic_link_regex import extract_info_hash_from_ml
 
 
-def extract_link(text):
+def extract_link(message):
     custom_file_name = None
     url = None
-    if "|" in text:
+    if "|" in message.text:
         url, custom_file_name = text.split("|")
         url = url.strip()
         custom_file_name = custom_file_name.strip()
+    elif message.entities is not None:
+        url = message.text
     return url, custom_file_name
