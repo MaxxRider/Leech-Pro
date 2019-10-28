@@ -12,6 +12,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 
+import os
 import time
 from plugins.extract_link_from_message import extract_link
 from plugins.real_debrid_extractor import extract_it
@@ -41,22 +42,27 @@ async def incoming_message_f(client, message):
             await i_m_sefg.edit_text("downloaded.. now uploading ...")
             # upload file
             start_time = time.time()
-            await client.send_document(
-                chat_id=message.chat.id,
-                document=err_message,
-                caption=dl_url,
-                parse_mode="html",
-                disable_notification=True,
-                reply_to_message_id=i_m_sefg.message_id,
-                progress=progress_for_pyrogram,
-                progress_args=(
-                    "trying to upload",
-                    i_m_sefg,
-                    start_time
+            try:
+                await client.send_document(
+                    chat_id=message.chat.id,
+                    document=err_message,
+                    caption=dl_url,
+                    parse_mode="html",
+                    disable_notification=True,
+                    reply_to_message_id=i_m_sefg.message_id,
+                    progress=progress_for_pyrogram,
+                    progress_args=(
+                        "trying to upload",
+                        i_m_sefg,
+                        start_time
+                    )
                 )
-            )
-            #
-            await i_m_sefg.delete()
+                #
+                await i_m_sefg.delete()
+            except Exception as e:
+                await i_m_sefg.edit_text(str(e))
+            else:
+                os.remove(err_message)
         else:
             await i_m_sefg.edit_text(err_message)
     else:
