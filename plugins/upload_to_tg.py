@@ -19,8 +19,9 @@ from plugins.display_progress import progress_for_pyrogram
 
 async def upload_to_tg(message, local_file_name):
     LOGGER.info(local_file_name)
+    caption_str = ""
     caption_str += "<code>"
-    caption_str = os.path.basename(local_file_name)
+    caption_str += os.path.basename(local_file_name)
     caption_str += "</code>"
     caption_str += "\n\n"
     caption_str += "<a href='tg://user?id=" + message.reply_to_message.from_user.id + "'>"
