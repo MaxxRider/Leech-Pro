@@ -43,6 +43,8 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--seed-time=1")
     aria2_daemon_start_cmd.append("--split=10")
     #
+    LOGGER.info(aria2_daemon_start_cmd)
+    #
     process = await asyncio.create_subprocess_exec(
         *aria2_daemon_start_cmd,
         stdout=asyncio.subprocess.PIPE,
@@ -72,10 +74,10 @@ def add_magnet(aria_instance, magnetic_link):
 
 def add_url(aria_instance, text_url, c_file_name):
     options = None
-    if c_file_name is not None:
-        options = {
-            "out": c_file_name
-        }
+    # if c_file_name is not None:
+    #     options = {
+    #         "out": c_file_name
+    #     }
     try:
         download = aria_instance.add_uris(
             text_url,
@@ -100,6 +102,7 @@ async def call_apropriate_function(
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
     if not sagtus:
         return sagtus, err_message
+    LOGGER.info(err_message)
     await check_progress_for_dl(
         aria_instance,
         err_message,
@@ -130,6 +133,7 @@ async def check_progress_for_dl(aria2, gid, event):
                 msg += f"\nTotal Size: {file.total_length_string()}"
                 msg += f"\nStatus: {file.status}"
                 msg += f"\nETA: {file.eta_string()}"
+                LOGGER.info(msg)
                 if msg != previous_message:
                     await event.edit(msg)
                     previous_message = msg
@@ -144,7 +148,7 @@ async def check_progress_for_dl(aria2, gid, event):
     file = aria2.get_download(gid)
     complete = file.is_complete
     if complete:
-        await event.edit(f"File Downloaded Successfully:`{file.name}`")
+        await event.edit(f"File Downloaded Successfully: `{file.name}`")
         await upload_to_tg(event, file.name)
 
 
