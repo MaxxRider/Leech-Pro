@@ -78,9 +78,11 @@ def add_url(aria_instance, text_url, c_file_name):
     #     options = {
     #         "out": c_file_name
     #     }
+    uris = [text_url]
+    # Add URL Into Queue
     try:
         download = aria_instance.add_uris(
-            text_url,
+            uris,
             options=options,
             position=None
         )
