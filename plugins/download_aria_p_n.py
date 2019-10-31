@@ -112,12 +112,14 @@ async def call_apropriate_function(
     )
     if incoming_link.startswith("magnet:"):
         #
-        new_gid = await check_metadata(aria_instance, err_message)
+        err_message = await check_metadata(aria_instance, err_message)
         await check_progress_for_dl(
             aria_instance,
             new_gid,
             sent_message_to_update_tg_p
         )
+    file = aria_instance.get_download(err_message)
+    await upload_to_tg(event, file.name)
     return True, None
 
 
@@ -151,7 +153,6 @@ async def check_progress_for_dl(aria2, gid, event):
     complete = file.is_complete
     if complete:
         await event.edit(f"File Downloaded Successfully: `{file.name}`")
-        await upload_to_tg(event, file.name)
 
 
 async def check_metadata(aria2, gid):
