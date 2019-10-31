@@ -92,5 +92,5 @@ async def upload_to_tg(message, local_file_name):
     except Exception as e:
         await message.edit_text("**FAILED**\n" + str(e))
     else:
-        await message.edit_text("Process Completed")
+        await message.delete()
     os.remove(local_file_name)
