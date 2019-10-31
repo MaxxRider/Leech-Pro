@@ -119,7 +119,7 @@ async def call_apropriate_function(
             sent_message_to_update_tg_p
         )
     file = aria_instance.get_download(err_message)
-    await upload_to_tg(event, file.name)
+    await upload_to_tg(sent_message_to_update_tg_p, file.name)
     return True, None
 
 
