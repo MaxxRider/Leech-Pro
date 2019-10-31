@@ -1,4 +1,5 @@
 aiohttp
 aria2p
+hachoir
 https://github.com/pyrogram/pyrogram/archive/asyncio.zip
 tgcrypto

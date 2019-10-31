@@ -15,7 +15,10 @@ LOGGER = logging.getLogger(__name__)
 def extract_link(message):
     custom_file_name = None
     url = None
-    if "|" in message.text:
+    if message is None:
+        url = None
+        custom_file_name = None
+    elif "|" in message.text:
         url, custom_file_name = message.text.split("|")
         url = url.strip()
         custom_file_name = custom_file_name.strip()

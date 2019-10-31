@@ -23,4 +23,4 @@ async def new_join_f(client, message):
 
 
 async def help_message_f(client, message):
-    message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)
+    await message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)

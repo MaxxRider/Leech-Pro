@@ -22,13 +22,13 @@ from plugins.display_progress import progress_for_pyrogram
 
 async def incoming_message_f(client, message):
     i_m_sefg = await message.reply_text("processing", quote=True)
-    LOGGER.info(message)
+    # LOGGER.info(message)
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
-        aria_i_p = aria_start()
+        aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
         await i_m_sefg.edit_text("trying to download")
         sagtus, err_message = await call_apropriate_function(

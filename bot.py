@@ -44,11 +44,11 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_message_handler)
     #
-    status_message_handler = MessageHandler(
-        status_message_f,
-        filters=Filters.command(["status"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
-    )
-    app.add_handler(status_message_handler)
+    # status_message_handler = MessageHandler(
+    #     status_message_f,
+    #     filters=Filters.command(["status"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
+    # )
+    # app.add_handler(status_message_handler)
     #
     help_text_handler = MessageHandler(
         help_message_f,

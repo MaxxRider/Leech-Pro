@@ -12,7 +12,9 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 import aria2p
+import asyncio
 import os
+from plugins.upload_to_tg import upload_to_tg
 
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
@@ -35,7 +37,7 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--max-connection-per-server=10")
     aria2_daemon_start_cmd.append("--min-split-size=10M")
     aria2_daemon_start_cmd.append("--rpc-listen-all=false")
-    aria2_daemon_start_cmd.append(f"--rpc-listen-port={Config.ARIA2_STARTED_PORT}")
+    aria2_daemon_start_cmd.append(f"--rpc-listen-port={Config.ARIA_TWO_STARTED_PORT}")
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
     aria2_daemon_start_cmd.append("--seed-ratio=100.0")
     aria2_daemon_start_cmd.append("--seed-time=1")
@@ -47,12 +49,12 @@ async def aria_start():
         stderr=asyncio.subprocess.PIPE
     )
     stdout, stderr = await process.communicate()
-    logger.info(stdout)
-    logger.info(stderr)
+    LOGGER.info(stdout)
+    LOGGER.info(stderr)
     aria2 = aria2p.API(
         aria2p.Client(
             host="http://localhost",
-            port=Config.ARIA2_STARTED_PORT,
+            port=Config.ARIA_TWO_STARTED_PORT,
             secret=""
         )
     )
@@ -65,7 +67,7 @@ def add_magnet(aria_instance, magnetic_link):
     except Exception as e:
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
     else:
-        return True, "Added " + "**URL** " + " to Progress: __" + download.gid + "__. Check /status"
+        return True, "" + download.gid + ""
 
 
 def add_url(aria_instance, text_url, c_file_name):
@@ -83,11 +85,71 @@ def add_url(aria_instance, text_url, c_file_name):
     except Exception as e:
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
     else:
-        return True, "Added " + "**URL** " + " to Progress: __" + download.gid + "__. Check /status"
+        return True, "" + download.gid + ""
 
 
-def call_apropriate_function(aria_instance, incoming_link, c_file_name):
+async def call_apropriate_function(
+    aria_instance,
+    incoming_link,
+    c_file_name,
+    sent_message_to_update_tg_p
+):
     if incoming_link.startswith("magnet:"):
-        return add_magnet(aria_instance, incoming_link)
+        sagtus, err_message = add_magnet(aria_instance, incoming_link)
     else:
-        return add_url(aria_instance, incoming_link, c_file_name)
+        sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
+    if not sagtus:
+        return sagtus, err_message
+    await check_progress_for_dl(
+        aria_instance,
+        err_message,
+        sent_message_to_update_tg_p
+    )
+    if incoming_link.startswith("magnet:"):
+        #
+        new_gid = await check_metadata(aria_instance, err_message)
+        await check_progress_for_dl(
+            aria_instance,
+            new_gid,
+            sent_message_to_update_tg_p
+        )
+    return True, None
+
+
+async def check_progress_for_dl(aria2, gid, event):
+    complete = None
+    previous_message = None
+    while not complete:
+        file = aria2.get_download(gid)
+        complete = file.is_complete
+        try:
+            if not file.error_message:
+                msg = f"\nDownloading File: `{file.name}`"
+                msg += f"\nSpeed: {file.download_speed_string()} 🔽 / {file.upload_speed_string()} 🔼"
+                msg += f"\nProgress: {file.progress_string()}"
+                msg += f"\nTotal Size: {file.total_length_string()}"
+                msg += f"\nStatus: {file.status}"
+                msg += f"\nETA: {file.eta_string()}"
+                if msg != previous_message:
+                    await event.edit(msg)
+                    previous_message = msg
+                    await asyncio.sleep(Config.EDIT_SLEEP_TIME_OUT)
+            else:
+                msg = file.error_message
+                await event.edit(f"`{msg}`")
+                return False
+        except Exception as e:
+            LOGGER.info(str(e))
+            pass
+    file = aria2.get_download(gid)
+    complete = file.is_complete
+    if complete:
+        await event.edit(f"File Downloaded Successfully:`{file.name}`")
+        await upload_to_tg(event, file.name)
+
+
+async def check_metadata(aria2, gid):
+    file = aria2.get_download(gid)
+    new_gid = file.followed_by_ids[0]
+    logger.info("Changing GID " + gid + " to " + new_gid)
+    return new_gid

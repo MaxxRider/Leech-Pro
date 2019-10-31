@@ -25,3 +25,4 @@ class Config(object):
     PROCESS_MAX_TIMEOUT = 3600
     #
     ARIA_TWO_STARTED_PORT = int(os.environ.get("ARIA_TWO_STARTED_PORT", 6800))
+    EDIT_SLEEP_TIME_OUT = int(os.environ.get("EDIT_SLEEP_TIME_OUT", 1))
