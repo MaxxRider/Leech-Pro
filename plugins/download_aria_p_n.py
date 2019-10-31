@@ -115,7 +115,7 @@ async def call_apropriate_function(
         err_message = await check_metadata(aria_instance, err_message)
         await check_progress_for_dl(
             aria_instance,
-            new_gid,
+            err_message,
             sent_message_to_update_tg_p
         )
     file = aria_instance.get_download(err_message)
