@@ -121,4 +121,6 @@ async def upload_single_file(message, local_file_name, caption_str):
             )
     except Exception as e:
         await message.edit_text("**FAILED**\n" + str(e))
+    else:
+        await message.delete()
     os.remove(local_file_name)
