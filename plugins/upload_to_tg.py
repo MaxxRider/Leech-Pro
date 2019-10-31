@@ -24,7 +24,9 @@ async def upload_to_tg(message, local_file_name):
     caption_str += os.path.basename(local_file_name)
     caption_str += "</code>"
     caption_str += "\n\n"
-    caption_str += "<a href='tg://user?id=" + message.reply_to_message.from_user.id + "'>"
+    caption_str += "<a href='tg://user?id="
+    caption_str += str(message.reply_to_message.from_user.id)
+    caption_str += "'>"
     caption_str += "Here is the file to the link you sent"
     caption_str += "</a>"
     start_time = time.time()
