@@ -20,3 +20,7 @@ async def new_join_f(client, message):
             delete=True
         )
     await message.delete(revoke=True)
+
+
+async def help_message_f(client, message):
+    message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)

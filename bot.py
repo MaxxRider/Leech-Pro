@@ -20,8 +20,9 @@ else:
     from config import Config
 
 from pyrogram import Client, Filters, MessageHandler
-from plugins.new_join_fn import new_join_f
+from plugins.new_join_fn import new_join_f, help_message_f
 from plugins.incoming_message_fn import incoming_message_f
+from plugins.status_message_fn import status_message_f
 
 
 if __name__ == "__main__" :
@@ -39,9 +40,21 @@ if __name__ == "__main__" :
     #
     incoming_message_handler = MessageHandler(
         incoming_message_f,
-        filters=Filters.incoming & Filters.chat(chats=Config.AUTH_CHANNEL)
+        filters=Filters.command(["leech"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
     )
     app.add_handler(incoming_message_handler)
+    #
+    status_message_handler = MessageHandler(
+        status_message_f,
+        filters=Filters.command(["status"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
+    )
+    app.add_handler(status_message_handler)
+    #
+    help_text_handler = MessageHandler(
+        help_message_f,
+        filters=Filters.command(["help"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
+    )
+    app.add_handler(help_text_handler)
     #
     new_join_handler = MessageHandler(
         new_join_f,

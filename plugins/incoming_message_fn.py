@@ -15,7 +15,7 @@ LOGGER = logging.getLogger(__name__)
 import os
 import time
 from plugins.extract_link_from_message import extract_link
-from plugins.real_debrid_extractor import extract_it
+from plugins.download_aria_p_n import call_apropriate_function, aria_start
 from plugins.download_from_link import request_download
 from plugins.display_progress import progress_for_pyrogram
 
@@ -23,53 +23,21 @@ from plugins.display_progress import progress_for_pyrogram
 async def incoming_message_f(client, message):
     i_m_sefg = await message.reply_text("processing", quote=True)
     LOGGER.info(message)
-    dl_url, cf_name = extract_link(message)
+    dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
-        downloadable_link, downloadable_file_name = await extract_it(
-            dl_url,
-            cf_name
-        )
-        LOGGER.info(downloadable_link)
-        LOGGER.info(downloadable_file_name)
-        if downloadable_link is None:
-            await i_m_sefg.edit_text("unable to fetch direct download link")
-            return
-        dl_requested_user = message.from_user.id
+        aria_i_p = aria_start()
+        LOGGER.info(aria_i_p)
         await i_m_sefg.edit_text("trying to download")
-        sagtus, err_message = await request_download(
-            downloadable_link,
-            downloadable_file_name,
-            dl_requested_user
+        sagtus, err_message = await call_apropriate_function(
+            aria_i_p,
+            dl_url,
+            cf_name,
+            i_m_sefg
         )
-        if sagtus:
-            await i_m_sefg.edit_text("downloaded.. now uploading ...")
-            # upload file
-            start_time = time.time()
-            try:
-                await client.send_document(
-                    chat_id=message.chat.id,
-                    document=err_message,
-                    caption=dl_url,
-                    parse_mode="html",
-                    disable_notification=True,
-                    reply_to_message_id=i_m_sefg.message_id,
-                    progress=progress_for_pyrogram,
-                    progress_args=(
-                        "trying to upload",
-                        i_m_sefg,
-                        start_time
-                    )
-                )
-                #
-                await i_m_sefg.delete()
-            except Exception as e:
-                await i_m_sefg.edit_text(str(e))
-            else:
-                os.remove(err_message)
-        else:
+        if not sagtus:
             await i_m_sefg.edit_text(err_message)
     else:
-        await i_m_sefg.delete()
+        await i_m_sefg.edit_text("**FCUK**! wat have you entered. Please read /help")
