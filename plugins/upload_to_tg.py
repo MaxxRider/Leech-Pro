@@ -19,7 +19,7 @@ from hachoir.parser import createParser
 from plugins.display_progress import progress_for_pyrogram
 
 
-async def upload_to_tg(message, local_file_name):
+async def upload_to_tg(message, local_file_name, from_user):
     LOGGER.info(local_file_name)
     caption_str = ""
     caption_str += "<code>"
@@ -27,7 +27,7 @@ async def upload_to_tg(message, local_file_name):
     caption_str += "</code>"
     caption_str += "\n\n"
     caption_str += "<a href='tg://user?id="
-    caption_str += str(message.reply_to_message.from_user.id)
+    caption_str += str(from_user.id)
     caption_str += "'>"
     caption_str += "Here is the file to the link you sent"
     caption_str += "</a>"
@@ -35,13 +35,15 @@ async def upload_to_tg(message, local_file_name):
         directory_contents = os.listdir(local_file_name)
         new_m_esg = await message.reply_text(
             "Found {} files".format(len(directory_contents)),
-            quote=True
+            # quote=True
+            reply_to_message_id=message.message_id
         )
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
             await upload_to_tg(
                 new_m_esg,
-                os.path.join(local_file_name, single_file)
+                os.path.join(local_file_name, single_file),
+                from_user
             )
     else:
         await upload_single_file(message, local_file_name, caption_str)
