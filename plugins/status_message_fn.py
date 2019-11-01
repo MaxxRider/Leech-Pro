@@ -41,7 +41,7 @@ async def cancel_message_f(client, message):
         downloads = aria_i_p.get_downloads(message.command[1])
         aria_i_p.pause(downloads)
         await message.reply_text(
-            "Leech Cancelled"
+            "Leech Cancelled",
             quote=True
         )
     else:
