@@ -39,7 +39,10 @@ async def upload_to_tg(message, local_file_name):
         )
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
-            await upload_to_tg(new_m_esg, single_file)
+            await upload_to_tg(
+                new_m_esg,
+                os.path.join(local_file_name, single_file)
+            )
     else:
         await upload_single_file(message, local_file_name, caption_str)
 
