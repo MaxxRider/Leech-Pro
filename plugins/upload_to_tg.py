@@ -27,7 +27,7 @@ async def upload_to_tg(message, local_file_name, from_user):
     caption_str += "</code>"
     caption_str += "\n\n"
     caption_str += "<a href='tg://user?id="
-    caption_str += str(from_user.id)
+    caption_str += str(from_user)
     caption_str += "'>"
     caption_str += "Here is the file to the link you sent"
     caption_str += "</a>"
