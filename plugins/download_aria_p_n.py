@@ -27,7 +27,7 @@ async def aria_start():
     aria2_daemon_start_cmd = []
     # start the daemon, aria2c command
     aria2_daemon_start_cmd.append("aria2c")
-    aria2_daemon_start_cmd.append("--allow-overwrite=true")
+    # aria2_daemon_start_cmd.append("--allow-overwrite=true")
     aria2_daemon_start_cmd.append("--daemon=true")
     # aria2_daemon_start_cmd.append(f"--dir={Config.TMP_DOWNLOAD_DIRECTORY}")
     # TODO: this does not work, need to investigate this.
@@ -39,7 +39,7 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--rpc-listen-all=false")
     aria2_daemon_start_cmd.append(f"--rpc-listen-port={Config.ARIA_TWO_STARTED_PORT}")
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
-    aria2_daemon_start_cmd.append("--seed-ratio=100.0")
+    aria2_daemon_start_cmd.append("--seed-ratio=0.0")
     aria2_daemon_start_cmd.append("--seed-time=1")
     aria2_daemon_start_cmd.append("--split=10")
     #
@@ -125,10 +125,13 @@ async def call_apropriate_function(
         err_message = await check_metadata(aria_instance, err_message)
         #
         await asyncio.sleep(1)
-        await check_progress_for_dl(
-            aria_instance,
-            err_message,
-            sent_message_to_update_tg_p
+        t.cancel()
+        t = asyncio.create_task(
+            check_progress_for_dl(
+                aria_instance,
+                err_message,
+                sent_message_to_update_tg_p
+            )
         )
     await asyncio.sleep(1)
     t.cancel()
