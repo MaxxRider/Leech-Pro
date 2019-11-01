@@ -58,6 +58,15 @@ async def upload_single_file(message, local_file_name, caption_str):
             duration = 0
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
+            thumb_image_path = "./thumb_image.jpg"
+            thumb = None
+            if os.path.exists(thumb_image_path):
+                thumb = thumb_image_path
+                metadata = extractMetadata(createParser(thumb_image_path))
+                if metadata.has("width"):
+                    width = metadata.get("width")
+                if metadata.has("height"):
+                    height = metadata.get("height")
             # send video
             await message.reply_video(
                 video=local_file_name,
@@ -65,9 +74,9 @@ async def upload_single_file(message, local_file_name, caption_str):
                 caption=caption_str,
                 parse_mode="html",
                 duration=duration,
-                # width=,
-                # height=,
-                # thumb=,
+                width=width,
+                height=height,
+                thumb=thumb,
                 supports_streaming=True,
                 disable_notification=True,
                 reply_to_message_id=message.reply_to_message.message_id,
