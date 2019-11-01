@@ -113,28 +113,22 @@ async def call_apropriate_function(
         return sagtus, err_message
     LOGGER.info(err_message)
     # https://stackoverflow.com/a/58213653/4723940
-    t = asyncio.create_task(
-        check_progress_for_dl(
-            aria_instance,
-            err_message,
-            sent_message_to_update_tg_p
-        )
+    await check_progress_for_dl(
+        aria_instance,
+        err_message,
+        sent_message_to_update_tg_p
     )
     if incoming_link.startswith("magnet:"):
         #
         err_message = await check_metadata(aria_instance, err_message)
         #
         await asyncio.sleep(1)
-        t.cancel()
-        t = asyncio.create_task(
-            check_progress_for_dl(
-                aria_instance,
-                err_message,
-                sent_message_to_update_tg_p
-            )
+        await check_progress_for_dl(
+            aria_instance,
+            err_message,
+            sent_message_to_update_tg_p
         )
     await asyncio.sleep(1)
-    t.cancel()
     file = aria_instance.get_download(err_message)
     await upload_to_tg(
         sent_message_to_update_tg_p,
@@ -179,6 +173,7 @@ async def check_progress_for_dl(aria2, gid, event):
 
 async def check_metadata(aria2, gid):
     file = aria2.get_download(gid)
+    LOGGER.info(file)
     new_gid = file.followed_by_ids[0]
     LOGGER.info("Changing GID " + gid + " to " + new_gid)
     return new_gid
