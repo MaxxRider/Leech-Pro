@@ -40,7 +40,7 @@ async def incoming_message_f(client, message):
         new_download_location = os.path.join(
             Config.DOWNLOAD_LOCATION,
             str(time.time()),
-            cf_name
+            cf_name if cf_name is not None else ""
         )
         # create download directory, if not exist
         if not os.path.isdir(new_download_location):
