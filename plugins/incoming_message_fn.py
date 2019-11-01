@@ -13,6 +13,13 @@ LOGGER = logging.getLogger(__name__)
 
 
 import os
+
+# the secret configuration specific things
+if bool(os.environ.get("WEBHOOK", False)):
+    from sample_config import Config
+else:
+    from config import Config
+
 import time
 from plugins.extract_link_from_message import extract_link
 from plugins.download_aria_p_n import call_apropriate_function, aria_start
@@ -30,11 +37,19 @@ async def incoming_message_f(client, message):
         await i_m_sefg.edit_text("extracting links")
         aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
+        new_download_location = os.path.join(
+            Config.DOWNLOAD_LOCATION,
+            str(time.time()),
+            cf_name
+        )
+        # create download directory, if not exist
+        if not os.path.isdir(new_download_location):
+            os.makedirs(new_download_location)
         await i_m_sefg.edit_text("trying to download")
         sagtus, err_message = await call_apropriate_function(
             aria_i_p,
             dl_url,
-            cf_name,
+            new_download_location,
             i_m_sefg
         )
         if not sagtus:

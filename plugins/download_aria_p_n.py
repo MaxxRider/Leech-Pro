@@ -63,9 +63,17 @@ async def aria_start():
     return aria2
 
 
-def add_magnet(aria_instance, magnetic_link):
+def add_magnet(aria_instance, magnetic_link, c_file_name):
+    options = None
+    if c_file_name is not None:
+        options = {
+            "dir": c_file_name
+        }
     try:
-        download = aria_instance.add_magnet(magnetic_link)
+        download = aria_instance.add_magnet(
+            magnetic_link,
+            options=options
+        )
     except Exception as e:
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
     else:
@@ -74,17 +82,16 @@ def add_magnet(aria_instance, magnetic_link):
 
 def add_url(aria_instance, text_url, c_file_name):
     options = None
-    # if c_file_name is not None:
-    #     options = {
-    #         "out": c_file_name
-    #     }
+    if c_file_name is not None:
+        options = {
+            "dir": c_file_name
+        }
     uris = [text_url]
     # Add URL Into Queue
     try:
         download = aria_instance.add_uris(
             uris,
-            options=options,
-            position=None
+            options=options
         )
     except Exception as e:
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
@@ -99,7 +106,7 @@ async def call_apropriate_function(
     sent_message_to_update_tg_p
 ):
     if incoming_link.startswith("magnet:"):
-        sagtus, err_message = add_magnet(aria_instance, incoming_link)
+        sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
     else:
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
     if not sagtus:
@@ -141,6 +148,7 @@ async def check_progress_for_dl(aria2, gid, event):
                 msg += f"\nTotal Size: {file.total_length_string()}"
                 msg += f"\nStatus: {file.status}"
                 msg += f"\nETA: {file.eta_string()}"
+                msg += f"\n`/cancel {gid}`"
                 LOGGER.info(msg)
                 if msg != previous_message:
                     await event.edit(msg)

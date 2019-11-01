@@ -33,3 +33,16 @@ async def status_message_f(client, message):
         msg = msg + "ETA:  " + str(download.eta_string()) + "\n\n"
     LOGGER.info(msg)
     message.reply_text(msg, quote=True)
+
+
+async def cancel_message_f(client, message):
+    if len(message.command) > 1:
+        aria_i_p = await aria_start()
+        downloads = aria_i_p.get_downloads(message.command[1])
+        aria_i_p.pause(downloads)
+        await message.reply_text(
+            "Leech Cancelled"
+            quote=True
+        )
+    else:
+        await message.delete()
