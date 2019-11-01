@@ -112,19 +112,29 @@ async def call_apropriate_function(
     if not sagtus:
         return sagtus, err_message
     LOGGER.info(err_message)
-    await check_progress_for_dl(
-        aria_instance,
-        err_message,
-        sent_message_to_update_tg_p
-    )
-    if incoming_link.startswith("magnet:"):
-        #
-        err_message = await check_metadata(aria_instance, err_message)
-        await check_progress_for_dl(
+    # https://stackoverflow.com/a/58213653/4723940
+    t = asyncio.create_task(
+        check_progress_for_dl(
             aria_instance,
             err_message,
             sent_message_to_update_tg_p
         )
+    )
+    if incoming_link.startswith("magnet:"):
+        #
+        err_message = await check_metadata(aria_instance, err_message)
+        #
+        await asyncio.sleep(1)
+        t.cancel()
+        t = asyncio.create_task(
+            check_progress_for_dl(
+                aria_instance,
+                err_message,
+                sent_message_to_update_tg_p
+            )
+        )
+    await asyncio.sleep(1)
+    t.cancel()
     file = aria_instance.get_download(err_message)
     await upload_to_tg(
         sent_message_to_update_tg_p,
