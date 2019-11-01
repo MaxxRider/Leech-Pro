@@ -35,8 +35,8 @@ async def upload_to_tg(message, local_file_name, from_user):
         directory_contents = os.listdir(local_file_name)
         new_m_esg = await message.reply_text(
             "Found {} files".format(len(directory_contents)),
-            # quote=True
-            reply_to_message_id=message.message_id
+            quote=True
+            # reply_to_message_id=message.message_id
         )
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
