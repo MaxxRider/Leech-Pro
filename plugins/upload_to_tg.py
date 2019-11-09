@@ -16,7 +16,9 @@ import os
 import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+from PIL import Image
 from plugins.display_progress import progress_for_pyrogram
+from plugins.help_Nekmo_ffmpeg import take_screen_shot
 
 
 async def upload_to_tg(message, local_file_name, from_user):
@@ -58,15 +60,36 @@ async def upload_single_file(message, local_file_name, caption_str):
             duration = 0
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
-            thumb_image_path = "./thumb_image.jpg"
-            thumb = None
+            #
+            width = 0
+            height = 0
+            thumb_image_path = await take_screen_shot(
+                local_file_name,
+                os.path.dirname(os.path.abspath(local_file_name)),
+                (duration / 2)
+            )
+            # get the correct width, height, and duration for videos greater than 10MB
             if os.path.exists(thumb_image_path):
-                thumb = thumb_image_path
                 metadata = extractMetadata(createParser(thumb_image_path))
                 if metadata.has("width"):
                     width = metadata.get("width")
                 if metadata.has("height"):
                     height = metadata.get("height")
+                # resize image
+                # ref: https://t.me/PyrogramChat/44663
+                # https://stackoverflow.com/a/21669827/4723940
+                Image.open(thumb_image_path).convert(
+                    "RGB"
+                ).save(thumb_image_path)
+                img = Image.open(thumb_image_path)
+                # https://stackoverflow.com/a/37631799/4723940
+                img.resize((320, height))
+                img.save(thumb_image_path, "JPEG")
+                # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
+            #
+            thumb = None
+            if os.path.exists(thumb_image_path):
+                thumb = thumb_image_path
             # send video
             await message.reply_video(
                 video=local_file_name,
@@ -87,6 +110,7 @@ async def upload_single_file(message, local_file_name, caption_str):
                     start_time
                 )
             )
+            os.remove(thumb)
         elif local_file_name.upper().endswith(("MP3", "M4A", "FLAC", "WAV")):
             metadata = extractMetadata(createParser(local_file_name))
             duration = 0
