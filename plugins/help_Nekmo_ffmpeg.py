@@ -13,6 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 import asyncio
+import time
 
 
 async def take_screen_shot(video_file, output_directory, ttl):
