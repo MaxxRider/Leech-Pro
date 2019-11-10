@@ -20,6 +20,12 @@ from PIL import Image
 from plugins.display_progress import progress_for_pyrogram
 from plugins.help_Nekmo_ffmpeg import take_screen_shot
 
+# the secret configuration specific things
+if bool(os.environ.get("WEBHOOK", False)):
+    from sample_config import Config
+else:
+    from config import Config
+
 
 async def upload_to_tg(message, local_file_name, from_user):
     LOGGER.info(local_file_name)
@@ -48,7 +54,15 @@ async def upload_to_tg(message, local_file_name, from_user):
                 from_user
             )
     else:
-        await upload_single_file(message, local_file_name, caption_str)
+        if os.path.getsize(local_file_name) > Config.TG_MAX_FILE_SIZE:
+            LOGGER.info("TODO")
+            d_f_s = os.path.getsize(local_file_name)
+            await message.reply_text(
+                "Telegram does not support uploading this file."
+                f"Detected File Size: {d_f_s}"
+            )
+        else:
+            await upload_single_file(message, local_file_name, caption_str)
 
 
 async def upload_single_file(message, local_file_name, caption_str):
