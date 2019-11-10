@@ -41,15 +41,20 @@ async def split_large_files(input_file):
         if metadata.has("duration"):
             total_duration = metadata.get('duration').seconds
         # proprietary logic to get the seconds to trim (at)
+        LOGGER.info(total_duration)
         total_file_size = os.path.getsize(input_file)
+        LOGGER.info(total_file_size)
         minimum_duration = (total_file_size / total_duration) * (Config.TG_MAX_FILE_SIZE - 100)
+        LOGGER.info(minimum_duration)
         # END: proprietary
         start_time = 0
         end_time = minimum_duration
         base_name = os.path.basename(input_file)
         input_extension = base_name.split(".")[-1]
+        LOGGER.info(input_extension)
         i = 0
         while end_time < total_duration:
+            LOGGER.info(i)
             parted_file_name = os.path.join(
                 str(i),
                 str(base_name),
@@ -59,12 +64,13 @@ async def split_large_files(input_file):
                 str(input_extension)
             )
             output_file = os.path.join(new_working_directory, parted_file_name)
-            await cult_small_video(
+            LOGGER.info(output_file)
+            LOGGER.info(await cult_small_video(
                 input_file,
                 output_file,
                 start_time,
                 end_time
-            )
+            ))
             start_time = end_time
             end_time = end_time + minimum_duration
             i = i + 1
@@ -97,6 +103,7 @@ async def split_large_files(input_file):
 async def cult_small_video(video_file, out_put_file_name, start_time, end_time):
     file_genertor_command = [
         "ffmpeg",
+        "-hide_banner",
         "-i",
         video_file,
         "-ss",
@@ -121,4 +128,5 @@ async def cult_small_video(video_file, out_put_file_name, start_time, end_time):
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
+    LOGGER.info(t_response)
     return out_put_file_name
