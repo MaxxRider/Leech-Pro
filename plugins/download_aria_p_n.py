@@ -151,10 +151,10 @@ async def check_progress_for_dl(aria2, gid, event):
                 msg += f"\nSpeed: {file.download_speed_string()} 🔽 / {file.upload_speed_string()} 🔼"
                 msg += f"\nProgress: {file.progress_string()}"
                 msg += f"\nTotal Size: {file.total_length_string()}"
-                msg += f"\nStatus: {file.status}"
+                # msg += f"\nStatus: {file.status}"
                 msg += f"\nETA: {file.eta_string()}"
-                msg += f"\n`/cancel {gid}`"
-                LOGGER.info(msg)
+                # msg += f"\n`/cancel {gid}`"
+                # LOGGER.info(msg)
                 if msg != previous_message:
                     await event.edit(msg)
                     previous_message = msg
