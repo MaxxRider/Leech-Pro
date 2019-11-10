@@ -55,21 +55,14 @@ async def split_large_files(input_file):
         i = 0
         while end_time < total_duration:
             LOGGER.info(i)
-            parted_file_name = os.path.join(
-                str(i),
-                str(base_name),
-                "_PART_",
-                str(start_time),
-                ".",
-                str(input_extension)
-            )
+            parted_file_name = "" + str(i) + str(base_name) + "_PART_" + str(start_time) + "." + str(input_extension)
             output_file = os.path.join(new_working_directory, parted_file_name)
             LOGGER.info(output_file)
             LOGGER.info(await cult_small_video(
                 input_file,
                 output_file,
-                start_time,
-                end_time
+                str(start_time),
+                str(end_time)
             ))
             start_time = end_time
             end_time = end_time + minimum_duration
