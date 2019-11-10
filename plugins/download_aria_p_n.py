@@ -119,7 +119,7 @@ async def call_apropriate_function(
         err_message,
         sent_message_to_update_tg_p
     )
-    if incoming_link.startswith("magnet:"):
+    if incoming_link.startswith("magnet:") or incoming_link.lower().endswith(".torrent"):
         #
         err_message = await check_metadata(aria_instance, err_message)
         #
@@ -144,10 +144,6 @@ async def check_progress_for_dl(aria2, gid, event):
     previous_message = None
     while not complete:
         file = aria2.get_download(gid)
-        if file.total_length > Config.TG_MAX_FILE_SIZE:
-            os.system(f"aria2p remove -f {gid}")
-            await event.edit("😡 don't send files larger than 1500MiB")
-            return
         complete = file.is_complete
         try:
             if not file.error_message:
