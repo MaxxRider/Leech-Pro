@@ -42,6 +42,7 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--seed-ratio=0.0")
     aria2_daemon_start_cmd.append("--seed-time=1")
     aria2_daemon_start_cmd.append("--split=10")
+    aria2_daemon_start_cmd.append("--bt-stop-timeout={Config.MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}")
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
@@ -143,6 +144,10 @@ async def check_progress_for_dl(aria2, gid, event):
     previous_message = None
     while not complete:
         file = aria2.get_download(gid)
+        if file.total_length > Config.TG_MAX_FILE_SIZE:
+            os.system(f"aria2p remove -f {gid}")
+            await event.edit("😡 don't send files larger than 1500MiB")
+            return
         complete = file.is_complete
         try:
             if not file.error_message:
