@@ -23,4 +23,8 @@ async def new_join_f(client, message):
 
 
 async def help_message_f(client, message):
-    await message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)
+    # await message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)
+    await message.reply_text(
+        "please read the <a href='https://t.me/c/1434259219/99'>Pinned Message</a>",
+        quote=True
+    )
