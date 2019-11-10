@@ -17,8 +17,9 @@ import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
-from plugins.display_progress import progress_for_pyrogram
+from plugins.display_progress import progress_for_pyrogram, humanbytes
 from plugins.help_Nekmo_ffmpeg import take_screen_shot
+from plugins.split_large_files import split_large_files
 
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
@@ -56,11 +57,23 @@ async def upload_to_tg(message, local_file_name, from_user):
     else:
         if os.path.getsize(local_file_name) > Config.TG_MAX_FILE_SIZE:
             LOGGER.info("TODO")
-            d_f_s = os.path.getsize(local_file_name)
-            await message.reply_text(
+            d_f_s = humanbytes(os.path.getsize(local_file_name))
+            i_m_s_g = await message.reply_text(
                 "Telegram does not support uploading this file."
-                f"Detected File Size: {d_f_s}"
+                f"Detected File Size: {d_f_s} 😡"
+                "🤖 trying to split the files 🌝🌝🌚"
             )
+            splitted_dir = await split_large_files(local_file_name)
+            totlaa_sleif = os.listdir(splitted_dir)
+            totlaa_sleif.sort()
+            LOGGER.info(totlaa_sleif)
+            for le_file in totlaa_sleif:
+                # recursion: will this FAIL somewhere?
+                await upload_to_tg(
+                    message,
+                    os.path.join(splitted_dir, le_file)
+                    from_user
+                )
         else:
             await upload_single_file(message, local_file_name, caption_str)
 
