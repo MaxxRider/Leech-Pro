@@ -34,8 +34,8 @@ async def split_large_files(input_file):
     # create download directory, if not exist
     if not os.path.isdir(new_working_directory):
         os.makedirs(new_working_directory)
-    # if input_file.upper().endswith(("MKV", "MP4", "WEBM", "MP3", "M4A", "FLAC", "WAV")):
-    if False:
+    if input_file.upper().endswith(("MKV", "MP4", "WEBM", "MP3", "M4A", "FLAC", "WAV")):
+    # if False:
         # handle video / audio files here
         metadata = extractMetadata(createParser(input_file))
         total_duration = 0
@@ -45,7 +45,7 @@ async def split_large_files(input_file):
         LOGGER.info(total_duration)
         total_file_size = os.path.getsize(input_file)
         LOGGER.info(total_file_size)
-        minimum_duration = (total_duration / total_file_size) * (Config.TG_MAX_FILE_SIZE - 100)
+        minimum_duration = (total_duration / total_file_size) * (Config.MAX_FILE_SIZE - 100)
         LOGGER.info(minimum_duration)
         # END: proprietary
         start_time = 0
