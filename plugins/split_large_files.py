@@ -45,7 +45,7 @@ async def split_large_files(input_file):
         LOGGER.info(total_duration)
         total_file_size = os.path.getsize(input_file)
         LOGGER.info(total_file_size)
-        minimum_duration = (total_duration / total_file_size) * (Config.MAX_FILE_SIZE - 100)
+        minimum_duration = (total_duration / total_file_size) * (Config.MAX_TG_SPLIT_FILE_SIZE)
         LOGGER.info(minimum_duration)
         # END: proprietary
         start_time = 0
