@@ -71,7 +71,7 @@ async def upload_to_tg(message, local_file_name, from_user):
                 # recursion: will this FAIL somewhere?
                 await upload_to_tg(
                     message,
-                    os.path.join(splitted_dir, le_file)
+                    os.path.join(splitted_dir, le_file),
                     from_user
                 )
         else:
