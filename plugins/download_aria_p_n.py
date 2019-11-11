@@ -133,13 +133,37 @@ async def call_apropriate_function(
     file = aria_instance.get_download(err_message)
     response = {}
     LOGGER.info(response)
+    user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
     final_response = await upload_to_tg(
         sent_message_to_update_tg_p,
         file.name,
-        sent_message_to_update_tg_p.reply_to_message.from_user.id,
+        user_id,
         response
     )
     LOGGER.info(final_response)
+    message_to_send = ""
+    for key_f_res_se in final_response:
+        local_file_name = key_f_res_se
+        message_id = final_response[key_f_res_se]
+        channel_id = str(Config.AUTH_CHANNEL)[4:]
+        private_link = f"https://t.me/c/{channel_id}/{message_id}"
+        message_to_send += "👉 <a href='"
+        message_to_send += private_link
+        message_to_send += "'>"
+        message_to_send += local_file_name
+        message_to_send += "</a>"
+        message_to_send += "\n"
+    if message_to_send != "":
+        mention_req_user = f"<a href='tg://user?id={user_id}'>Your Requested Files</a>\n\n"
+        message_to_send = mention_req_user + message_to_send
+        message_to_send = message_to_send + "\n\n" + "#uploads"
+    else:
+        message_to_send = "<i>FAILED</i> to upload files. 😞😞"
+    await sent_message_to_update_tg_p.reply_to_message.reply_text(
+        text=message_to_send,
+        quote=True,
+        disable_web_page_preview=True
+    )
     return True, None
 
 
