@@ -4,3 +4,4 @@ hachoir
 Pillow
 https://github.com/pyrogram/pyrogram/archive/asyncio.zip
 tgcrypto
+youtube-dl

@@ -124,11 +124,14 @@ async def call_apropriate_function(
         err_message = await check_metadata(aria_instance, err_message)
         #
         await asyncio.sleep(1)
-        await check_progress_for_dl(
-            aria_instance,
-            err_message,
-            sent_message_to_update_tg_p
-        )
+        if err_message is not None:
+            await check_progress_for_dl(
+                aria_instance,
+                err_message,
+                sent_message_to_update_tg_p
+            )
+        else:
+            return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
     response = {}
@@ -206,6 +209,9 @@ async def check_progress_for_dl(aria2, gid, event):
 async def check_metadata(aria2, gid):
     file = aria2.get_download(gid)
     LOGGER.info(file)
+    if not file.followed_by_ids:
+        # https://t.me/c/1213160642/496
+        return None
     new_gid = file.followed_by_ids[0]
     LOGGER.info("Changing GID " + gid + " to " + new_gid)
     return new_gid

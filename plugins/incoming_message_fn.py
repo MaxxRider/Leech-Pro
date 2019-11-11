@@ -56,3 +56,14 @@ async def incoming_message_f(client, message):
             await i_m_sefg.edit_text(err_message)
     else:
         await i_m_sefg.edit_text("**FCUK**! wat have you entered. Please read /help")
+
+
+async def incoming_youtube_dl_f(client, message):
+    i_m_sefg = await message.reply_text("processing", quote=True)
+    # LOGGER.info(message)
+    dl_url, cf_name = extract_link(message.reply_to_message)
+    LOGGER.info(dl_url)
+    LOGGER.info(cf_name)
+    if dl_url is not None:
+        await i_m_sefg.edit_text("extracting links")
+        

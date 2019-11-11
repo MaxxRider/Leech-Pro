@@ -37,15 +37,22 @@ async def status_message_f(client, message):
 
 async def cancel_message_f(client, message):
     if len(message.command) > 1:
+        i_m_s_e_g = await message.reply_text("checking..?", quote=True)
         aria_i_p = await aria_start()
         g_id = message.command[1].strip()
         LOGGER.info(g_id)
-        downloads = aria_i_p.get_download(g_id)
-        LOGGER.info(downloads)
-        LOGGER.info(aria_i_p.pause(downloads))
-        await message.reply_text(
-            "Leech Cancelled",
-            quote=True
-        )
+        try:
+            downloads = aria_i_p.get_download(g_id)
+            LOGGER.info(downloads)
+            LOGGER.info(aria_i_p.pause(downloads))
+            await i_m_s_e_g.edit_text(
+                "Leech Cancelled",
+                quote=True
+            )
+        except Exception as e:
+            await i_m_s_e_g.edit_text(
+                "<i>FAILED</i>\n\n" + str(e) + "#error",
+                quote=True
+            )
     else:
         await message.delete()

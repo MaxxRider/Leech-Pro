@@ -21,7 +21,7 @@ else:
 
 from pyrogram import Client, Filters, MessageHandler
 from plugins.new_join_fn import new_join_f, help_message_f
-from plugins.incoming_message_fn import incoming_message_f
+from plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f
 from plugins.status_message_fn import status_message_f, cancel_message_f
 
 
@@ -43,6 +43,12 @@ if __name__ == "__main__" :
         filters=Filters.command(["leech"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
     )
     app.add_handler(incoming_message_handler)
+    #
+    incoming_youtube_dl_handler = MessageHandler(
+        incoming_youtube_dl_f,
+        filters=Filters.command(["ytdl"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_youtube_dl_handler)
     #
     # status_message_handler = MessageHandler(
     #     status_message_f,
