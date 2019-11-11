@@ -131,11 +131,15 @@ async def call_apropriate_function(
         )
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
-    await upload_to_tg(
+    response = {}
+    LOGGER.info(response)
+    final_response = await upload_to_tg(
         sent_message_to_update_tg_p,
         file.name,
-        sent_message_to_update_tg_p.reply_to_message.from_user.id
+        sent_message_to_update_tg_p.reply_to_message.from_user.id,
+        response
     )
+    LOGGER.info(final_response)
     return True, None
 
 

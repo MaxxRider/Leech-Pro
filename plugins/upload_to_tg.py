@@ -28,20 +28,29 @@ else:
     from config import Config
 
 
-async def upload_to_tg(message, local_file_name, from_user):
+async def upload_to_tg(
+    message,
+    local_file_name,
+    from_user,
+    dict_contatining_uploaded_files
+):
     LOGGER.info(local_file_name)
+    base_file_name = os.path.basename(local_file_name)
     caption_str = ""
     caption_str += "<code>"
-    caption_str += os.path.basename(local_file_name)
+    caption_str += base_file_name
     caption_str += "</code>"
-    caption_str += "\n\n"
-    caption_str += "<a href='tg://user?id="
-    caption_str += str(from_user)
-    caption_str += "'>"
-    caption_str += "Here is the file to the link you sent"
-    caption_str += "</a>"
+    # caption_str += "\n\n"
+    # caption_str += "<a href='tg://user?id="
+    # caption_str += str(from_user)
+    # caption_str += "'>"
+    # caption_str += "Here is the file to the link you sent"
+    # caption_str += "</a>"
     if os.path.isdir(local_file_name):
         directory_contents = os.listdir(local_file_name)
+        directory_contents.sort()
+        # number_of_files = len(directory_contents)
+        LOGGER.info(directory_contents)
         new_m_esg = await message.reply_text(
             "Found {} files".format(len(directory_contents)),
             quote=True
@@ -52,7 +61,8 @@ async def upload_to_tg(message, local_file_name, from_user):
             await upload_to_tg(
                 new_m_esg,
                 os.path.join(local_file_name, single_file),
-                from_user
+                from_user,
+                dict_contatining_uploaded_files
             )
     else:
         if os.path.getsize(local_file_name) > Config.TG_MAX_FILE_SIZE:
@@ -78,14 +88,18 @@ async def upload_to_tg(message, local_file_name, from_user):
                 await upload_to_tg(
                     message,
                     os.path.join(splitted_dir, le_file),
-                    from_user
+                    from_user,
+                    dict_contatining_uploaded_files
                 )
         else:
-            await upload_single_file(message, local_file_name, caption_str)
+            sent_message = await upload_single_file(message, local_file_name, caption_str)
+            dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
+    return dict_contatining_uploaded_files
 
 
 async def upload_single_file(message, local_file_name, caption_str):
     await asyncio.sleep(5)
+    sent_message = None
     start_time = time.time()
     try:
         if local_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
@@ -124,7 +138,7 @@ async def upload_single_file(message, local_file_name, caption_str):
             if os.path.exists(thumb_image_path):
                 thumb = thumb_image_path
             # send video
-            await message.reply_video(
+            sent_message = await message.reply_video(
                 video=local_file_name,
                 # quote=True,
                 caption=caption_str,
@@ -156,7 +170,7 @@ async def upload_single_file(message, local_file_name, caption_str):
             if metadata.has("artist"):
                 artist = metadata.get("artist")
             # send audio
-            await message.reply_audio(
+            sent_message = await message.reply_audio(
                 audio=local_file_name,
                 # quote=True,
                 caption=caption_str,
@@ -176,7 +190,7 @@ async def upload_single_file(message, local_file_name, caption_str):
             )
         else:
             # send document
-            await message.reply_document(
+            sent_message = await message.reply_document(
                 document=local_file_name,
                 # quote=True,
                 # thumb=,
@@ -196,3 +210,4 @@ async def upload_single_file(message, local_file_name, caption_str):
     else:
         await message.delete()
     os.remove(local_file_name)
+    return sent_message
