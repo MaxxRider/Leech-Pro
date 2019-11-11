@@ -68,4 +68,10 @@ if __name__ == "__main__" :
     )
     app.add_handler(new_join_handler)
     #
+    group_new_join_handler = MessageHandler(
+        help_message_f,
+        filters=Filters.chat(chats=Config.AUTH_CHANNEL)
+    )
+    app.add_handler(group_new_join_handler)
+    #
     app.run()
