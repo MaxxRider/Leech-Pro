@@ -70,7 +70,7 @@ if __name__ == "__main__" :
     #
     group_new_join_handler = MessageHandler(
         help_message_f,
-        filters=Filters.chat(chats=Config.AUTH_CHANNEL)
+        filters=Filters.chat(chats=Config.AUTH_CHANNEL) & Filters.new_chat_members
     )
     app.add_handler(group_new_join_handler)
     #
