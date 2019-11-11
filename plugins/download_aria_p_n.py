@@ -197,7 +197,10 @@ async def check_progress_for_dl(aria2, gid, event):
     file = aria2.get_download(gid)
     complete = file.is_complete
     if complete:
-        await event.edit(f"File Downloaded Successfully: `{file.name}`")
+        try:
+            await event.edit(f"File Downloaded Successfully: `{file.name}`")
+        except:
+            pass
 
 
 async def check_metadata(aria2, gid):
