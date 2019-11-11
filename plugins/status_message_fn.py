@@ -46,13 +46,11 @@ async def cancel_message_f(client, message):
             LOGGER.info(downloads)
             LOGGER.info(aria_i_p.pause(downloads))
             await i_m_s_e_g.edit_text(
-                "Leech Cancelled",
-                quote=True
+                "Leech Cancelled"
             )
         except Exception as e:
             await i_m_s_e_g.edit_text(
-                "<i>FAILED</i>\n\n" + str(e) + "#error",
-                quote=True
+                "<i>FAILED</i>\n\n" + str(e) + "#error"
             )
     else:
         await message.delete()
