@@ -25,6 +25,7 @@ from plugins.extract_link_from_message import extract_link
 from plugins.download_aria_p_n import call_apropriate_function, aria_start
 from plugins.download_from_link import request_download
 from plugins.display_progress import progress_for_pyrogram
+from plugins.youtube_dl_extractor import extract_youtube_dl_formats
 
 
 async def incoming_message_f(client, message):
@@ -66,4 +67,16 @@ async def incoming_youtube_dl_f(client, message):
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
-        
+        current_user_id = message.from_user.id
+        user_working_dir = os.path.join(Config.DOWNLOAD_LOCATION, str(current_user_id))
+        # create download directory, if not exist
+        if not os.path.isdir(user_working_dir):
+            os.makedirs(user_working_dir)
+        text_message, reply_markup = await extract_youtube_dl_formats(
+            dl_url,
+            user_working_dir
+        )
+        await i_m_sefg.edit_text(
+            text=text_message,
+            reply_markup=reply_markup
+        )

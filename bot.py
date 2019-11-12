@@ -19,10 +19,11 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-from pyrogram import Client, Filters, MessageHandler
+from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
 from plugins.new_join_fn import new_join_f, help_message_f
 from plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f
 from plugins.status_message_fn import status_message_f, cancel_message_f
+from plugins.call_back_button_handler import button
 
 
 if __name__ == "__main__" :
@@ -79,5 +80,10 @@ if __name__ == "__main__" :
         filters=Filters.chat(chats=Config.AUTH_CHANNEL) & Filters.new_chat_members
     )
     app.add_handler(group_new_join_handler)
+    #
+    call_back_button_handler = CallbackQueryHandler(
+        button
+    )
+    app.add_handler(call_back_button_handler)
     #
     app.run()
