@@ -117,7 +117,8 @@ async def call_apropriate_function(
     await check_progress_for_dl(
         aria_instance,
         err_message,
-        sent_message_to_update_tg_p
+        sent_message_to_update_tg_p,
+        None
     )
     if incoming_link.startswith("magnet:") or incoming_link.lower().endswith(".torrent"):
         #
@@ -128,7 +129,8 @@ async def call_apropriate_function(
             await check_progress_for_dl(
                 aria_instance,
                 err_message,
-                sent_message_to_update_tg_p
+                sent_message_to_update_tg_p,
+                None
             )
         else:
             return False, "can't get metadata \n\n#stopped"
@@ -170,13 +172,12 @@ async def call_apropriate_function(
     return True, None
 
 
-async def check_progress_for_dl(aria2, gid, event):
-    complete = None
-    previous_message = None
-    while not complete:
+# https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
+async def check_progress_for_dl(aria2, gid, event, previous_message):
+    try:
         file = aria2.get_download(gid)
         complete = file.is_complete
-        try:
+        if not complete:
             if not file.error_message:
                 msg = f"\nDownloading File: `{file.name}`"
                 msg += f"\nSpeed: {file.download_speed_string()} 🔽 / {file.upload_speed_string()} 🔼"
@@ -189,21 +190,29 @@ async def check_progress_for_dl(aria2, gid, event):
                 if msg != previous_message:
                     await event.edit(msg)
                     previous_message = msg
-                    await asyncio.sleep(Config.EDIT_SLEEP_TIME_OUT)
             else:
                 msg = file.error_message
                 await event.edit(f"`{msg}`")
                 return False
-        except Exception as e:
-            LOGGER.info(str(e))
-            pass
-    file = aria2.get_download(gid)
-    complete = file.is_complete
-    if complete:
-        try:
+            await asyncio.sleep(Config.EDIT_SLEEP_TIME_OUT)
+            await check_progress_for_dl(aria2, gid, event, previous_message)
+        else:
             await event.edit(f"File Downloaded Successfully: `{file.name}`")
-        except:
-            pass
+            return True
+    except Exception as e:
+        LOGGER.info(str(e))
+        if " not found" in str(e) or "'file'" in str(e):
+            await event.edit("Download Canceled :\n`{}`".format(file.name))
+            return False
+        elif " depth exceeded" in str(e):
+            file.remove(force=True)
+            await event.edit("Download Auto Canceled :\n`{}`\nYour Torrent/Link is Dead.".format(file.name))
+            return False
+        else:
+            LOGGER.info(str(e))
+            await event.edit("<u>error</u> :\n`{}` \n\n#error".format(str(e)))
+            return
+# https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
 
 
 async def check_metadata(aria2, gid):

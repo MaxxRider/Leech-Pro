@@ -28,7 +28,7 @@ async def extract_youtube_dl_formats(url, user_working_dir):
         "-j",
         url
     ]
-    # logger.info(command_to_exec)
+    LOGGER.info(command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,
         # stdout must a pipe to be accessible as process.stdout
@@ -38,9 +38,9 @@ async def extract_youtube_dl_formats(url, user_working_dir):
     # Wait for the subprocess to finish
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
-    # logger.info(e_response)
+    LOGGER.info(e_response)
     t_response = stdout.decode().strip()
-    # logger.info(t_response)
+    LOGGER.info(t_response)
     # https://github.com/rg3/youtube-dl/issues/2630#issuecomment-38635239
     if e_response:
         # logger.warn("Status : FAIL", exc.returncode, exc.output)
