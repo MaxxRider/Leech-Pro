@@ -15,7 +15,6 @@ import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
-
 async def new_join_f(client, message):
     chat_type = message.chat.type
     if chat_type != "private":
@@ -36,13 +35,15 @@ async def help_message_f(client, message):
 
 
 async def rename_message_f(client, message):
+    inline_keyboard = []
+    inline_keyboard.append([
+        pyrogram.InlineKeyboardButton(
+            text="read this?",
+            url="https://t.me/keralagram/698909"
+    ])
+    reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
     await message.reply_text(
         "please use @renamebot",
         quote=True,
-        reply_markup=pyrogram.InlineKeyboardMarkup([
-            pyrogram.InlineKeyboardButton(
-                "read this?",
-                url="https://t.me/keralagram/698909"
-            )
-        ])
+        reply_markup=reply_markup
     )
