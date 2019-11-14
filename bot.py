@@ -20,7 +20,7 @@ else:
     from config import Config
 
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
-from plugins.new_join_fn import new_join_f, help_message_f
+from plugins.new_join_fn import new_join_f, help_message_f, rename_message_f
 from plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f
 from plugins.status_message_fn import status_message_f, cancel_message_f
 from plugins.call_back_button_handler import button
@@ -62,6 +62,12 @@ if __name__ == "__main__" :
         filters=Filters.command(["cancel"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
     )
     app.add_handler(cancel_message_handler)
+    #
+    rename_message_handler = MessageHandler(
+        rename_message_f,
+        filters=Filters.command(["rename"]) & Filters.chat(chats=Config.AUTH_CHANNEL)
+    )
+    app.add_handler(rename_message_handler)
 
     help_text_handler = MessageHandler(
         help_message_f,
