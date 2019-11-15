@@ -22,7 +22,8 @@ from tobrot.helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 from tobrot.helper_funcs.split_large_files import split_large_files
 
 from tobrot import (
-    TG_MAX_FILE_SIZE
+    TG_MAX_FILE_SIZE,
+    EDIT_SLEEP_TIME_OUT
 )
 
 
@@ -76,9 +77,10 @@ async def upload_to_tg(
             totlaa_sleif.sort()
             number_of_files = len(totlaa_sleif)
             LOGGER.info(totlaa_sleif)
+            ba_se_file_name = os.path.basename(local_file_name)
             await i_m_s_g.edit_text(
                 f"Detected File Size: {d_f_s} 😡\n"
-                f"<code>{local_file_name}</code> splitted into {number_of_files} files.\n"
+                f"<code>{ba_se_file_name}</code> splitted into {number_of_files} files.\n"
                 "trying to upload to Telegram, now ..."
             )
             for le_file in totlaa_sleif:
@@ -97,7 +99,7 @@ async def upload_to_tg(
 
 
 async def upload_single_file(message, local_file_name, caption_str):
-    await asyncio.sleep(5)
+    await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
     sent_message = None
     start_time = time.time()
     try:

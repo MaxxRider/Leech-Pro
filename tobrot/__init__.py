@@ -6,9 +6,9 @@ import os
 
 # the secret configuration specific things
 if bool(os.environ.get("ENV", False)):
-    from pyrobot.sample_config import Config
+    from tobrot.sample_config import Config
 else:
-    from pyrobot.config import Development as Config
+    from tobrot.config import Config
 
 
 # TODO: is there a better way?
