@@ -17,15 +17,13 @@ import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
-from plugins.display_progress import progress_for_pyrogram, humanbytes
-from plugins.help_Nekmo_ffmpeg import take_screen_shot
-from plugins.split_large_files import split_large_files
+from tobrot.helper_funcs.display_progress import progress_for_pyrogram, humanbytes
+from tobrot.helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
+from tobrot.helper_funcs.split_large_files import split_large_files
 
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from tobrot import (
+    TG_MAX_FILE_SIZE
+)
 
 
 async def upload_to_tg(
@@ -65,7 +63,7 @@ async def upload_to_tg(
                 dict_contatining_uploaded_files
             )
     else:
-        if os.path.getsize(local_file_name) > Config.TG_MAX_FILE_SIZE:
+        if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
             LOGGER.info("TODO")
             d_f_s = humanbytes(os.path.getsize(local_file_name))
             i_m_s_g = await message.reply_text(

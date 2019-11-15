@@ -12,10 +12,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 
-import os
-import time
-
-from plugins.download_aria_p_n import call_apropriate_function, aria_start
+from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
 
 
 async def status_message_f(client, message):

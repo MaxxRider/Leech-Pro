@@ -14,13 +14,14 @@ LOGGER = logging.getLogger(__name__)
 import aria2p
 import asyncio
 import os
-from plugins.upload_to_tg import upload_to_tg
+from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from tobrot import (
+    ARIA_TWO_STARTED_PORT,
+    MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START,
+    AUTH_CHANNEL,
+    EDIT_SLEEP_TIME_OUT
+)
 
 
 async def aria_start():
@@ -37,12 +38,12 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--max-connection-per-server=10")
     aria2_daemon_start_cmd.append("--min-split-size=10M")
     aria2_daemon_start_cmd.append("--rpc-listen-all=false")
-    aria2_daemon_start_cmd.append(f"--rpc-listen-port={Config.ARIA_TWO_STARTED_PORT}")
+    aria2_daemon_start_cmd.append(f"--rpc-listen-port={ARIA_TWO_STARTED_PORT}")
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
     aria2_daemon_start_cmd.append("--seed-ratio=0.0")
     aria2_daemon_start_cmd.append("--seed-time=1")
     aria2_daemon_start_cmd.append("--split=10")
-    aria2_daemon_start_cmd.append(f"--bt-stop-timeout={Config.MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}")
+    aria2_daemon_start_cmd.append(f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}")
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
@@ -57,7 +58,7 @@ async def aria_start():
     aria2 = aria2p.API(
         aria2p.Client(
             host="http://localhost",
-            port=Config.ARIA_TWO_STARTED_PORT,
+            port=ARIA_TWO_STARTED_PORT,
             secret=""
         )
     )
@@ -150,7 +151,7 @@ async def call_apropriate_function(
     for key_f_res_se in final_response:
         local_file_name = key_f_res_se
         message_id = final_response[key_f_res_se]
-        channel_id = str(Config.AUTH_CHANNEL)[4:]
+        channel_id = str(AUTH_CHANNEL)[4:]
         private_link = f"https://t.me/c/{channel_id}/{message_id}"
         message_to_send += "👉 <a href='"
         message_to_send += private_link
@@ -194,7 +195,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 msg = file.error_message
                 await event.edit(f"`{msg}`")
                 return False
-            await asyncio.sleep(Config.EDIT_SLEEP_TIME_OUT)
+            await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await check_progress_for_dl(aria2, gid, event, previous_message)
         else:
             await event.edit(f"File Downloaded Successfully: `{file.name}`")

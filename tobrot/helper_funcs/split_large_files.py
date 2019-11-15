@@ -18,11 +18,9 @@ import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from tobrot import (
+    MAX_TG_SPLIT_FILE_SIZE
+)
 
 
 async def split_large_files(input_file):
@@ -45,7 +43,7 @@ async def split_large_files(input_file):
         LOGGER.info(total_duration)
         total_file_size = os.path.getsize(input_file)
         LOGGER.info(total_file_size)
-        minimum_duration = (total_duration / total_file_size) * (Config.MAX_TG_SPLIT_FILE_SIZE)
+        minimum_duration = (total_duration / total_file_size) * (MAX_TG_SPLIT_FILE_SIZE)
         LOGGER.info(minimum_duration)
         # END: proprietary
         start_time = 0
@@ -79,7 +77,7 @@ async def split_large_files(input_file):
             "split",
             "-d",
             "--suffix-length=5",
-            "--bytes=1572863000",
+            f"--bytes={MAX_TG_SPLIT_FILE_SIZE}",
             input_file,
             o_d_t
         ]

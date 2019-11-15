@@ -1,0 +1,76 @@
+{
+  "name": "Telegram Torrent Leecher",
+  "description": "A Telegram Torrent (and youtube-dl) Leecher based on Pyrogram. Powered by @ThankTelegram!",
+  "keywords": [
+    "telegram",
+    "best",
+    "indian",
+    "pyrogram",
+    "torrent",
+    "3",
+    "plugin",
+    "modular",
+    "productivity",
+    "youtube-dl",
+    "leecher"
+  ],
+  "repository": "https://github.com/SpEcHiDe/PublicLeech",
+  "success_url": "https://telegram.dog/ThankTelegram",
+  "website": "https://github.com/SpEcHiDe/PublicLeech",
+  "env": {
+    "ENV": {
+      "description": "Setting this to ANYTHING will enable webhooks when in env mode",
+      "value": "ANYTHING"
+    },
+    "APP_ID": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": ""
+    },
+    "API_HASH": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": ""
+    },
+    "TG_BOT_TOKEN": {
+      "description": "get this value from @BotFather",
+      "value": ""
+    },
+    "AUTH_CHANNEL": {
+      "description": "should be an integer. The BOT API ID of the Telegram Group, where the Leecher should work.",
+      "value": ""
+    },
+    "CHUNK_SIZE": {
+      "description": "should be an integer",
+      "value": "128",
+      "required": false
+    },
+    "ARIA_TWO_STARTED_PORT": {
+      "description": "should be an integer. The port on which aria2c daemon must start, and keep listening.",
+      "value": "6800",
+      "required": false
+    },
+    "EDIT_SLEEP_TIME_OUT": {
+      "description": "should be an integer. Number of seconds to wait before editing a message.",
+      "value": "1",
+      "required": false
+    },
+    "MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START": {
+      "description": "should be an integer. Number of seconds to wait before cancelling a torrent.",
+      "required": false
+    }
+  },
+  "addons": [
+  ],
+  "buildpacks": [{
+    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  }, {
+    "url": "https://github.com/amivin/aria2-heroku"
+  }, {
+    "url": "heroku/python"
+  }],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}

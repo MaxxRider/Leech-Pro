@@ -13,11 +13,9 @@ LOGGER = logging.getLogger(__name__)
 
 import os
 
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from tobrot import (
+    REAL_DEBRID_KEY
+)
 
 
 import aiohttp
@@ -34,7 +32,7 @@ async def fetch(session, url, data):
 
 async def extract_it(restricted_link, custom_file_name):
     async with aiohttp.ClientSession() as session:
-        url_to_send = BASE_URL + "/unrestrict/link?auth_token=" + Config.REAL_DEBRID_KEY
+        url_to_send = BASE_URL + "/unrestrict/link?auth_token=" + REAL_DEBRID_KEY
         to_send_data = {
             "link": restricted_link
         }

@@ -15,8 +15,8 @@ import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
-from plugins.display_progress import progress_for_pyrogram, humanbytes
-from plugins.youtube_dl_button import youtube_dl_call_back
+from tobrot.helper_funcs.display_progress import progress_for_pyrogram, humanbytes
+from tobrot.helper_funcs.youtube_dl_button import youtube_dl_call_back
 
 
 async def button(bot, update):

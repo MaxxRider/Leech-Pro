@@ -14,18 +14,17 @@ LOGGER = logging.getLogger(__name__)
 
 import os
 
-# the secret configuration specific things
-if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
-else:
-    from config import Config
+from tobrot import (
+    DOWNLOAD_LOCATION
+)
+
 
 import time
-from plugins.extract_link_from_message import extract_link
-from plugins.download_aria_p_n import call_apropriate_function, aria_start
-from plugins.download_from_link import request_download
-from plugins.display_progress import progress_for_pyrogram
-from plugins.youtube_dl_extractor import extract_youtube_dl_formats
+from tobrot.helper_funcs.extract_link_from_message import extract_link
+from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
+from tobrot.helper_funcs.download_from_link import request_download
+from tobrot.helper_funcs.display_progress import progress_for_pyrogram
+from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 
 async def incoming_message_f(client, message):
@@ -39,7 +38,7 @@ async def incoming_message_f(client, message):
         aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
         new_download_location = os.path.join(
-            Config.DOWNLOAD_LOCATION,
+            DOWNLOAD_LOCATION,
             str(time.time()),
             cf_name if cf_name is not None else ""
         )
@@ -68,7 +67,7 @@ async def incoming_youtube_dl_f(client, message):
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
         current_user_id = message.from_user.id
-        user_working_dir = os.path.join(Config.DOWNLOAD_LOCATION, str(current_user_id))
+        user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
         # create download directory, if not exist
         if not os.path.isdir(user_working_dir):
             os.makedirs(user_working_dir)
