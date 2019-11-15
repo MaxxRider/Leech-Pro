@@ -12,8 +12,8 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
 Simply clone the repository and run the main file:
 
 ```sh
-git clone https://github.com/SpEcHiDe/PyroGramUserBot.git
-cd PyroGramUserBot
+git clone https://github.com/SpEcHiDe/PublicLeech.git
+cd PublicLeech
 virtualenv -p /usr/bin/python3 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
