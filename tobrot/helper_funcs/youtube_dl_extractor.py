@@ -81,6 +81,7 @@ async def extract_youtube_dl_formats(url, user_working_dir):
                     approx_file_size = ""
                     if "filesize" in formats:
                         approx_file_size = humanbytes(formats["filesize"])
+                    dipslay_str_uon = " " + format_string + " (" + format_ext.upper() + ") " + approx_file_size + " "
                     cb_string_video = "{}|{}|{}".format(
                         "video", format_id, format_ext)
                     ikeyboard = []
@@ -88,7 +89,7 @@ async def extract_youtube_dl_formats(url, user_working_dir):
                         if format_id == "source":
                             ikeyboard = [
                                 pyrogram.InlineKeyboardButton(
-                                    " " + format_string + " " + approx_file_size + " ",
+                                    dipslay_str_uon,
                                     callback_data=(cb_string_video).encode("UTF-8")
                                 )
                             ]
@@ -96,7 +97,7 @@ async def extract_youtube_dl_formats(url, user_working_dir):
                         if format_string is not None and not "audio only" in format_string:
                             ikeyboard = [
                                 pyrogram.InlineKeyboardButton(
-                                    " " + format_string + " " + approx_file_size + " ",
+                                    dipslay_str_uon,
                                     callback_data=(cb_string_video).encode("UTF-8")
                                 )
                             ]
