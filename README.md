@@ -32,6 +32,43 @@ class Config(Config):
   AUTH_CHANNEL = -1001234567890
 ```
 
+### Variable Explanations
+
+##### Mandatory Variables
+
+* `TG_BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+
+* `APP_ID`
+* `API_HASH`: Get these two values from [my.telegram.org/apps](https://my.telegram.org/apps).
+  * N.B.: if Telegram is blocked by your ISP, try our [Telegram bot](https://telegram.dog/UseTGXBot) to get the IDs.
+
+* `AUTH_CHANNEL`: Create a Super Group in Telegram, add `@GoogleIMGBot` to the group, and send /id in the chat, to get this value.
+
+##### Optional Configuration Variables
+
+* `DOWNLOAD_LOCATION`
+
+* `MAX_FILE_SIZE`
+
+* `TG_MAX_FILE_SIZE`
+
+* `FREE_USER_MAX_FILE_SIZE`
+
+* `MAX_TG_SPLIT_FILE_SIZE`
+
+* `CHUNK_SIZE`
+
+* `MAX_MESSAGE_LENGTH`
+
+* `PROCESS_MAX_TIMEOUT`
+
+* `ARIA_TWO_STARTED_PORT`
+
+* `EDIT_SLEEP_TIME_OUT`
+
+* `MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START`
+
+
 ## Credits, and Thanks to
 
 * [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
