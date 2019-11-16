@@ -66,7 +66,7 @@ async def status_message_f(client, message):
             msg += " | "
             msg += "\n\n"
         LOGGER.info(msg)
-        message.reply_text(msg, quote=True)
+        await message.reply_text(msg, quote=True)
 
 
 async def cancel_message_f(client, message):
