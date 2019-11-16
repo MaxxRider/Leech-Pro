@@ -48,8 +48,7 @@ async def incoming_message_f(client, message):
         new_download_location = os.path.join(
             DOWNLOAD_LOCATION,
             str(current_user_id),
-            str(time.time()),
-            cf_name if cf_name is not None else ""
+            str(time.time())
         )
         # create download directory, if not exist
         if not os.path.isdir(new_download_location):
