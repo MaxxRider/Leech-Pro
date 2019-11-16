@@ -25,7 +25,7 @@ from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
 
 from tobrot.plugins.new_join_fn import new_join_f, help_message_f, rename_message_f
 from tobrot.plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f
-from tobrot.plugins.status_message_fn import status_message_f, cancel_message_f
+from tobrot.plugins.status_message_fn import status_message_f, cancel_message_f, exec_message_f
 from tobrot.plugins.call_back_button_handler import button
 
 
@@ -65,6 +65,12 @@ if __name__ == "__main__" :
         filters=Filters.command(["cancel"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(cancel_message_handler)
+    #
+    exec_message_handler = MessageHandler(
+        exec_message_f,
+        filters=Filters.command(["exec"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(exec_message_handler)
     #
     rename_message_handler = MessageHandler(
         rename_message_f,
