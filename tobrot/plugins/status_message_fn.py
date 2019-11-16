@@ -12,24 +12,53 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 
+from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
 
 
 async def status_message_f(client, message):
-    aria_i_p = await aria_start()
-    # Show All Downloads
-    downloads = aria_i_p.get_downloads()
-    msg = ""
-    for download in downloads:
-        msg = msg + "File: `" + str(download.name) + "`\n"
-        msg = msg + "Speed: " + str(download.download_speed_string()) + "\n"
-        msg = msg + "Progress: " + str(download.progress_string(
-        )) + "\n"
-        msg = msg + "Total Size: " + str(download.total_length_string()) + "\n"
-        msg = msg + "Status: " + str(download.status) + "\n"
-        msg = msg + "ETA:  " + str(download.eta_string()) + "\n\n"
-    LOGGER.info(msg)
-    message.reply_text(msg, quote=True)
+    if await AdminCheck(client, message.chat.id, message.from_user.id):
+        aria_i_p = await aria_start()
+        # Show All Downloads
+        downloads = aria_i_p.get_downloads()
+        #
+        DOWNLOAD_ICON = "📥"
+        UPLOAD_ICON = "📤"
+        #
+        msg = ""
+        for download in downloads:
+            downloading_dir_name = "NA"
+            try:
+                downloading_dir_name = str(download.name)
+            except:
+                pass
+            total_length_size = str(download.total_length_string())
+            progress_percent_string = str(download.progress_string())
+            down_speed_string = str(download.download_speed_string())
+            up_speed_string = str(download.upload_speed_string())
+            download_current_status = str(download.status)
+            e_t_a = str(download.eta_string())
+            current_gid = str(download.gid)
+            #
+            msg += f"<u>{downloading_dir_name}</u>"
+            msg += " | "
+            msg += f"{total_length_size}"
+            msg += " | "
+            msg += f"{progress_percent_string}"
+            msg += " | "
+            msg += f"{DOWNLOAD_ICON} {down_speed_string}"
+            msg += " | "
+            msg += f"{UPLOAD_ICON} {up_speed_string}"
+            msg += " | "
+            msg += f"{e_t_a}"
+            msg += " | "
+            msg += f"{download_current_status}"
+            msg += " | "
+            msg += f"<code>/cancel {current_gid}</code>"
+            msg += " | "
+            msg += "\n\n"
+        LOGGER.info(msg)
+        message.reply_text(msg, quote=True)
 
 
 async def cancel_message_f(client, message):
@@ -42,7 +71,7 @@ async def cancel_message_f(client, message):
         try:
             downloads = aria_i_p.get_download(g_id)
             LOGGER.info(downloads)
-            LOGGER.info(downloads.pause())
+            LOGGER.info(downloads.remove(force=True))
             await i_m_s_e_g.edit_text(
                 "Leech Cancelled"
             )

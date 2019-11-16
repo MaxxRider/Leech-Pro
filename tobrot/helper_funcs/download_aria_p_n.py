@@ -193,7 +193,16 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         if not complete:
             if not file.error_message:
                 msg = ""
-                # msg = f"\nDownloading File: `{file.name}`"
+                # sometimes, this weird https://t.me/c/1220993104/392975
+                # error creeps up
+                # TODO: temporary workaround
+                downloading_dir_name = "N/A"
+                try:
+                    downloading_dir_name = str(download.name)
+                except:
+                    pass
+                #
+                msg = f"\nDownloading File: `{downloading_dir_name}`"
                 msg += f"\nSpeed: {file.download_speed_string()} 🔽 / {file.upload_speed_string()} 🔼"
                 msg += f"\nProgress: {file.progress_string()}"
                 msg += f"\nTotal Size: {file.total_length_string()}"
