@@ -34,6 +34,7 @@ async def status_message_f(client, message):
 
 async def cancel_message_f(client, message):
     if len(message.command) > 1:
+        # /cancel command
         i_m_s_e_g = await message.reply_text("checking..?", quote=True)
         aria_i_p = await aria_start()
         g_id = message.command[1].strip()

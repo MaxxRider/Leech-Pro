@@ -8,14 +8,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 LOGGER = logging.getLogger(__name__)
 
-import os
 
-
-import pyrogram
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
-
-from tobrot.helper_funcs.display_progress import progress_for_pyrogram, humanbytes
 from tobrot.helper_funcs.youtube_dl_button import youtube_dl_call_back
 
 

@@ -14,6 +14,10 @@ LOGGER = logging.getLogger(__name__)
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
+from tobrot import (
+    AUTH_CHANNEL
+)
+
 
 async def new_join_f(client, message):
     chat_type = message.chat.type
@@ -23,13 +27,17 @@ async def new_join_f(client, message):
             chat_id=message.chat.id,
             delete=True
         )
+    # delete all other messages, except for AUTH_CHANNEL
     await message.delete(revoke=True)
 
 
 async def help_message_f(client, message):
     # await message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)
+    channel_id = str(AUTH_CHANNEL)[4:]
+    message_id = 99
+    # display the /help message
     await message.reply_text(
-        "please read the <a href='https://t.me/c/1434259219/99'>Pinned Message</a>",
+        f"please read the <a href='https://t.me/c/{channel_id}/{message_id}'>Pinned Message</a>",
         quote=True
     )
 

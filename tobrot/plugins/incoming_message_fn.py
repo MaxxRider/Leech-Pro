@@ -28,15 +28,19 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 
 async def incoming_message_f(client, message):
+    """/leech command"""
     i_m_sefg = await message.reply_text("processing", quote=True)
     # LOGGER.info(message)
+    # get link from the incoming message
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
+        # start the aria2c daemon
         aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
+        # create an unique directory
         new_download_location = os.path.join(
             DOWNLOAD_LOCATION,
             str(time.time()),
@@ -46,6 +50,7 @@ async def incoming_message_f(client, message):
         if not os.path.isdir(new_download_location):
             os.makedirs(new_download_location)
         await i_m_sefg.edit_text("trying to download")
+        # try to download the "link"
         sagtus, err_message = await call_apropriate_function(
             aria_i_p,
             dl_url,
@@ -53,24 +58,29 @@ async def incoming_message_f(client, message):
             i_m_sefg
         )
         if not sagtus:
+            # if FAILED, display the error message
             await i_m_sefg.edit_text(err_message)
     else:
         await i_m_sefg.edit_text("**FCUK**! wat have you entered. Please read /help")
 
 
 async def incoming_youtube_dl_f(client, message):
+    """ /ytdl command """
     i_m_sefg = await message.reply_text("processing", quote=True)
     # LOGGER.info(message)
+    # extract link from message
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
         current_user_id = message.from_user.id
+        # create an unique directory
         user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
         # create download directory, if not exist
         if not os.path.isdir(user_working_dir):
             os.makedirs(user_working_dir)
+        # list the formats, and display in button markup formats
         text_message, reply_markup = await extract_youtube_dl_formats(
             dl_url,
             user_working_dir
@@ -79,3 +89,6 @@ async def incoming_youtube_dl_f(client, message):
             text=text_message,
             reply_markup=reply_markup
         )
+    else:
+        # if no links found, delete the "processing" message
+        await i_m_sefg.delete()
