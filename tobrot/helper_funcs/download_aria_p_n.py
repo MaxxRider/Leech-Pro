@@ -15,6 +15,7 @@ import aria2p
 import asyncio
 import os
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
+from tobrot.helper_funcs.create_compressed_archive import create_archive
 
 from tobrot import (
     ARIA_TWO_STARTED_PORT,
@@ -105,7 +106,8 @@ async def call_apropriate_function(
     aria_instance,
     incoming_link,
     c_file_name,
-    sent_message_to_update_tg_p
+    sent_message_to_update_tg_p,
+    is_zip
 ):
     if incoming_link.startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
@@ -137,12 +139,22 @@ async def call_apropriate_function(
             return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
+    to_upload_file = file.name
+    #
+    if is_zip:
+        # first check if current free space allows this
+        # ref: https://github.com/out386/aria-telegram-mirror-bot/blob/master/src/download_tools/aria-tools.ts#L194
+        # archive the contents
+        check_if_file = await create_archive(to_upload_file)
+        if check_if_file is not None:
+            to_upload_file = check_if_file
+    #
     response = {}
     LOGGER.info(response)
     user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
     final_response = await upload_to_tg(
         sent_message_to_update_tg_p,
-        file.name,
+        to_upload_file,
         user_id,
         response
     )

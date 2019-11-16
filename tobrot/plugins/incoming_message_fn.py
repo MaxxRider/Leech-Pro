@@ -30,7 +30,10 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 async def incoming_message_f(client, message):
     """/leech command"""
     i_m_sefg = await message.reply_text("processing", quote=True)
-    # LOGGER.info(message)
+    is_zip = False
+    if len(message.command) > 1:
+        if message.command[1] == "archive":
+            is_zip = True
     # get link from the incoming message
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
@@ -55,7 +58,8 @@ async def incoming_message_f(client, message):
             aria_i_p,
             dl_url,
             new_download_location,
-            i_m_sefg
+            i_m_sefg,
+            is_zip
         )
         if not sagtus:
             # if FAILED, display the error message
