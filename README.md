@@ -4,11 +4,11 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
 
 ## installing
 
-#### The Easy Way
+### The Easy Way
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-#### The Legacy Way
+### The Legacy Way
 Simply clone the repository and run the main file:
 
 ```sh
@@ -21,7 +21,7 @@ pip install -r requirements.txt
 python3 -m tobrot
 ```
 
-#### an example config.py 👇
+### an example config.py 👇
 ```py
 from tobrot.sample_config import Config
 
@@ -67,6 +67,15 @@ class Config(Config):
 * `EDIT_SLEEP_TIME_OUT`
 
 * `MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START`
+
+
+## Available Commands
+
+* `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)
+
+* `/leech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified torrent]
+
+* `/leech archive`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [This command will create a .tar.gz file of the output directory, and send the files in the chat, splited into PARTS of 1024MiB each, due to Telegram limitations]
 
 
 ## Credits, and Thanks to
