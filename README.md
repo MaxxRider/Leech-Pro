@@ -78,6 +78,22 @@ class Config(Config):
 * `/leech archive`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [This command will create a .tar.gz file of the output directory, and send the files in the chat, splited into PARTS of 1024MiB each, due to Telegram limitations]
 
 
+## How to Use?
+
+* send any one of the available command, as a reply to a valid link.
+
+* if file is larger than 1500MB, [read this](https://t.me/c/1434259219/113).
+
+* if file is a TAR archive, [read this](https://t.me/c/1434259219/104) to know how to uncompress.
+
+
+## Issues or Feature Requests
+
+* search for known issues, [here](https://t.me/c/1434259219/118).
+
+* add issues / feature requests, [here](https://github.com/SpEcHiDe/PublicLeech/issues/new).
+
+
 ## Credits, and Thanks to
 
 * [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
