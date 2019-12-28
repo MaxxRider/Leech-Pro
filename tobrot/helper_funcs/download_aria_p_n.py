@@ -199,7 +199,9 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 # TODO: temporary workaround
                 downloading_dir_name = "N/A"
                 try:
-                    downloading_dir_name = str(download.name)
+                    # another derp -_-
+                    # https://t.me/c/1220993104/423318
+                    downloading_dir_name = str(file.name)
                 except:
                     pass
                 #
