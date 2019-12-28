@@ -22,6 +22,7 @@ from tobrot import (
 
 from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
+from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 
 
 async def status_message_f(client, message):
@@ -135,3 +136,20 @@ async def exec_message_f(client, message):
             await message.delete()
         else:
             await message.reply_text(OUTPUT)
+
+
+async def upload_document_f(client, message):
+    imsegd = await message.reply_text(
+        "processing ..."
+    )
+    if await AdminCheck(client, message.chat.id, message.from_user.id):
+        if " " in message.text:
+            recvd_command, local_file_name = message.text.split(" ", 1)
+            recvd_response = await upload_to_tg(
+                imsegd,
+                local_file_name,
+                message.from_user.id,
+                {}
+            )
+            LOGGER.info(recvd_response)
+    await imsegd.delete()
