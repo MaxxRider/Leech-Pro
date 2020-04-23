@@ -52,15 +52,16 @@ async def upload_to_tg(
         directory_contents.sort()
         # number_of_files = len(directory_contents)
         LOGGER.info(directory_contents)
-        new_m_esg = await message.reply_text(
-            "Found {} files".format(len(directory_contents)),
-            quote=True
-            # reply_to_message_id=message.message_id
-        )
+        if not message.photo:
+            new_m_esg = await message.reply_text(
+                "Found {} files".format(len(directory_contents)),
+                quote=True
+                # reply_to_message_id=message.message_id
+            )
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
             await upload_to_tg(
-                new_m_esg,
+                new_m_esg or message,
                 os.path.join(local_file_name, single_file),
                 from_user,
                 dict_contatining_uploaded_files
@@ -102,6 +103,7 @@ async def upload_to_tg(
             )
             if sent_message is not None:
                 dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
+    await message.delete()
     return dict_contatining_uploaded_files
 
 
@@ -118,9 +120,10 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
     LOGGER.info(thumbnail_location)
     #
     try:
-        message_for_progress_display = await message.reply_text(
-            "starting upload of {}".format(os.path.basename(local_file_name))
-        )
+        if not message.photo:
+            message_for_progress_display = await message.reply_text(
+                "starting upload of {}".format(os.path.basename(local_file_name))
+            )
         if local_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
             metadata = extractMetadata(createParser(local_file_name))
             duration = 0
@@ -179,7 +182,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 progress=progress_for_pyrogram,
                 progress_args=(
                     "trying to upload",
-                    message_for_progress_display,
+                    message_for_progress_display or message,
                     start_time
                 )
             )
@@ -220,7 +223,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 progress=progress_for_pyrogram,
                 progress_args=(
                     "trying to upload",
-                    message_for_progress_display,
+                    message_for_progress_display or message,
                     start_time
                 )
             )
@@ -251,7 +254,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 progress=progress_for_pyrogram,
                 progress_args=(
                     "trying to upload",
-                    message_for_progress_display,
+                    message_for_progress_display or message,
                     start_time
                 )
             )
