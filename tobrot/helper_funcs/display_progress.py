@@ -46,12 +46,20 @@ async def progress_for_pyrogram(
             estimated_total_time if estimated_total_time != '' else "0 s"
         )
         try:
-            await message.edit(
-                text="{}\n {}".format(
-                    ud_type,
-                    tmp
+            if not message.photo:
+                await message.edit_text(
+                    text="{}\n {}".format(
+                        ud_type,
+                        tmp
+                    )
                 )
-            )
+            else:
+                await message.edit_caption(
+                    caption="{}\n {}".format(
+                        ud_type,
+                        tmp
+                    )
+                )
         except:
             pass
 
