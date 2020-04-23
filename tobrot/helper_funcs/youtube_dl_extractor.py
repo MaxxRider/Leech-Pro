@@ -50,7 +50,7 @@ async def extract_youtube_dl_formats(url, user_working_dir):
         error_message = e_response.replace(
             "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.", ""
         )
-        return error_message, None
+        return None, error_message, None
     if t_response:
         # logger.info(t_response)
         x_reponse = t_response
@@ -67,7 +67,11 @@ async def extract_youtube_dl_formats(url, user_working_dir):
             json.dump(response_json, outfile, ensure_ascii=False)
         # logger.info(response_json)
         inline_keyboard = []
+        thumb_image = "http://archive.is/wrODY/683dbe9224405f0f889018b84e425b6b05bfc350.jpg"
         for current_r_json in response_json:
+            #
+            thumb_image = current_r_json["thumbnail"]
+            #
             duration = None
             if "duration" in current_r_json:
                 duration = current_r_json["duration"]
@@ -142,4 +146,4 @@ async def extract_youtube_dl_formats(url, user_working_dir):
         # LOGGER.info(reply_markup)
         succss_mesg = """Select the desired format: 👇
 <u>mentioned</u> <i>file size might be approximate</i>"""
-        return succss_mesg, reply_markup
+        return thumb_image, succss_mesg, reply_markup

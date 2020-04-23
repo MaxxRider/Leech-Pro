@@ -86,14 +86,23 @@ async def incoming_youtube_dl_f(client, message):
         if not os.path.isdir(user_working_dir):
             os.makedirs(user_working_dir)
         # list the formats, and display in button markup formats
-        text_message, reply_markup = await extract_youtube_dl_formats(
+        thumb_image, text_message, reply_markup = await extract_youtube_dl_formats(
             dl_url,
             user_working_dir
         )
-        await i_m_sefg.edit_text(
-            text=text_message,
-            reply_markup=reply_markup
-        )
+        if thumb_image is not None:
+            await message.reply_photo(
+                photo=thumb_image,
+                quote=True,
+                caption=text_message,
+                reply_markup=reply_markup
+            )
+            await i_m_sefg.delete()
+        else:
+            await i_m_sefg.edit_text(
+                text=text_message,
+                reply_markup=reply_markup
+            )
     else:
         # if no links found, delete the "processing" message
         await i_m_sefg.delete()
