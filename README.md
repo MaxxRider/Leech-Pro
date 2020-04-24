@@ -68,6 +68,9 @@ class Config(Config):
 
 * `MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START`
 
+* `FINISHED_PROGRESS_STR`
+
+* `UN_FINISHED_PROGRESS_STR`
 
 ## Available Commands
 
