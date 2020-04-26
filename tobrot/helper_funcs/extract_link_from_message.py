@@ -66,8 +66,11 @@ async def extract_link(message, type_o_request):
                     t=type_o_request
                 )
                 async with session.get(api_url) as resp:
-                    LOGGER.info(resp.status)
-                    LOGGER.info(await resp.json())
+                    suats = int(resp.status)
+                    err = await resp.text()
+                    if suats != 200:
+                        url = None
+                        custom_file_name = err
         except:
             # this might occur in case of a BAD API URL,
             # who knows? :\
