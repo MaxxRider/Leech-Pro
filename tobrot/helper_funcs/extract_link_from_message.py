@@ -18,7 +18,7 @@ from tobrot import (
 )
 
 
-def extract_link(message):
+async def extract_link(message, type_o_request):
     custom_file_name = None
     url = None
 
@@ -54,5 +54,23 @@ def extract_link(message):
 
     elif message.entities is not None:
         url = message.text
+
+    # additional conditional check,
+    # here to FILTER out BAD URLs
+    if TG_OFFENSIVE_API is not None:
+        try:
+            async with aiohttp.ClientSession() as session:
+                api_url = TG_OFFENSIVE_API.format(
+                    i=url,
+                    m=custom_file_name,
+                    t=type_o_request
+                )
+                async with session.get(api_url) as resp:
+                    LOGGER.info(resp.status)
+                    LOGGER.info(await resp.json())
+        except:
+            # this might occur in case of a BAD API URL,
+            # who knows? :\
+            pass
 
     return url, custom_file_name

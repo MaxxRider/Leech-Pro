@@ -24,7 +24,6 @@ from tobrot import (
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-from tobrot.helper_funcs.extract_link_from_message import extract_link
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 
 
@@ -83,17 +82,6 @@ async def youtube_dl_call_back(bot, update):
     custom_file_name = "%(title)s.%(ext)s"
     # https://superuser.com/a/994060
     LOGGER.info(custom_file_name)
-    #
-    if "noyes.in" in youtube_dl_url or "tor.checker.in" in youtube_dl_url or "workers.dev" in youtube_dl_url:
-        await update.message.edit_caption(
-            caption="😡😡 <i>please do not abuse this <u>FREE</u> service</i> 🌚"
-        )
-        return
-    if "drive.google.com" in youtube_dl_url and youtube_dl_format != "source":
-        await update.message.edit_caption(
-            caption="<i>please do not abuse this <u>FREE</u> service</i>"
-        )
-        return
     #
     await update.message.edit_caption(
         caption="trying to download"
