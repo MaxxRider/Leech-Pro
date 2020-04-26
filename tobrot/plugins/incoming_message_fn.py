@@ -66,7 +66,10 @@ async def incoming_message_f(client, message):
             # if FAILED, display the error message
             await i_m_sefg.edit_text(err_message)
     else:
-        await i_m_sefg.edit_text("**FCUK**! wat have you entered. Please read /help")
+        await i_m_sefg.edit_text(
+            "**FCUK**! wat have you entered. \nPlease read /help \n"
+            f"<b>API Error</b>: {cf_name}"
+        )
 
 
 async def incoming_youtube_dl_f(client, message):
@@ -104,5 +107,7 @@ async def incoming_youtube_dl_f(client, message):
                 reply_markup=reply_markup
             )
     else:
-        # if no links found, delete the "processing" message
-        await i_m_sefg.delete()
+        await i_m_sefg.edit_text(
+            "**FCUK**! wat have you entered. \nPlease read /help \n"
+            f"<b>API Error</b>: {cf_name}"
+        )

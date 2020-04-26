@@ -11,6 +11,8 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
+import aiohttp
+
 
 def extract_link(message):
     custom_file_name = None
