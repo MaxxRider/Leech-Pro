@@ -38,6 +38,11 @@ def extract_link(message):
         else:
             url = message.text.strip()
 
+    elif message.document is not None:
+        if message.document.file_name.lower().endswith(".torrent"):
+            url = await message.download()
+            custom_file_name = message.caption
+
     elif message.caption is not None:
         if "|" in message.caption:
             url, custom_file_name = message.caption.split("|")
