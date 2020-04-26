@@ -72,6 +72,8 @@ class Config(Config):
 
 * `UN_FINISHED_PROGRESS_STR`
 
+* `TG_OFFENSIVE_API`
+
 ## Available Commands
 
 * `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)

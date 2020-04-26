@@ -64,6 +64,10 @@
     "UN_FINISHED_PROGRESS_STR": {
       "description": "should be a single character.",
       "required": false
+    },
+    "TG_OFFENSIVE_API": {
+      "description": "should be an URL accepting the FormParams {i}, {m}, and {t}",
+      "required": false
     }
   },
   "addons": [
