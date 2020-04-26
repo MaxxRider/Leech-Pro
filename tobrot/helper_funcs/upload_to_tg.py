@@ -72,7 +72,8 @@ async def upload_to_tg(
                 new_m_esg,
                 os.path.join(local_file_name, single_file),
                 from_user,
-                dict_contatining_uploaded_files
+                dict_contatining_uploaded_files,
+                edit_media
             )
     else:
         if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
