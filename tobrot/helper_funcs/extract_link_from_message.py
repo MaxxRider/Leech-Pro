@@ -57,6 +57,7 @@ async def extract_link(message, type_o_request):
 
     # additional conditional check,
     # here to FILTER out BAD URLs
+    LOGGER.info(TG_OFFENSIVE_API)
     if TG_OFFENSIVE_API is not None:
         try:
             async with aiohttp.ClientSession() as session:
@@ -65,6 +66,7 @@ async def extract_link(message, type_o_request):
                     m=custom_file_name,
                     t=type_o_request
                 )
+                LOGGER.info(api_url)
                 async with session.get(api_url) as resp:
                     suats = int(resp.status)
                     err = await resp.text()
