@@ -19,6 +19,10 @@ import os
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
+from tobrot import (
+    DEF_THUMB_NAIL_VID_S
+)
+
 
 async def extract_youtube_dl_formats(url, user_working_dir):
     command_to_exec = [
@@ -67,7 +71,9 @@ async def extract_youtube_dl_formats(url, user_working_dir):
             json.dump(response_json, outfile, ensure_ascii=False)
         # logger.info(response_json)
         inline_keyboard = []
-        thumb_image = "http://archive.is/wrODY/683dbe9224405f0f889018b84e425b6b05bfc350.jpg"
+        #
+        thumb_image = DEF_THUMB_NAIL_VID_S
+        #
         for current_r_json in response_json:
             #
             thumb_image = current_r_json.get("thumbnail", thumb_image)
