@@ -84,6 +84,26 @@ def add_magnet(aria_instance, magnetic_link, c_file_name):
         return True, "" + download.gid + ""
 
 
+def add_torrent(aria_instance, torrent_file_path):
+    if torrent_file_path is None:
+        return False, "**FAILED** \n" + str(e) + " \nsomething wrongings when trying to add <u>TORRENT</u> file"
+    if os.path.exists(torrent_file_path):
+        # Add Torrent Into Queue
+        try:
+            download = aria_instance.add_torrent(
+                torrent_file_path,
+                uris=None,
+                options=None,
+                position=None
+            )
+        except Exception as e:
+            return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
+        else:
+            return True, "" + download.gid + ""
+    else:
+        return False, "**FAILED** \n" + str(e) + " \nPlease try other sources to get workable link"
+
+
 def add_url(aria_instance, text_url, c_file_name):
     options = None
     # if c_file_name is not None:
@@ -110,8 +130,10 @@ async def call_apropriate_function(
     sent_message_to_update_tg_p,
     is_zip
 ):
-    if incoming_link.startswith("magnet:"):
+    if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
+    elif incoming_link.lower().endswith(".torrent"):
+        sagtus, err_message = add_torrent(aria_instance, incoming_link)
     else:
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
     if not sagtus:
@@ -124,7 +146,7 @@ async def call_apropriate_function(
         sent_message_to_update_tg_p,
         None
     )
-    if incoming_link.startswith("magnet:") or incoming_link.lower().endswith(".torrent"):
+    if incoming_link.startswith("magnet:"):
         #
         err_message = await check_metadata(aria_instance, err_message)
         #
