@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+# (c) Shrimadhav U K / Akshay C
 
 # the logging things
 import logging
@@ -20,12 +20,25 @@ from tobrot import (
 
 
 import time
+import aria2p
+import asyncio
 from tobrot.helper_funcs.extract_link_from_message import extract_link
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
 from tobrot.helper_funcs.download_from_link import request_download
 from tobrot.helper_funcs.display_progress import progress_for_pyrogram
 from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
-
+from tobrot.helper_funcs.admin_check import AdminCheck
+        
+async def incoming_purge_message_f(client, message):
+    """/purge command"""
+    i_m_sefg2 = await message.reply_text("Purging...", quote=True)
+    if await AdminCheck(client, message.chat.id, message.from_user.id):
+        aria_i_p = await aria_start()
+        # Show All Downloads
+        downloads = aria_i_p.get_downloads()
+        for download in downloads:
+            LOGGER.info(download.remove(force=True))
+    await i_m_sefg2.delete()
 
 async def incoming_message_f(client, message):
     """/leech command"""
