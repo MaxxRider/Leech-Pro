@@ -95,8 +95,8 @@ async def extract_link(message, type_o_request):
     # might have some issues with #45
     if url is not None:
         url = url.strip()
-    if file_name is not None:
-        file_name = file_name.strip()
+    if custom_file_name is not None:
+        custom_file_name = custom_file_name.strip()
     # https://stackoverflow.com/a/761825/4723940
     if youtube_dl_username is not None:
         youtube_dl_username = youtube_dl_username.strip()
