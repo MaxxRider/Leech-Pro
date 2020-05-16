@@ -22,7 +22,9 @@ from tobrot import (
     MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START,
     AUTH_CHANNEL,
     DOWNLOAD_LOCATION,
-    EDIT_SLEEP_TIME_OUT
+    EDIT_SLEEP_TIME_OUT,
+    SEED_RATIO,
+    SEED_TIME
 )
 
 
@@ -42,8 +44,8 @@ async def aria_start():
     aria2_daemon_start_cmd.append("--rpc-listen-all=false")
     aria2_daemon_start_cmd.append(f"--rpc-listen-port={ARIA_TWO_STARTED_PORT}")
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
-    aria2_daemon_start_cmd.append("--seed-ratio=0.0")
-    aria2_daemon_start_cmd.append("--seed-time=1")
+    aria2_daemon_start_cmd.append("--seed-ratio={SEED_RATIO}")
+    aria2_daemon_start_cmd.append("--seed-time={SEED_TIME}")
     aria2_daemon_start_cmd.append("--split=10")
     aria2_daemon_start_cmd.append(f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}")
     #
