@@ -25,7 +25,7 @@ from tobrot import (
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
 
 from tobrot.plugins.new_join_fn import new_join_f, help_message_f, rename_message_f
-from tobrot.plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f
+from tobrot.plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f, incoming_purge_message_f
 from tobrot.plugins.status_message_fn import (
     status_message_f,
     cancel_message_f,
@@ -57,6 +57,12 @@ if __name__ == "__main__" :
         filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_message_handler)
+    #
+    incoming_purge_message_handler = MessageHandler(
+        incoming_purge_message_f,
+        filters=Filters.command(["purge"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_purge_message_handler)
     #
     incoming_youtube_dl_handler = MessageHandler(
         incoming_youtube_dl_f,
