@@ -33,6 +33,7 @@ async def youtube_dl_call_back(bot, update):
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext = cb_data.split("|")
     #
+'''
     current_user_id = update.message.reply_to_message.from_user.id
     current_touched_user_id = update.from_user.id
     if current_user_id != current_touched_user_id:
@@ -43,6 +44,7 @@ async def youtube_dl_call_back(bot, update):
             cache_time=0
         )
         return False, None
+'''
     user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
     # create download directory, if not exist
     if not os.path.isdir(user_working_dir):
