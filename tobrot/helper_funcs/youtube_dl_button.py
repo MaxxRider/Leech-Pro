@@ -33,8 +33,8 @@ async def youtube_dl_call_back(bot, update):
     # youtube_dl extractors
     tg_send_type, youtube_dl_format, youtube_dl_ext = cb_data.split("|")
     #
-    current_user_id = 12345
-    current_touched_user_id = 12345
+    current_user_id = update.message.reply_to_message.from_user.id
+    current_touched_user_id = update.from_user.id
     if current_user_id != current_touched_user_id:
         await bot.answer_callback_query(
             callback_query_id=update.id,
