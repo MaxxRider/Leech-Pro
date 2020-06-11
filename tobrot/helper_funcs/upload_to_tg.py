@@ -25,7 +25,8 @@ from tobrot.helper_funcs.copy_similar_file import copy_file
 from tobrot import (
     TG_MAX_FILE_SIZE,
     EDIT_SLEEP_TIME_OUT,
-    DOWNLOAD_LOCATION
+    DOWNLOAD_LOCATION,
+    CUSTOM_FILE_NAME
 )
 
 from pyrogram import (
@@ -42,6 +43,7 @@ async def upload_to_tg(
     dict_contatining_uploaded_files,
     edit_media=False
 ):
+    local_file_name = local_file_name + CUSTOM_FILE_NAME
     LOGGER.info(local_file_name)
     base_file_name = os.path.basename(local_file_name)
     caption_str = ""
