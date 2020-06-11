@@ -22,8 +22,7 @@ from tobrot import (
     MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START,
     AUTH_CHANNEL,
     DOWNLOAD_LOCATION,
-    EDIT_SLEEP_TIME_OUT,
-    CUSTOM_FILE_NAME
+    EDIT_SLEEP_TIME_OUT
 )
 
 
@@ -163,7 +162,7 @@ async def call_apropriate_function(
             return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
-    to_upload_file = os.rename(file.name, CUSTOM_FILE_NAME + '.' + file.name)
+    to_upload_file = file.name
     #
     if is_zip:
         # first check if current free space allows this
