@@ -172,6 +172,9 @@ async def call_apropriate_function(
         if check_if_file is not None:
             to_upload_file = check_if_file
     #
+    if to_upload_file:
+        os.rename(to_upload_file, 'gautam')
+        to_upload_file = 'gautam'
     response = {}
     LOGGER.info(response)
     user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
