@@ -33,5 +33,5 @@ class Config(object):
     UN_FINISHED_PROGRESS_STR = os.environ.get("UN_FINISHED_PROGRESS_STR", "░")
     # add offensive API
     TG_OFFENSIVE_API = os.environ.get("TG_OFFENSIVE_API", None)
-    CUSTOM_FILE_NAME = os.environ.get("CUSTOM_FILE_NAME", "set_custom_name")
+    CUSTOM_FILE_NAME = os.environ.get("CUSTOM_FILE_NAME", "set.env.vars.or.keep.empty")
 
