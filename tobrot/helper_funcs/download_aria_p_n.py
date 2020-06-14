@@ -174,8 +174,11 @@ async def call_apropriate_function(
             to_upload_file = check_if_file
     #
     if to_upload_file:
-        os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}.{to_upload_file}")
-        to_upload_file = f"{CUSTOM_FILE_NAME}.{to_upload_file}"
+        if CUSTOM_FILE_NAME:
+            os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
+            to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
+        else:
+            to_upload_file = to_upload_file
     response = {}
     LOGGER.info(response)
     user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
