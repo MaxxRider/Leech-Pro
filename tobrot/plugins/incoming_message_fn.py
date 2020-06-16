@@ -73,7 +73,8 @@ async def incoming_message_f(client, message):
             dl_url,
             new_download_location,
             i_m_sefg,
-            is_zip
+            is_zip,
+            cf_name
         )
         if not sagtus:
             # if FAILED, display the error message
