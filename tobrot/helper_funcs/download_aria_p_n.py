@@ -183,7 +183,7 @@ async def call_apropriate_function(
             #to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
         #else:
             #to_upload_file = to_upload_file
-    if to_upload_file:
+    if cstom_file_name:
         os.rename(to_upload_file, cstom_file_name)
         to_upload_file = cstom_file_name
     else:
