@@ -16,6 +16,7 @@ import os
 import time
 import sys
 import traceback
+import io
 
 from tobrot import (
     MAX_MESSAGE_LENGTH
