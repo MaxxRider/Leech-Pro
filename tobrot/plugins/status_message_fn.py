@@ -14,6 +14,8 @@ LOGGER = logging.getLogger(__name__)
 import asyncio
 import os
 import time
+import sys
+import traceback
 
 from tobrot import (
     MAX_MESSAGE_LENGTH
