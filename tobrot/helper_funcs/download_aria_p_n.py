@@ -185,9 +185,9 @@ async def call_apropriate_function(
             #to_upload_file = to_upload_file
     if to_upload_file:
         os.rename(to_upload_file, cstom_file_name)
-        to_upload_file_name = cstom_file_name
+        to_upload_file = cstom_file_name
     else:
-        to_upload_file_name = to_upload_file
+        to_upload_file = to_upload_file
     #
     response = {}
     LOGGER.info(response)
