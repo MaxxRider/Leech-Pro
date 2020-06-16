@@ -88,6 +88,12 @@ if __name__ == "__main__" :
     )
     app.add_handler(exec_message_handler)
     #
+    eval_message_handler = MessageHandler(
+        eval_message_f,
+        filters=Filters.command(["eval"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(eval_message_handler)
+    #
     rename_message_handler = MessageHandler(
         rename_message_f,
         filters=Filters.command(["rename"]) & Filters.chat(chats=AUTH_CHANNEL)
