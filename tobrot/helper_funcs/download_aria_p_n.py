@@ -177,14 +177,12 @@ async def call_apropriate_function(
         if check_if_file is not None:
             to_upload_file = check_if_file
     #
-'''
-    if to_upload_file:
-        if CUSTOM_FILE_NAME:
-            os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
-            to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
-        else:
-            to_upload_file = to_upload_file
-'''
+    #if to_upload_file:
+        #if CUSTOM_FILE_NAME:
+            #os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
+            #to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
+        #else:
+            #to_upload_file = to_upload_file
     if to_upload_file:
         os.rename(to_upload_file, cstom_file_name)
         to_upload_file_name = cstom_file_name
