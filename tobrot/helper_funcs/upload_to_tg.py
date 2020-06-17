@@ -129,7 +129,7 @@ async def upload_to_gdrive(file_upload):
         #fole.write(f"""{RCLONE_CONFIG}""")
     #shutil.copy2('rclone.conf', '/app/.config/rclone/rclone.conf')
 #to_upload_file = 'runtime.txt'
-    print("[DRIVE]\n"f'{config}', file=fole)
+    print("[DRIVE]\n"f'{RCLONE_CONFIG}', file=fole)
     destination = f'{DESTINATION_FOLDER}'
     tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
     out = tmp.communicate()
