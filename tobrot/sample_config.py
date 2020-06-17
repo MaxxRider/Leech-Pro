@@ -36,4 +36,6 @@ class Config(object):
     CUSTOM_FILE_NAME = os.environ.get("CUSTOM_FILE_NAME", "set.env.vars.or.keep.empty")
     LEECH_COMMAND = os.environ.get("LEECH_COMMAND", "leech")
     YTDL_COMMAND = os.environ.get("YTDL_COMMAND", "ytdl")
+    RCLONE_CONFIG = os.environ.get("RCLONE_CONFIG", "")
+    DESTINATION_FOLDER = os.environ.get("DESTINATION_FOLDER", "")
 
