@@ -93,7 +93,7 @@ async def incoming_gdrive_message_f(client, message):
         if message.command[1] == "archive":
             is_zip = True
     # get link from the incoming message
-    dl_url, cf_name, _, _ = await extract_link(message.reply_to_message, "LEECH")
+    dl_url, cf_name, _, _ = await extract_link(message.reply_to_message, "GLEECH")
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
