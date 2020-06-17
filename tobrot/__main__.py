@@ -64,8 +64,8 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_message_handler)
     #
-    incoming_gupload_message_handler = MessageHandler(
-        incoming_gupload_message_f,
+    incoming_gdrive_message_handler = MessageHandler(
+        incoming_gdrive_message_f,
         filters=Filters.command([gleech]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_message_handler)
