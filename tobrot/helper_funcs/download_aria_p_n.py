@@ -295,6 +295,9 @@ async def call_apropriate_function_g(
     final_response = await upload_to_gdrive(
         to_upload_file
     )
+
+    '''
+    
     LOGGER.info(final_response)
     message_to_send = ""
     for key_f_res_se in final_response:
@@ -320,7 +323,7 @@ async def call_apropriate_function_g(
         disable_web_page_preview=True
     )
     return True, None
-
+    '''
 
 
 # https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
