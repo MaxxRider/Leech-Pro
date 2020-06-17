@@ -68,7 +68,7 @@ if __name__ == "__main__" :
         incoming_gdrive_message_f,
         filters=Filters.command(["gleech"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
-    app.add_handler(incoming_message_handler)
+    app.add_handler(incoming_gdrive_message_handler)
     #
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
