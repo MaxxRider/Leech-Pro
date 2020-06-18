@@ -2,6 +2,8 @@
 
 A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
+### All credit goes to SpEcHiDe
+
 ## installing
 
 ### The Easy Way
@@ -44,6 +46,44 @@ class Config(Config):
 
 * `AUTH_CHANNEL`: Create a Super Group in Telegram, add `@GoogleIMGBot` to the group, and send /id in the chat, to get this value.
 
+* `RCLONE_CONFIG`: Create the rclone config using the rclone.org and read the rclone section for the next.
+
+* `DESTINATION_FOLDER`: Name of your folder in ur respective drive where you want to upload the files using the bot.
+
+##### Set Rclone
+
+1. Set Rclone locally by following the official repo : https://rclone.org/docs/
+2. Get your `rclone.conf` file.
+will look like this
+```
+[NAME]
+type = 
+scope =
+token =
+client_id = 
+client_secret = 
+
+```
+3. Only copy the config of drive u want to upload file.
+4. Copy the entries of `rclone.conf` 
+5. Your copied config should look like this:
+ ```
+type = 
+scope =
+token =
+client_id = 
+client_secret = 
+
+and everythin except `[NAME]`
+
+```
+
+6. Paste copied config in `RCLONE_CONFIG`
+
+7. Hit deploy button.
+
+## FAQ
+
 ##### Optional Configuration Variables
 
 * `DOWNLOAD_LOCATION`
@@ -74,6 +114,12 @@ class Config(Config):
 
 * `TG_OFFENSIVE_API`
 
+* `CUSTOM_FILE_NAME`
+
+* `LEECH_COMMAND`
+
+* `YTDL_COMMAND`
+
 ## Available Commands
 
 * `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)
@@ -81,6 +127,20 @@ class Config(Config):
 * `/leech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified torrent]
 
 * `/leech archive`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. [This command will create a .tar.gz file of the output directory, and send the files in the chat, splited into PARTS of 1024MiB each, due to Telegram limitations]
+
+* `/gleech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. And this will download the files from the given link or torrent and will upload to the drive using rclone.
+
+* [Only work with direct link for now]It is like u can add custom name as prefix of the original file name.
+Like if your file name is `gk.txt` uploaded will be what u add in `CUSTOM_FILE_NAME` + `gk.txt`
+
+Only works with direct link.No magnet or torrent.
+
+And also added custom name like...
+
+You have to pass link as 
+`www.download.me/gk.txt | new.txt`
+
+the file will be uploaded as `new.txt`.
 
 
 ## How to Use?
@@ -100,7 +160,6 @@ class Config(Config):
 
 
 ## Credits, and Thanks to
-
 * [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
 * [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
 * [@AjeeshNair](https://telegram.dog/AjeeshNait) for his [torrent.ajee.sh](https://torrent.ajee.sh)
