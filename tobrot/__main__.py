@@ -35,8 +35,8 @@ from tobrot.plugins.status_message_fn import (
     status_message_f,
     cancel_message_f,
     exec_message_f,
-    upload_document_f,
-    eval_message_f
+    upload_document_f
+    #eval_message_f
 )
 from tobrot.plugins.call_back_button_handler import button
 from tobrot.plugins.custom_thumbnail import (
