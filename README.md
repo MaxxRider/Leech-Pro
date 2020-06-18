@@ -4,6 +4,8 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
 
 ### All credit goes to SpEcHiDe
 
+##for support join here [TorrentLeech-Gdrive](https://telegram.dog/torrentleechgdrivesupport)
+
 ## installing
 
 ### The Easy Way
