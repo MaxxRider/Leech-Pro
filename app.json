@@ -14,9 +14,9 @@
     "youtube-dl",
     "leecher"
   ],
-  "repository": "https://github.com/SpEcHiDe/PublicLeech",
-  "success_url": "https://telegram.dog/ThankTelegram",
-  "website": "https://github.com/SpEcHiDe/PublicLeech",
+  "repository": "https://github.com/gautamajay52/TorrentLeech-Gdrive",
+  "success_url": "https://github.com/gautamajay52/TorrentLeech-Gdrive",
+  "website": "https://github.com/gautamajay52/TorrentLeech-Gdrive",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
@@ -77,8 +77,17 @@
       "description": "Enter your custom ytdl command like ytdl1 and so on. Default is ytdl.",
       "required": false
     },
+    "RCLONE_CONFIG": {
+      "description": "Enter your copied text from rclone config. Compulsory for /gleech command ",
+      "required": false
+    },
+    "DESTINATION_FOLDER": {
+      "description": "Enter your Destination folder in which you want to upload yoyr file.",
+      "required": false
+    },
     "CUSTOM_FILE_NAME": {
       "description": "fill with name u want to prefix the file name like ur channel username🙊, keep empty for do nothing, but add to ur config vars even without input",
+      "value": ""
       "required": false
     }
   },
@@ -88,6 +97,8 @@
     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
   }, {
     "url": "https://github.com/SayanthD/aria2-heroku"
+  }, {
+    "url": "https://github.com/amivin/rclone-heroku"
   }, {
     "url": "heroku/python"
   }],
