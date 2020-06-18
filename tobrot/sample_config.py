@@ -33,7 +33,7 @@ class Config(object):
     UN_FINISHED_PROGRESS_STR = os.environ.get("UN_FINISHED_PROGRESS_STR", "░")
     # add offensive API
     TG_OFFENSIVE_API = os.environ.get("TG_OFFENSIVE_API", None)
-    CUSTOM_FILE_NAME = os.environ.get("CUSTOM_FILE_NAME", "set.env.vars.or.keep.empty")
+    CUSTOM_FILE_NAME = os.environ.get("CUSTOM_FILE_NAME", "")
     LEECH_COMMAND = os.environ.get("LEECH_COMMAND", "leech")
     YTDL_COMMAND = os.environ.get("YTDL_COMMAND", "ytdl")
     RCLONE_CONFIG = os.environ.get("RCLONE_CONFIG", "")
