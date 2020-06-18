@@ -1,10 +1,10 @@
+## for support join here [TorrentLeech-Gdrive](https://telegram.dog/torrentleechgdrivesupport)
+
 # Telegram Torrent Leecher 🔥🤖
 
 A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
 ### All credit goes to SpEcHiDe
-
-##for support join here [TorrentLeech-Gdrive](https://telegram.dog/torrentleechgdrivesupport)
 
 ## installing
 
