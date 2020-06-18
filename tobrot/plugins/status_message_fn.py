@@ -156,7 +156,7 @@ async def upload_document_f(client, message):
             )
             LOGGER.info(recvd_response)
     await imsegd.delete()
-
+'''
 async def eval_message_f(client, message):
     status_message = await message.reply_text("Processing ...")
     cmd = message.text.split(" ", maxsplit=1)[1]
@@ -217,3 +217,4 @@ async def aexec(code, client, message):
         ''.join(f'\n {l}' for l in code.split('\n'))
     )
     return await locals()['__aexec'](client, message)
+'''
