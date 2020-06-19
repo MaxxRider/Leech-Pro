@@ -293,7 +293,8 @@ async def call_apropriate_function_g(
     LOGGER.info(response)
     user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
     final_response = await upload_to_gdrive(
-        to_upload_file
+        to_upload_file,
+        sent_message_to_update_tg_p
     )
 
     '''
