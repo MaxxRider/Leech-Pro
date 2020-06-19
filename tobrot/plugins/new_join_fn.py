@@ -38,7 +38,7 @@ async def help_message_f(client, message):
     #message_id = 99
     # display the /help message
     await message.reply_text(
-        ## Available Commands
+        """## Available Commands
 
         * `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)
 
@@ -58,7 +58,7 @@ async def help_message_f(client, message):
         You have to pass link as 
         `www.download.me/gk.txt | new.txt`
 
-        the file will be uploaded as `new.txt`.
+        the file will be uploaded as `new.txt`."""
     )
 
 
