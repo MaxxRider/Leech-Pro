@@ -121,7 +121,7 @@ async def upload_to_tg(
     return dict_contatining_uploaded_files
 #
 
-async def upload_to_gdrive(file_upload):
+async def upload_to_gdrive(file_upload, message):
     subprocess.Popen(('touch', 'rclone.conf'), stdout = subprocess.PIPE)
     with open('rclone.conf', 'a', newline="\n") as fole:
         fole.write("[DRIVE]\n")
@@ -139,6 +139,7 @@ async def upload_to_gdrive(file_upload):
         out = tmp.communicate()
         print(out)
         shutil.rmtree(file_upload)
+    await message.reply_text("Uploaded Successfully!!")
 
 #
 
