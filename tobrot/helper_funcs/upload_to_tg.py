@@ -131,6 +131,7 @@ async def upload_to_gdrive(file_upload, message):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
         out = tmp.communicate()
         print(out)
+        await message.edit_text("f"{out}"Uploaded Successfully f"{file_upload}"")
         os.remove(file_upload)
     else:
         tt= os.path.join(destination, file_upload)
@@ -138,8 +139,8 @@ async def upload_to_gdrive(file_upload, message):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
         out = tmp.communicate()
         print(out)
+        await message.edit_text("Uploaded Successfully to f"{tt}" 🤒")
         shutil.rmtree(file_upload)
-    await message.reply_text("Uploaded Successfully!!")
 
 #
 
