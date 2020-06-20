@@ -67,7 +67,7 @@ async def unzip_me(input_directory):
             "unzip",
             base_dir_name,
             "-d",
-            ucompressed_file_name
+            uncompressed_file_name
         ]
         process = await asyncio.create_subprocess_exec(
             *file_genertor_command,
