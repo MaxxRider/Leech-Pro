@@ -44,6 +44,7 @@ async def incoming_message_f(client, message):
     """/leech command"""
     i_m_sefg = await message.reply_text("processing", quote=True)
     is_zip = False
+    is_unzip = False
     if len(message.command) > 1:
         if message.command[1] == "archive":
             is_zip = True
@@ -92,6 +93,7 @@ async def incoming_gdrive_message_f(client, message):
     """/gleech command"""
     i_m_sefg = await message.reply_text("processing", quote=True)
     is_zip = False
+    is_unzip = False
     if len(message.command) > 1:
         if message.command[1] == "archive":
             is_zip = True
