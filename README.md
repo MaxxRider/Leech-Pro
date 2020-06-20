@@ -138,6 +138,10 @@ and everythin except `[NAME]`
 
 * `/gleech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. And this will download the files from the given link or torrent and will upload to the drive using rclone.
 
+* `/leech unzip`: This will unzip the .zip file and dupload to telegram.
+
+* `/gleech unzip`: This will unzip the .zip file and upload to drive.
+
 * [Only work with direct link for now]It is like u can add custom name as prefix of the original file name.
 Like if your file name is `gk.txt` uploaded will be what u add in `CUSTOM_FILE_NAME` + `gk.txt`
 
