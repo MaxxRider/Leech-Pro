@@ -180,7 +180,7 @@ async def call_apropriate_function(
     #
     if is_unzip:
         check_ifi_file = await unzip_me(to_upload_file)
-        if check_if_file is not None:
+        if check_ifi_file is not None:
             to_upload_file = check_ifi_file
     #
     if to_upload_file:
