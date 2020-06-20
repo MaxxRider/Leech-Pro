@@ -49,3 +49,41 @@ async def create_archive(input_directory):
                 pass
             return_name = compressed_file_name
     return return_name
+
+#
+
+async def unzip_me(input_directory):
+    return_name = None
+    if os.path.exists(input_directory):
+        base_dir_name = os.path.basename(input_directory)
+        uncompressed_file_name = os.path.splitext(base_dir_name)[0]
+        # #BlameTelegram
+        #suffix_extention_length = 1 + 3 + 1 + 2
+        #if len(base_dir_name) > (64 - suffix_extention_length):
+            #compressed_file_name = base_dir_name[0:(64 - suffix_extention_length)]
+            #compressed_file_name += ".tar.gz"
+        # fix for https://t.me/c/1434259219/13344
+        file_genertor_command = [
+            "unzip",
+            base_dir_name,
+            "-d",
+            ucompressed_file_name
+        ]
+        process = await asyncio.create_subprocess_exec(
+            *file_genertor_command,
+            # stdout must a pipe to be accessible as process.stdout
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        # Wait for the subprocess to finish
+        stdout, stderr = await process.communicate()
+        e_response = stderr.decode().strip()
+        t_response = stdout.decode().strip()
+        if os.path.exists(uncompressed_file_name):
+            try:
+                shutil.rmtree(input_directory)
+            except:
+                pass
+            return_name = uncompressed_file_name
+    return return_name
+
