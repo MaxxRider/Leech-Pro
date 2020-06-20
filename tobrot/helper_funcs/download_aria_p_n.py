@@ -179,9 +179,9 @@ async def call_apropriate_function(
             to_upload_file = check_if_file
     #
     if is_unzip:
-        check_if_file = await unzip_me(to_upload_file)
+        check_ifi_file = await unzip_me(to_upload_file)
         if check_if_file is not None:
-            to_upload_file = check_if_file
+            to_upload_file = check_ifi_file
     #
     if to_upload_file:
         if CUSTOM_FILE_NAME:
@@ -238,7 +238,8 @@ async def call_apropriate_function_g(
     c_file_name,
     sent_message_to_update_tg_p,
     is_zip,
-    cstom_file_name
+    cstom_file_name,
+    is_unzip
 ):
     if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
@@ -281,6 +282,11 @@ async def call_apropriate_function_g(
         check_if_file = await create_archive(to_upload_file)
         if check_if_file is not None:
             to_upload_file = check_if_file
+    #
+    if is_unzip:
+        check_ifi_file = await unzip_me(to_upload_file)
+        if check_if_file is not None:
+            to_upload_file = check_ifi_file
     #
     if to_upload_file:
         if CUSTOM_FILE_NAME:
