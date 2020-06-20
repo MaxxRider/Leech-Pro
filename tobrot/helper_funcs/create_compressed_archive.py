@@ -13,6 +13,7 @@ LOGGER = logging.getLogger(__name__)
 import asyncio
 import os
 import shutil
+import subprocess
 
 
 async def create_archive(input_directory):
