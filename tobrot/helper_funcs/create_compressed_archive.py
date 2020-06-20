@@ -13,6 +13,7 @@ LOGGER = logging.getLogger(__name__)
 import asyncio
 import os
 import shutil
+import subprocess
 
 
 async def create_archive(input_directory):
@@ -49,3 +50,38 @@ async def create_archive(input_directory):
                 pass
             return_name = compressed_file_name
     return return_name
+
+#
+
+async def unzip_me(input_directory):
+    return_name = None
+    if os.path.exists(input_directory):
+        base_dir_name = os.path.basename(input_directory)
+        uncompressed_file_name = os.path.splitext(base_dir_name)[0]
+        # #BlameTelegram
+        #suffix_extention_length = 1 + 3 + 1 + 2
+        #if len(base_dir_name) > (64 - suffix_extention_length):
+            #compressed_file_name = base_dir_name[0:(64 - suffix_extention_length)]
+            #compressed_file_name += ".tar.gz"
+        # fix for https://t.me/c/1434259219/13344
+        process = subprocess.Popen([
+            "unzip",
+            "-o",
+            f"{base_dir_name}",
+            "-d",
+            f"{uncompressed_file_name}"],
+            stdout=subprocess.PIPE
+        )
+        # Wait for the subprocess to finish
+        stdout, stderr = process.communicate()
+        #e_response = stderr.decode().strip()
+        #t_response = stdout.decode().strip()
+        if os.path.exists(uncompressed_file_name):
+            try:
+                os.remove(input_directory)
+            except:
+                pass
+            return_name = uncompressed_file_name
+            print(return_name)
+    return return_name
+    
