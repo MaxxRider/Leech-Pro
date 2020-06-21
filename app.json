@@ -70,15 +70,15 @@
       "required": false
     },
     "LEECH_COMMAND": {
-      "description": "Enter your custom leech command like leech@urgroupusername and so on. Default is leech",
+      "description": "Enter your custom leech command like leech@urgroupname and so on. Default is leech",
       "required": false
     },
     "GLEECH_COMMAND": {
-      "description": "Enter your custom gleech command like gleech1@urgroupusername and so on. Default is gleech",
+      "description": "Enter your custom gleech command like gleech1@urgroupname and so on. Default is gleech",
       "required": false
     },
     "YTDL_COMMAND": {
-      "description": "Enter your custom ytdl command like ytdl1@urgroupusername and so on. Default is ytdl.",
+      "description": "Enter your custom ytdl command like ytdl1@urgroupname and so on. Default is ytdl.",
       "required": false
     },
     "RCLONE_CONFIG": {
