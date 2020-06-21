@@ -5,6 +5,15 @@
 
 A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
+# Benefits :-
+    ✓ Drive/Teamdrive support/All other cloud services rclone.org supports
+    ✓ Unzip
+    ✓ Unrar
+    ✓ Untar
+    ✓ Custom file name
+    ✓ Custom commands
+    ✓ 
+
 ### All credit goes to SpEcHiDe
 
 ## installing
