@@ -24,7 +24,8 @@ from tobrot import (
     API_HASH,
     AUTH_CHANNEL,
     LEECH_COMMAND,
-    YTDL_COMMAND
+    YTDL_COMMAND,
+    GLEECH_COMMAND
 )
 
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
@@ -66,7 +67,7 @@ if __name__ == "__main__" :
     #
     incoming_gdrive_message_handler = MessageHandler(
         incoming_gdrive_message_f,
-        filters=Filters.command(["gleech"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([f"{GLEECH_COMMAND}"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_gdrive_message_handler)
     #
