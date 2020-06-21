@@ -143,6 +143,14 @@ and everythin except `[NAME]`
 
 * `/gleech unzip`: This will unzip the .zip file and upload to drive.
 
+* `/leech unrar`: This will unrar the .rar file and dupload to telegram.
+
+* `/gleech unrar`: This will unrar the .rar file and upload to drive.
+
+* `/leech untar`: This will untar the .tar file and upload to telegram.
+
+* `/gleech untar`: This will untar the .tar file and upload to drive.
+
 * [Only work with direct link for now]It is like u can add custom name as prefix of the original file name.
 Like if your file name is `gk.txt` uploaded will be what u add in `CUSTOM_FILE_NAME` + `gk.txt`
 
