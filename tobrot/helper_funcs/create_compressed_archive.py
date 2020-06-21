@@ -117,7 +117,7 @@ async def unrar_me(input_directory):
     if os.path.exists(input_directory):
         base_dir_name = os.path.basename(input_directory)
         uncompressed_file_name = os.path.splitext(base_dir_name)[0]
-        #os.mkdir(f"{uncompressed_file_name}")
+        subprocess.Popen(('mkdir', f'{uncompressed_file_name}'), stdout = subprocess.PIPE)
         print(base_dir_name)
         process = subprocess.Popen([
             "unrar",
