@@ -15,7 +15,7 @@ import aria2p
 import asyncio
 import os
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg, upload_to_gdrive
-from tobrot.helper_funcs.create_compressed_archive import create_archive, unzip_me
+from tobrot.helper_funcs.create_compressed_archive import create_archive, unzip_me, unrar_me
 from tobrot.helper_funcs.extract_link_from_message import extract_link
 
 from tobrot import (
@@ -134,7 +134,8 @@ async def call_apropriate_function(
     sent_message_to_update_tg_p,
     is_zip,
     cstom_file_name,
-    is_unzip
+    is_unzip,
+    is_unrar
 ):
     if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
@@ -182,6 +183,11 @@ async def call_apropriate_function(
         check_ifi_file = await unzip_me(to_upload_file)
         if check_ifi_file is not None:
             to_upload_file = check_ifi_file
+    #
+    if is_unrar:
+        check_ife_file = await unrar_me(to_upload_file)
+        if check_ife_file is not None:
+            to_upload_file = check_ife_file
     #
     if to_upload_file:
         if CUSTOM_FILE_NAME:
@@ -239,7 +245,8 @@ async def call_apropriate_function_g(
     sent_message_to_update_tg_p,
     is_zip,
     cstom_file_name,
-    is_unzip
+    is_unzip,
+    is_unrar
 ):
     if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
@@ -287,6 +294,11 @@ async def call_apropriate_function_g(
         check_ifi_file = await unzip_me(to_upload_file)
         if check_ifi_file is not None:
             to_upload_file = check_ifi_file
+    #
+    if is_unrar:
+        check_ife_file = await unrar_me(to_upload_file)
+        if check_ife_file is not None:
+            to_upload_file = check_ife_file
     #
     if to_upload_file:
         if CUSTOM_FILE_NAME:
