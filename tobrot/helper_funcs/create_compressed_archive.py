@@ -91,9 +91,10 @@ async def unzip_me(input_directory):
         base_dir_name = os.path.basename(input_directory)
         uncompressed_file_name = os.path.splitext(base_dir_name)[0]
         process = subprocess.Popen([
-            "unrar",
-            "e",
+            "tar",
+            "-xvf",
             f"{base_dir_name}",
+            "-C"
             f"{uncompressed_file_name}"],
             stdout=subprocess.PIPE
         )
