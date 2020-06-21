@@ -84,4 +84,57 @@ async def unzip_me(input_directory):
             return_name = uncompressed_file_name
             print(return_name)
     return return_name
-    
+#
+async def untar_me(input_directory):
+    return_name = None
+    if os.path.exists(input_directory):
+        base_dir_name = os.path.basename(input_directory)
+        uncompressed_file_name = os.path.splitext(base_dir_name)[0]
+        subprocess.Popen(('mkdir', f'{uncompressed_file_name}'), stdout = subprocess.PIPE)
+        process = subprocess.Popen([
+            "tar",
+            "-xvf",
+            f"{base_dir_name}",
+            "-C"
+            f"{uncompressed_file_name}"],
+            stdout=subprocess.PIPE
+        )
+        # Wait for the subprocess to finish
+        stdout, stderr = process.communicate()
+        #e_response = stderr.decode().strip()
+        #t_response = stdout.decode().strip()
+        if os.path.exists(uncompressed_file_name):
+            try:
+                os.remove(input_directory)
+            except:
+                pass
+            return_name = uncompressed_file_name
+            print(return_name)
+    return return_name
+#
+async def unrar_me(input_directory):
+    return_name = None
+    if os.path.exists(input_directory):
+        base_dir_name = os.path.basename(input_directory)
+        uncompressed_file_name = os.path.splitext(base_dir_name)[0]
+        subprocess.Popen(('mkdir', f'{uncompressed_file_name}'), stdout = subprocess.PIPE)
+        print(base_dir_name)
+        process = subprocess.Popen([
+            "unrar",
+            "x",
+            f"{base_dir_name}",
+            f"{uncompressed_file_name}"],
+            stdout=subprocess.PIPE
+        )
+        # Wait for the subprocess to finish
+        stdout, stderr = process.communicate()
+        #e_response = stderr.decode().strip()
+        #t_response = stdout.decode().strip()
+        if os.path.exists(uncompressed_file_name):
+            try:
+                os.remove(input_directory)
+            except:
+                pass
+            return_name = uncompressed_file_name
+            print(return_name)
+    return return_name
