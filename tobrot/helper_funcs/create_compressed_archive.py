@@ -85,7 +85,7 @@ async def unzip_me(input_directory):
             print(return_name)
     return return_name
 #
-async def unzip_me(input_directory):
+async def unrar_me(input_directory):
     return_name = None
     if os.path.exists(input_directory):
         base_dir_name = os.path.basename(input_directory)
