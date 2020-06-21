@@ -190,7 +190,7 @@ async def call_apropriate_function(
         if check_ife_file is not None:
             to_upload_file = check_ife_file
     #
-    if is_unrar:
+    if is_untar:
         check_ify_file = await untar_me(to_upload_file)
         if check_ify_file is not None:
             to_upload_file = check_ify_file
