@@ -135,6 +135,6 @@ async def unrar_me(input_directory):
                 #os.remove(input_directory)
             #except:
                 $pass
-        return_name = uncompressed_file_name
-        print(return_name)
+    return_name = uncompressed_file_name
+    print(return_name)
     return return_name
