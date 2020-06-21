@@ -45,11 +45,14 @@ async def incoming_message_f(client, message):
     i_m_sefg = await message.reply_text("processing", quote=True)
     is_zip = False
     is_unzip = False
+    is_unrar = False
     if len(message.command) > 1:
         if message.command[1] == "archive":
             is_zip = True
         elif message.command[1] == "unzip":
             is_unzip = True
+        elif message.command[1] == "unrar":
+            is_unrar = True
     # get link from the incoming message
     dl_url, cf_name, _, _ = await extract_link(message.reply_to_message, "LEECH")
     LOGGER.info(dl_url)
@@ -78,7 +81,8 @@ async def incoming_message_f(client, message):
             i_m_sefg,
             is_zip,
             cf_name,
-            is_unzip
+            is_unzip,
+            is_unrar
         )
         if not sagtus:
             # if FAILED, display the error message
@@ -94,11 +98,14 @@ async def incoming_gdrive_message_f(client, message):
     i_m_sefg = await message.reply_text("processing", quote=True)
     is_zip = False
     is_unzip = False
+    is_unrar = True
     if len(message.command) > 1:
         if message.command[1] == "archive":
             is_zip = True
         elif message.command[1] == "unzip":
             is_unzip = True
+        elif message.command[1] == "unrar":
+            is_unrar = True
     # get link from the incoming message
     dl_url, cf_name, _, _ = await extract_link(message.reply_to_message, "GLEECH")
     LOGGER.info(dl_url)
@@ -127,7 +134,8 @@ async def incoming_gdrive_message_f(client, message):
             i_m_sefg,
             is_zip,
             cf_name,
-            is_unzip
+            is_unzip,
+            is_unrar
         )
         if not sagtus:
             # if FAILED, display the error message
