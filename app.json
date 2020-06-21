@@ -50,7 +50,7 @@
     },
     "EDIT_SLEEP_TIME_OUT": {
       "description": "should be an integer. Number of seconds to wait before editing a message.",
-      "value": "1",
+      "value": "15",
       "required": false
     },
     "MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START": {
