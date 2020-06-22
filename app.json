@@ -1,6 +1,6 @@
 {
   "name": "Telegram Torrent Leecher",
-  "description": "A Telegram Torrent (and youtube-dl) Leecher based on Pyrogram. Powered by @ThankTelegram!",
+  "description": "A Telegram Torrent (and youtube-dl) Leecher based on Pyrogram. Powered by @torrentleechgdrivesupport!",
   "keywords": [
     "telegram",
     "best",
@@ -15,7 +15,7 @@
     "leecher"
   ],
   "repository": "https://github.com/gautamajay52/TorrentLeech-Gdrive",
-  "success_url": "https://github.com/gautamajay52",
+  "success_url": "https://t.me/torrentleechgdrivesupport",
   "website": "https://github.com/gautamajay52/TorrentLeech-Gdrive",
   "env": {
     "ENV": {
