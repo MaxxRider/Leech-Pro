@@ -37,7 +37,7 @@ async def help_message_f(client, message):
     #channel_id = str(AUTH_CHANNEL)[4:]
     #message_id = 99
     # display the /help message
-    await message.reply_text(""join this group forr help-- @torrentleechgdrivesupport "")
+    await message.reply_text("""join this group forr help-- @torrentleechgdrivesupport""")
 
 
 async def rename_message_f(client, message):
