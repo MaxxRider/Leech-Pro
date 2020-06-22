@@ -73,6 +73,10 @@
       "description": "Enter your custom leech command like leech@urgroupname and so on. Default is leech",
       "required": false
     },
+    "INDEX_LINK": {
+      "description": "Enter your index link:",
+      "required": false
+    },
     "GLEECH_COMMAND": {
       "description": "Enter your custom gleech command like gleech1@urgroupname and so on. Default is gleech",
       "required": false
