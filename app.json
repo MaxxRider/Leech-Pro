@@ -107,6 +107,8 @@
   }, {
     "url": "https://github.com/amivin/rclone-heroku"
   }, {
+    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
+  }, {
     "url": "heroku/python"
   }],
   "formation": {
