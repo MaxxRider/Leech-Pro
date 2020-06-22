@@ -138,6 +138,7 @@ and everythin except `[NAME]`
 
 * `YTDL_COMMAND`
 
+* `INDEX_LINK`
 ## Available Commands
 
 * `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)
