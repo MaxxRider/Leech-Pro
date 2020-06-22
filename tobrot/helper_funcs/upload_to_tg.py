@@ -133,7 +133,7 @@ async def upload_to_gdrive(file_upload, message):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
         out = tmp.communicate()
         print(out)
-        indexurl = f"{INDEX_LINK}/{DESTINATION_FOLDER}/{file_upload}"
+        indexurl = f"{INDEX_LINK}/{file_upload}"
         g_link = requote_uri(indexurl)
         await message.edit_text(f'{file_upload} has been Uploaded successfully to your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         os.remove(file_upload)
@@ -143,7 +143,7 @@ async def upload_to_gdrive(file_upload, message):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
         out = tmp.communicate()
         print(out)
-        indexurl = f"{INDEX_LINK}/{DESTINATION_FOLDER}/{file_upload}/"
+        indexurl = f"{INDEX_LINK}/{file_upload}/"
         g_link = requote_uri(indexurl)
         await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         shutil.rmtree(file_upload)
