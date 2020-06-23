@@ -44,9 +44,9 @@ async def down_load_media_f(client, sms):
         ms = (end_t - start_t).seconds
         print(the_real_download_location)
         await message.reply(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
-        gl = subprocess.Popen(['mv', f'{the_real_download_file}', '/app/'], stdout = subprocess.PIPE)
+        gl = subprocess.Popen(['mv', f'{the_real_download_location}', '/app/'], stdout = subprocess.PIPE)
         out = gl.communicate()
-        the_real_download_file_g = os.basename(the_real_download_file)
+        the_real_download_file_g = os.basename(the_real_download_location)
         if len(sms.command) > 1:
             if sms.command[1] == "unzip":
                 file_upload = await unzip_me(the_real_download_location_g)
