@@ -37,19 +37,17 @@ async def aria_start():
     # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
     # TODO: this does not work, need to investigate this.
     # but for now, https://t.me/TrollVoiceBot?start=858
-    aria2_daemon_start_cmd.append("--enable-rpc=true")
-    aria2_daemon_start_cmd.append("--rpc-allow-origin-all=true")
-    aria2_daemon_start_cmd.append("--max-connection-per-server=16")
+    aria2_daemon_start_cmd.append("--enable-rpc")
+    aria2_daemon_start_cmd.append("--follow-torrent=mem")
+    aria2_daemon_start_cmd.append("--max-connection-per-server=10")
     aria2_daemon_start_cmd.append("--min-split-size=10M")
-    aria2_daemon_start_cmd.append("--rpc-listen-all=true")
+    aria2_daemon_start_cmd.append("--rpc-listen-all=false")
     aria2_daemon_start_cmd.append(f"--rpc-listen-port={ARIA_TWO_STARTED_PORT}")
     aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
-    aria2_daemon_start_cmd.append("--seed-ratio=1.0")
-    aria2_daemon_start_cmd.append("--seed-time=0")
+    aria2_daemon_start_cmd.append("--seed-ratio=0.0")
+    aria2_daemon_start_cmd.append("--seed-time=1")
     aria2_daemon_start_cmd.append("--split=10")
     aria2_daemon_start_cmd.append(f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}")
-    aria2_daemon_start_cmd.append("--follow-torrent=mem")
-    aria2_daemon_start_cmd.append("--bt-tracker=udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.opentrackr.org:1337/announce,http://tracker.opentrackr.org:1337/announce,udp://tracker.leechers-paradise.org:6969/announce,udp://9.rarbg.to:2710/announce,udp://tracker.internetwarriors.net:1337/announce,udp://9.rarbg.me:2710/announce,udp://p4p.arenabg.com:1337/announce,http://p4p.arenabg.com:1337/announce,udp://exodus.desync.com:6969/announce,udp://tracker.cyberia.is:6969/announce,udp://retracker.lanta-net.ru:2710/announce,udp://open.stealth.si:80/announce,udp://tracker.tiny-vps.com:6969/announce,udp://tracker.torrent.eu.org:451/announce,http://tracker4.itzmx.com:2710/announce,udp://tracker3.itzmx.com:6961/announce,http://tracker3.itzmx.com:6961/announce,http://tracker1.itzmx.com:8080/announce,udp://tracker.moeking.me:6969/announce,udp://ipv4.tracker.harry.lu:80/announce,udp://bt2.archive.org:6969/announce,udp://bt1.archive.org:6969/announce,udp://explodie.org:6969/announce,http://explodie.org:6969/announce,udp://zephir.monocul.us:6969/announce,udp://valakas.rollo.dnsabr.com:2710/announce,udp://tracker.zerobytes.xyz:1337/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.lelux.fi:6969/announce,udp://tracker.kamigami.org:2710/announce,udp://tracker.ds.is:6969/announce,udp://tracker.army:6969/announce,udp://tracker-udp.gbitt.info:80/announce,udp://retracker.akado-ural.ru:80/announce,udp://opentracker.i2p.rocks:6969/announce,udp://opentor.org:2710/announce,udp://chihaya.de:6969/announce,udp://aaa.army:8866/announce,https://tracker.lelux.fi:443/announce,https://aaa.army:8866/announce,http://vps02.net.orel.ru:80/announce,http://tracker.zerobytes.xyz:1337/announce,http://tracker.nyap2p.com:8080/announce,http://tracker.lelux.fi:80/announce,http://tracker.kamigami.org:2710/announce,http://tracker.gbitt.info:80/announce,http://opentracker.i2p.rocks:6969/announce,http://h4.trakx.nibba.trade:80/announce,http://aaa.army:8866/announce,udp://u.wwwww.wtf:1/announce,udp://tracker.jae.moe:6969/announce,udp://t3.leech.ie:1337/announce,udp://t2.leech.ie:1337/announce,udp://t1.leech.ie:1337/announce,udp://retracker.sevstar.net:2710/announce,https://w.wwwww.wtf:443/announce,https://tracker.jae.moe:443/announce,http://tracker.bt4g.com:2095/announce,http://t3.leech.ie:80/announce,http://t2.leech.ie:80/announce,http://t1.leech.ie:80/announce,http://t.overflow.biz:6969/announce,http://retracker.sevstar.net:2710/announce,udp://tracker.yoshi210.com:6969/announce,udp://tracker.teambelgium.net:6969/announce,udp://tracker.skyts.net:6969/announce,udp://tracker.dler.org:6969/announce,udp://tr2.ysagin.top:2710/announce,udp://retracker.netbynet.ru:2710/announce,https://tracker.vectahosting.eu:2053/announce,https://tracker.tamersunion.org:443/announce,https://tracker.sloppyta.co:443/announce,https://tracker.nitrix.me:443/announce,https://tracker.nanoha.org:443/announce,https://tracker.imgoingto.icu:443/announce,https://tracker.hama3.net:443/announce,https://tracker.coalition.space:443/announce,https://tr.ready4.icu:443/announce,https://1337.abcvg.info:443/announce,http://tracker2.dler.org:80/announce,http://tracker.yoshi210.com:6969/announce,http://tracker.skyts.net:6969/announce,http://tracker.dler.org:6969/announce,http://t.nyaatracker.com:80/announce,http://mail2.zelenaya.net:80/announce,udp://tracker6.dler.org:2710/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker2.itzmx.com:6961/announce,udp://tracker.filemail.com:6969/announce,udp://tr.bangumi.moe:6969/announce,udp://qg.lorzl.gq:2710/announce,udp://bt2.54new.com:8080/announce,http://www.loushao.net:8080/announce,http://trun.tom.ru:80/announce,http://tracker2.itzmx.com:6961/announce,http://t.acg.rip:6699/announce,http://open.acgnxtracker.com:80/announce,")
     #
     LOGGER.info(aria2_daemon_start_cmd)
     #
