@@ -41,7 +41,7 @@ async def down_load_media_f(client, sms):
         end_t = datetime.now()
         ms = (end_t - start_t).seconds
         await message.edit(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
-        await upload_to_gdrive(file_name, message)
+        await upload_to_gdrive(the_real_download_location, message)
     elif len(sms.command) > 1:
         start_t = datetime.now()
         the_url_parts = " ".join(sms.command[1:])
