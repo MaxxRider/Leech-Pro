@@ -50,7 +50,7 @@ async def down_load_media_f(client, sms):
             url, custom_file_name = the_url_parts.split("|")
             url = url.strip()
             custom_file_name = custom_file_name.strip()
-        download_file_path = os.path.join(TMP_DOWNLOAD_DIRECTORY, custom_file_name)
+        download_file_path = os.path.join(DOWNLOAD_LOCATION, custom_file_name)
         downloader = SmartDL(url, download_file_path, progress_bar=False)
         downloader.start(blocking=False)
         c_time = time.time()
