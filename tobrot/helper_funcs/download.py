@@ -20,7 +20,8 @@ from tobrot import (
     DOWNLOAD_LOCATION
 )
 from tobrot.helper_funcs.display_progress import progress_for_pyrogram
-from tobrot.helper_funcs.upload_to_tg import upload_to_gdrive
+#from tobrot.helper_funcs.upload_to_tg import upload_to_gdrive
+from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function_t
 
 async def down_load_media_f(client, sms):
     message = await sms.reply_text("...", quote=True)
