@@ -31,11 +31,11 @@ async def down_load_media_f(client, sms):
     is_unrar = False
     is_untar = False
     if len(sms.command) > 1:
-        if message.command[1] == "unzip":
+        if sms.command[1] == "unzip":
             is_unzip = True
-        elif message.command[1] == "unrar":
+        elif sms.command[1] == "unrar":
             is_unrar = True
-        elif message.command[1] == "untar":
+        elif sms.command[1] == "untar":
             is_untar = True
     if sms.reply_to_message is not None:
         start_t = datetime.now()
