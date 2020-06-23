@@ -362,6 +362,7 @@ async def call_apropriate_function_t(
         to_upload_file,
         sent_message_to_update_tg_p
     )
+    LOGGER.info(final_response)
     #if to_upload_file:
         #if CUSTOM_FILE_NAME:
             #os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
