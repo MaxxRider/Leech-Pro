@@ -339,6 +339,7 @@ async def call_apropriate_function_t(
     is_untar
 ):
     #
+    to_upload_file = to_upload_file_g
     if is_unzip:
         check_ifi_file = await unzip_me(to_upload_file_g)
         if check_ifi_file is not None:
