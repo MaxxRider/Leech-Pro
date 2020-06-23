@@ -354,6 +354,13 @@ async def call_apropriate_function_t(
         if check_ify_file is not None:
             to_upload_file = check_ify_file
     #
+    response = {}
+    LOGGER.info(response)
+    user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
+    final_response = await upload_to_gdrive(
+        to_upload_file,
+        sent_message_to_update_tg_p
+    )
     #if to_upload_file:
         #if CUSTOM_FILE_NAME:
             #os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
