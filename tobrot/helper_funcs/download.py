@@ -88,5 +88,6 @@ async def down_load_media_f(client, sms):
             end_t = datetime.now()
             ms = (end_t - start_t).seconds
             await message.edit(f"Downloaded to <code>{download_file_path}</code> in <u>{ms}</u> seconds")
+            await upload_to_gdrive(download_file_path, message)
     else:
         await message.edit("Reply to a Telegram Media, to download it to local server.")
