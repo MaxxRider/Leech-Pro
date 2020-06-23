@@ -71,6 +71,12 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_gdrive_message_handler)
     #
+    incoming_telegram_download_handler = MessageHandler(
+        down_load_media_f,
+        filters=Filters.command(["tdownload"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_gdrive_message_handler)
+    #
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
         filters=Filters.command(["purge"]) & Filters.chat(chats=AUTH_CHANNEL)
