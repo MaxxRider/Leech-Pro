@@ -22,7 +22,7 @@ from tobrot import (
 
 
 
-async def down_load_media(client, sms):
+async def down_load_media_f(client, sms):
     message = await sms.reply_text("...", quote=True)
     if not os.path.isdir(DOWNLOAD_LOCATION):
         os.makedirs(DOWNLOAD_LOCATION)
