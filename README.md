@@ -183,13 +183,6 @@ the file will be uploaded as `new.txt`.
 * if file is a TAR archive, [read this](https://t.me/c/1434259219/104) to know how to uncompress.
 
 
-## Issues or Feature Requests
-
-* search for known issues, [here](https://t.me/c/1434259219/118).
-
-* add issues / feature requests, [here](https://github.com/SpEcHiDe/PublicLeech/issues/new).
-
-
 ## Credits, and Thanks to
 * [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
 * [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
