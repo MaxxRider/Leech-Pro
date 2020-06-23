@@ -53,6 +53,7 @@ async def down_load_media_f(client, sms):
         ms = (end_t - start_t).seconds
         await message.edit(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
         await call_apropriate_function_t(the_real_download_location, message, is_unzip, is_unrar, is_untar)
+    '''
     elif len(sms.command) > 1:
         start_t = datetime.now()
         the_url_parts = " ".join(sms.command[1:])
@@ -100,7 +101,8 @@ async def down_load_media_f(client, sms):
         if os.path.exists(download_file_path):
             end_t = datetime.now()
             ms = (end_t - start_t).seconds
-            await message.edit(f"Downloaded to <code>{download_file_path}</code> in <u>{ms}</u> seconds")
-            await upload_to_gdrive(download_file_path, message)
+            #await message.edit(f"Downloaded to <code>{download_file_path}</code> in <u>{ms}</u> seconds")
+            #await upload_to_gdrive(download_file_path, message)
+    '''
     else:
         await message.edit("Reply to a Telegram Media, to download it to local server.")
