@@ -39,7 +39,7 @@ async def down_load_media_f(client, sms):
             is_untar = True
     if sms.reply_to_message is not None:
         start_t = datetime.now()
-        download_location = DOWNLOAD_LOCATION + "/"
+        download_location = DOWNLOAD_LOCATION
         c_time = time.time()
         the_real_download_location = await client.download_media(
             message=sms.reply_to_message,
@@ -52,7 +52,7 @@ async def down_load_media_f(client, sms):
         end_t = datetime.now()
         ms = (end_t - start_t).seconds
         await message.edit(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
-        await call_apropriate_function_t(the_real_download_location, message, is_unzip, is_unrar, is_untar)
+        #await call_apropriate_function_t(the_real_download_location, message, is_unzip, is_unrar, is_untar)
     else:
         await message.edit("Reply to a Telegram Media, to download it to local server.")
     '''
