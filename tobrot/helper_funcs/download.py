@@ -26,6 +26,16 @@ async def down_load_media_f(client, sms):
     message = await sms.reply_text("...", quote=True)
     if not os.path.isdir(DOWNLOAD_LOCATION):
         os.makedirs(DOWNLOAD_LOCATION)
+    is_unzip = False
+    is_unrar = False
+    is_untar = False
+    if len(sms.command) > 1:
+        if message.command[1] == "unzip":
+            is_unzip = True
+        elif message.command[1] == "unrar":
+            is_unrar = True
+        elif message.command[1] == "untar":
+            is_untar = True
     if sms.reply_to_message is not None:
         start_t = datetime.now()
         download_location = DOWNLOAD_LOCATION + "/"
@@ -41,7 +51,7 @@ async def down_load_media_f(client, sms):
         end_t = datetime.now()
         ms = (end_t - start_t).seconds
         await message.edit(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
-        await upload_to_gdrive(the_real_download_location, message)
+        await call_apropriate_function_t(the_real_download_location, message, is_unzip, is_unrar, is_untar)
     elif len(sms.command) > 1:
         start_t = datetime.now()
         the_url_parts = " ".join(sms.command[1:])
@@ -89,7 +99,7 @@ async def down_load_media_f(client, sms):
         if os.path.exists(download_file_path):
             end_t = datetime.now()
             ms = (end_t - start_t).seconds
-            #await message.edit(f"Downloaded to <code>{download_file_path}</code> in <u>{ms}</u> seconds")
+            await message.edit(f"Downloaded to <code>{download_file_path}</code> in <u>{ms}</u> seconds")
             await upload_to_gdrive(download_file_path, message)
     else:
         await message.edit("Reply to a Telegram Media, to download it to local server.")
