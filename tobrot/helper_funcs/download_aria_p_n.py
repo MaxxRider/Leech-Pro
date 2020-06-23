@@ -332,7 +332,7 @@ async def call_apropriate_function_g(
     )
 #
 async def call_apropriate_function_t(
-    to_upload_file,
+    to_upload_file_g,
     sent_message_to_update_tg_p,
     is_unzip,
     is_unrar,
@@ -340,17 +340,17 @@ async def call_apropriate_function_t(
 ):
     #
     if is_unzip:
-        check_ifi_file = await unzip_me(to_upload_file)
+        check_ifi_file = await unzip_me(to_upload_file_g)
         if check_ifi_file is not None:
             to_upload_file = check_ifi_file
     #
     if is_unrar:
-        check_ife_file = await unrar_me(to_upload_file)
+        check_ife_file = await unrar_me(to_upload_file_g)
         if check_ife_file is not None:
             to_upload_file = check_ife_file
     #
     if is_untar:
-        check_ify_file = await untar_me(to_upload_file)
+        check_ify_file = await untar_me(to_upload_file_g)
         if check_ify_file is not None:
             to_upload_file = check_ify_file
     #
