@@ -1,10 +1,34 @@
+# the logging things
+import logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+LOGGER = logging.getLogger(__name__)
+#
+
+import asyncio
+import math
+import os
+import time
+from datetime import datetime
+from pySmartDL import SmartDL
+from pyrogram import Client, Filters
+
+from tobrot import (
+    DOWNLOAD_LOCATION
+)
+
+
+
 async def down_load_media(client, sms):
     message = await sms.reply_text("...", quote=True)
-    if not os.path.isdir(TMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(TMP_DOWNLOAD_DIRECTORY)
+    if not os.path.isdir(DOWNLOAD_LOCATION):
+        os.makedirs(DOWNLOAD_LOCATION)
     if sms.reply_to_message is not None:
         start_t = datetime.now()
-        download_location = TMP_DOWNLOAD_DIRECTORY + "/"
+        download_location = DOWNLOAD_LOCATION + "/"
         c_time = time.time()
         the_real_download_location = await client.download_media(
             message=sms.reply_to_message,
