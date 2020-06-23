@@ -44,6 +44,7 @@ from tobrot.plugins.custom_thumbnail import (
     save_thumb_nail,
     clear_thumb_nail
 )
+from torbot.helper_funcs.download import down_load_media_f
 
 
 if __name__ == "__main__" :
