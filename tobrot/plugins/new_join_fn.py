@@ -36,8 +36,9 @@ async def help_message_f(client, message):
     # await message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)
     #channel_id = str(AUTH_CHANNEL)[4:]
     #message_id = 99
-    # display the /help message
-    await message.reply_text("""join this group forr help-- @torrentleechgdrivesupport\n\n And also don't forget to fork this repo: <a href="{https://github.com/gautamajay52/TorrentLeech-Gdrive}">TorrentLeech-Gdrive</a>""")
+    # display the /help
+    
+    await message.reply_text("""join this group forr help-- @torrentleechgdrivesupport\n\n And also don't forget to fork this repo: <a href="https://github.com/gautamajay52/TorrentLeech-Gdrive">TorrentLeech-Gdrive</a>""")
 
 
 async def rename_message_f(client, message):
