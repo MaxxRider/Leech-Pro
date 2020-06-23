@@ -51,8 +51,9 @@ async def down_load_media_f(client, sms):
         )
         end_t = datetime.now()
         ms = (end_t - start_t).seconds
-        await message.edit(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
-        download_location_g = os.path.join(DOWNLOAD_LOCATION, os.path.basename(the_real_download_location))
+        print(the_real_download_location)
+        await message.reply(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
+        download_location_g = os.path.basename(the_real_download_location))
         print(download_location_g)
         final_response= await call_apropriate_function_t(download_location_g, message, is_unzip, is_unrar, is_untar)
         LOGGER.info(final_response)
