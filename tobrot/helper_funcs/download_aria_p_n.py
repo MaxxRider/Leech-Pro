@@ -330,7 +330,42 @@ async def call_apropriate_function_g(
         to_upload_file,
         sent_message_to_update_tg_p
     )
+#
+async def call_apropriate_function_t(
+    to_upload_file,
+    sent_message_to_update_tg_p,
+    is_unzip,
+    is_unrar,
+    is_untar
+):
+    #
+    if is_unzip:
+        check_ifi_file = await unzip_me(to_upload_file)
+        if check_ifi_file is not None:
+            to_upload_file = check_ifi_file
+    #
+    if is_unrar:
+        check_ife_file = await unrar_me(to_upload_file)
+        if check_ife_file is not None:
+            to_upload_file = check_ife_file
+    #
+    if is_untar:
+        check_ify_file = await untar_me(to_upload_file)
+        if check_ify_file is not None:
+            to_upload_file = check_ify_file
+    #
+    #if to_upload_file:
+        #if CUSTOM_FILE_NAME:
+            #os.rename(to_upload_file, f"{CUSTOM_FILE_NAME}{to_upload_file}")
+            #to_upload_file = f"{CUSTOM_FILE_NAME}{to_upload_file}"
+        #else:
+            #to_upload_file = to_upload_file
 
+    #if cstom_file_name:
+        #os.rename(to_upload_file, cstom_file_name)
+        #to_upload_file = cstom_file_name
+    #else:
+        #to_upload_file = to_upload_file
     '''
     
     LOGGER.info(final_response)
