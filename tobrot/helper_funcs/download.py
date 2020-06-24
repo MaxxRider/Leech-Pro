@@ -64,11 +64,11 @@ async def down_load_media_f(client, message):
                     gk_response = await upload_to_gdrive(file_uploade, mess_age)
                     LOGGER.info(gk_response)
                     
-           elif message.command[1] == "untar":
-                file_uploadg = await untar_me(the_real_download_location_g)
-                if file_uploadg is not None:
-                    gau_response = await upload_to_gdrive(file_uploadg, mess_age)
-                    LOGGER.info(gau_response)
+            elif message.command[1] == "untar":
+                 file_uploadg = await untar_me(the_real_download_location_g)
+                 if file_uploadg is not None:
+                     gau_response = await upload_to_gdrive(file_uploadg, mess_age)
+                     LOGGER.info(gau_response)
         else:
             gaut_response = await upload_to_gdrive(the_real_download_location_g, mess_age)
             LOGGER.info(gaut_response)
