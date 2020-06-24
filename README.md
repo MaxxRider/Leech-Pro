@@ -6,6 +6,7 @@
 A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.com/pyrogram/pyrogram)
 
 # Benefits :-
+    ✓ Telegram File mirrorring to cloud along with its unzipping, unrar and untar
     ✓ Drive/Teamdrive support/All other cloud services rclone.org supports
     ✓ Unzip
     ✓ Unrar
@@ -138,6 +139,8 @@ and everythin except `[NAME]`
 
 * `YTDL_COMMAND`
 
+* `TELEGRAM_LEECH_COMMAND_G`
+
 * `INDEX_LINK`: (Without `/` at last of the link, otherwise u will get error) During creating index, plz fill `Default Root ID` with the id of your `DESTINATION_FOLDER` after creating. Otherwise index will not work properly.
 ## Available Commands
 
@@ -160,6 +163,15 @@ and everythin except `[NAME]`
 * `/leech untar`: This will untar the .tar file and upload to telegram.
 
 * `/gleech untar`: This will untar the .tar file and upload to drive.
+
+* `/tleech`: This will mirror the telegram files to ur respective cloud drive.
+
+* `/tleech unzip`: This will unzip the .zip telegram file and upload to drive.
+
+* `/tleech unrar`: This will unrar the .rar telegram file and upload to drive.
+
+* `/tleech untar`: This will untar the .tar telegram file and upload to drive.
+
 
 * [Only work with direct link for now]It is like u can add custom name as prefix of the original file name.
 Like if your file name is `gk.txt` uploaded will be what u add in `CUSTOM_FILE_NAME` + `gk.txt`
