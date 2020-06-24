@@ -25,7 +25,8 @@ from tobrot import (
     AUTH_CHANNEL,
     LEECH_COMMAND,
     YTDL_COMMAND,
-    GLEECH_COMMAND
+    GLEECH_COMMAND,
+    TELEGRAM_LEECH_COMMAND_G
 )
 
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
@@ -44,6 +45,7 @@ from tobrot.plugins.custom_thumbnail import (
     save_thumb_nail,
     clear_thumb_nail
 )
+from tobrot.helper_funcs.download import down_load_media_f
 
 
 if __name__ == "__main__" :
@@ -70,6 +72,12 @@ if __name__ == "__main__" :
         filters=Filters.command([f"{GLEECH_COMMAND}"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_gdrive_message_handler)
+    #
+    incoming_telegram_download_handler = MessageHandler(
+        down_load_media_f,
+        filters=Filters.command([f"{TELEGRAM_LEECH_COMMAND_G}"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_telegram_download_handler)
     #
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
