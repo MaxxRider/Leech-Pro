@@ -77,10 +77,10 @@ async def unzip_me(input_directory):
         #e_response = stderr.decode().strip()
         #t_response = stdout.decode().strip()
         if os.path.exists(uncompressed_file_name):
-            #try:
-                #os.remove(input_directory)
-            #except:
-                #pass
+            try:
+                os.remove(input_directory)
+            except:
+                pass
             return_name = uncompressed_file_name
             print(return_name)
     return return_name
