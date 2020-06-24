@@ -14,7 +14,7 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     ✓ Custom commands
     ✓ 
 
-### All credit goes to SpEcHiDe
+### Credit goes to SpEcHiDe for his Publicleech repo.
 
 ## installing
 
