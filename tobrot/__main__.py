@@ -25,7 +25,8 @@ from tobrot import (
     AUTH_CHANNEL,
     LEECH_COMMAND,
     YTDL_COMMAND,
-    GLEECH_COMMAND
+    GLEECH_COMMAND,
+    TELEGRAM_LEECH_COMMAND_G
 )
 
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
@@ -74,7 +75,7 @@ if __name__ == "__main__" :
     #
     incoming_telegram_download_handler = MessageHandler(
         down_load_media_f,
-        filters=Filters.command(["tdownload"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([f"{TELEGRAM_LEECH_COMMAND_G}"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_telegram_download_handler)
     #
