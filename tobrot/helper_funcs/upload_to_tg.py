@@ -15,6 +15,7 @@ import asyncio
 import os
 import time
 import subprocess
+import re
 import shutil
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
