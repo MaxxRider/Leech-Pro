@@ -122,7 +122,8 @@ async def upload_to_tg(
                 dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
     # await message.delete()
     return dict_contatining_uploaded_files
-#
+
+#(c)gautamajay52
 
 async def upload_to_gdrive(file_upload, message):
     subprocess.Popen(('touch', 'rclone.conf'), stdout = subprocess.PIPE)
