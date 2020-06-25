@@ -142,7 +142,7 @@ async def upload_to_gdrive(file_upload, message):
         p = popi.decode("utf-8")
         print(p)
         gauti = f"https://drive.google.com/file/d/{p}/view?usp=drivesdk"
-        gau_link = requote_uri(gauti)
+        gau_link = gau_link = re.search("(?P<url>https?://[^\s]+)", gauti).group("url")
         print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}"
         tam_link = requote_uri(indexurl)
@@ -165,7 +165,7 @@ async def upload_to_gdrive(file_upload, message):
         p = popie.decode("utf-8")
         print(p)
         gautii = f"https://drive.google.com/folderview?id={p}"
-        gau_link = requote_uri(gautii)
+        gau_link = gau_link = re.search("(?P<url>https?://[^\s]+)", gautii).group("url")
         print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}/"
         tam_link = requote_uri(indexurl)
@@ -173,7 +173,7 @@ async def upload_to_gdrive(file_upload, message):
         await asyncio.sleep(3)
         await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\n '-'*10\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
         shutil.rmtree(file_upload)
-        shutil.rmtree(filter1.txt)
+        os.remove(filter1.txt)
 
 #
 
