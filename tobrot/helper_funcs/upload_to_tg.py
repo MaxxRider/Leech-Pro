@@ -134,10 +134,10 @@ async def upload_to_gdrive(file_upload, message):
     if os.path.isfile(file_upload):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
         pro, cess = tmp.communicate()
-        gk_file = re.escape(file_upload)
-        print(gk_file)
+        #gk_file = re.escape(file_upload)
+        #print(gk_file)
         with open('filter.txt', 'w+') as filter:
-            print(f"+ {gk_file}\n- *", file=filter)
+            print(f"+ {file_upload}\n- *", file=filter)
         process1 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter.txt", "--files-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         os.remove("filter.txt")
         popi, popp = process1.communicate()
