@@ -13,7 +13,6 @@ LOGGER = logging.getLogger(__name__)
 
 import asyncio
 import os
-import re
 import time
 import subprocess
 import shutil
@@ -122,8 +121,7 @@ async def upload_to_tg(
                 dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
     # await message.delete()
     return dict_contatining_uploaded_files
-
-#(c)gautamajay52
+#
 
 async def upload_to_gdrive(file_upload, message):
     subprocess.Popen(('touch', 'rclone.conf'), stdout = subprocess.PIPE)
@@ -149,10 +147,9 @@ async def upload_to_gdrive(file_upload, message):
         gau_link = re.search("(?P<url>https?://[^\s]+)", gauti).group("url")
         print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}"
-        tam_link = requote_uri(indexurl)
-        #s_tr = '-'*40
-        await asyncio.sleep(3)
-        await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FileLink</a>\nℹ️ Direct URL:  <a href="{tam_link}">IndexLink</a>""")
+        g_link = requote_uri(indexurl)
+        time.sleep(4)
+        await message.edit_text(f'{file_upload} has been Uploaded successfully to your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         os.remove(file_upload)
         #os.remove(filter.txt)
     else:
