@@ -141,8 +141,9 @@ async def upload_to_gdrive(file_upload, message):
         gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
         indexurl = f"{INDEX_LINK}/{file_upload}"
         tam_link = requote_uri(indexurl)
-        await asyncio.sleep(4)
-        await message.edit_text(f''🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n '-'*10\n ☁️Drive Link: <a href="{gau_link}">DriveUrl</a>\n '-'*10\n ℹ️Index Url: <a href="{tam_link}">Index</a>'')
+        s_tr = '-'*40
+        await asyncio.sleep(3)
+        await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n {s_tr}\n ☁️Drive Link: <a href="{gau_link}">DriveUrl</a>\n {s_tr}\n ℹ️Index Url: <a href="{tam_link}">Index</a>""")
         os.remove(file_upload)
     else:
         tt= os.path.join(destination, file_upload)
@@ -156,8 +157,9 @@ async def upload_to_gdrive(file_upload, message):
         gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
         indexurl = f"{INDEX_LINK}/{file_upload}/"
         tam_link = requote_uri(indexurl)
+        s_tr = '-'*40
         await asyncio.sleep(4)
-        await message.edit_text(f''🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n '-'*10\n ☁️DriveLink: <a href="{gau_link}">DriveUrl</a>\n '-'*10\n '-'*10\n ℹ️Index Url: <a href="{tam_link}">here</a>'')
+        await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n {s_tr}\n ☁️DriveLink: <a href="{gau_link}">DriveUrl</a>\n '-'*10\n {s_tr}\n ℹ️Index Url: <a href="{tam_link}">here</a>""")
         shutil.rmtree(file_upload)
 
 #
