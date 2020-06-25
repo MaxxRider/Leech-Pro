@@ -131,8 +131,10 @@ async def upload_to_gdrive(file_upload, message):
     destination = f'{DESTINATION_FOLDER}'
     if os.path.isfile(file_upload):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
-        gau, tam = tmp.communicate()
-        print(gau)
+        pro, cess = tmp.communicate()
+        process1 = subprocess.Popen(['rclone', 'link', '--config=rclone.conf', 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        gau, tam = process1.communicate()
+        print(pro)
         l_nk = gau.decode("utf-8")
         gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
         indexurl = f"{INDEX_LINK}/{file_upload}"
@@ -144,14 +146,16 @@ async def upload_to_gdrive(file_upload, message):
         tt= os.path.join(destination, file_upload)
         print(tt)
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
-        gau, tam = tmp.communicate()
-        print(gau)
+        pro, cess = tmp.communicate()
+        print(pro)
+        process1 = subprocess.Popen(['rclone', 'link', '--config=/data/data/com.termux/files/home/.config/rclone/rclone.conf', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        gau, tam  = process1.communicate()
         l_nk = gau.decode("utf-8")
         gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
         indexurl = f"{INDEX_LINK}/{file_upload}/"
-        g_link = requote_uri(indexurl)
+        tam_link = requote_uri(indexurl)
         await asyncio.sleep(4)
-        await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Drive Link: <a href="{gau_link}">DriveUrl</a>\n\n Index Url: <a href="{g_link}">here</a>')
+        await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Drive Link: <a href="{gau_link}">DriveUrl</a>\n\n Index Url: <a href="{tam_link}">here</a>')
         shutil.rmtree(file_upload)
 
 #
