@@ -132,54 +132,24 @@ async def upload_to_gdrive(file_upload, message):
     destination = f'{DESTINATION_FOLDER}'
     if os.path.isfile(file_upload):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
-        pro, cess = tmp.communicate()
-        gk_file = re.escape(file_upload)
-        print(gk_file)
-        with open('filter.txt', 'w+') as filter:
-            print(f"+ {gk_file}\n- *", file=filter)
-        process1 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter.txt", "--files-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        #os.remove("filter.txt")
-        popi, popp = process1.communicate()
-        print(popi)
-        p = popi.decode("utf-8")
-        print(p)
-        #os.remove("filter.txt")
-        gauti = f"https://drive.google.com/file/d/{p}/view?usp=drivesdk"
-        gau_link = re.search("(?P<url>https?://[^\s]+)", gauti).group("url")
-        print(gau_link)
+        out = tmp.communicate()
+        print(out)
         indexurl = f"{INDEX_LINK}/{file_upload}"
         g_link = requote_uri(indexurl)
         time.sleep(4)
         await message.edit_text(f'{file_upload} has been Uploaded successfully to your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         os.remove(file_upload)
-        #os.remove(filter.txt)
     else:
         tt= os.path.join(destination, file_upload)
         print(tt)
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
-        pro, cess = tmp.communicate()
-        print(pro)
-        g_file = re.escape(file_upload)
-        print(g_file)
-        with open('filter1.txt', 'w+') as filter1:
-            print(f"+ {g_file}/\n- *", file=filter1)
-        process12 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter1.txt", "--dirs-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        #os.remove("filter1.txt")
-        popie, popp = process12.communicate()
-        print(popie)
-        p = popie.decode("utf-8")
-        print(p)
-        #os.remove("filter1.txt")
-        gautii = f"https://drive.google.com/folderview?id={p}"
-        gau_link = re.search("(?P<url>https?://[^\s]+)", gautii).group("url")
-        print(gau_link)
+        out = tmp.communicate()
+        print(out)
         indexurl = f"{INDEX_LINK}/{file_upload}/"
-        tam_link = requote_uri(indexurl)
-        #s_tr = '-'*40
-        await asyncio.sleep(3)
-        await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
+        g_link = requote_uri(indexurl)
+        time.sleep(4)
+        await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         shutil.rmtree(file_upload)
-        #os.remove(filter1.txt)
 
 #
 
