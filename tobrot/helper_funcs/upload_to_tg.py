@@ -125,7 +125,7 @@ async def upload_to_tg(
 #
 
 async def upload_to_gdrive(file_upload, message):
-    await message.edit_text("📢 Now Uploading to ☁️ cloud...")
+    await message.edit_text("🔊 Now Uploading to ☁️ cloud...")
     subprocess.Popen(('touch', 'rclone.conf'), stdout = subprocess.PIPE)
     with open('rclone.conf', 'a', newline="\n") as fole:
         fole.write("[DRIVE]\n")
