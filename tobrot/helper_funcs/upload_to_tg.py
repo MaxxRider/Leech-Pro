@@ -137,11 +137,11 @@ async def upload_to_gdrive(file_upload, message):
         with open('filter.txt', 'w+') as filter:
             print(f"+ {file_upload}\n- *", file=filter)
         process1 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter.txt", "--files-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        os.remove("filter.txt")
         popi, popp = process1.communicate()
         print(popi)
         p = popi.decode("utf-8")
         print(p)
+        os.remove("filter.txt")
         gauti = f"https://drive.google.com/file/d/{p}/view?usp=drivesdk"
         gau_link = gau_link = re.search("(?P<url>https?://[^\s]+)", gauti).group("url")
         print(gau_link)
@@ -161,11 +161,12 @@ async def upload_to_gdrive(file_upload, message):
         with open('filter1.txt', 'w+') as filter1:
             print(f"+ {file_upload}/\n- *", file=filter1)
         process12 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter1.txt", "--dirs-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        os.remove("filter1.txt")
+        #os.remove("filter1.txt")
         popie, popp = process12.communicate()
         print(popie)
         p = popie.decode("utf-8")
         print(p)
+        os.remove("filter1.txt")
         gautii = f"https://drive.google.com/folderview?id={p}"
         gau_link = gau_link = re.search("(?P<url>https?://[^\s]+)", gautii).group("url")
         print(gau_link)
