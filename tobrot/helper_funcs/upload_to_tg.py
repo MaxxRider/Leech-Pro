@@ -134,33 +134,44 @@ async def upload_to_gdrive(file_upload, message):
     if os.path.isfile(file_upload):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
         pro, cess = tmp.communicate()
-        process1 = subprocess.Popen(['rclone', 'link', '--config=rclone.conf', 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        gau, tam = process1.communicate()
-        print(pro)
-        l_nk = gau.decode("utf-8")
-        gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
+        with open('filter.txt', 'w+') as filter:
+            print(f"+ {to_upload_file}\n- *", file=filter)
+        process1 = subprocess.Popen(['rclone', 'lsf', '--config=/data/data/com.termux/files/home/.config/rclone/rclone.conf', '-F', 'i', "--filter-from=/data/data/com.termux/files/home/scpt/filter.txt", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        popi, popp = process1.communicate()
+        print(popi)
+        p = popi.decode("utf-8")
+        print(p)
+        gau_link = f"https://drive.google.com/file/d/{p}/view?usp=drivesdk"
+        print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}"
         tam_link = requote_uri(indexurl)
         #s_tr = '-'*40
         await asyncio.sleep(3)
         await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FileLink</a>\nℹ️ Direct URL:  <a href="{tam_link}">IndexLink</a>""")
         os.remove(file_upload)
+        os.remove(filter.txt)
     else:
         tt= os.path.join(destination, file_upload)
         print(tt)
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
         pro, cess = tmp.communicate()
         print(pro)
-        process1 = subprocess.Popen(['rclone', 'link', '--config=/data/data/com.termux/files/home/.config/rclone/rclone.conf', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        gau, tam  = process1.communicate()
-        l_nk = gau.decode("utf-8")
-        gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
+        with open('filter1.txt', 'w+') as filter1:
+            print(f"+ {to_upload_file}\n- *", file=filter1)
+        process12 = subprocess.Popen(['rclone', 'lsf', '--config=/data/data/com.termux/files/home/.config/rclone/rclone.conf', '-F', 'i', "--filter-from=/data/data/com.termux/files/home/scpt/filter1.txt", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        popie, popp = process12.communicate()
+        print(popie)
+        p = popie.decode("utf-8")
+        print(p)
+        gau_link = f"https://drive.google.com/folderview?id={p}"
+        print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}/"
         tam_link = requote_uri(indexurl)
         #s_tr = '-'*40
         await asyncio.sleep(3)
         await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\n '-'*10\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
         shutil.rmtree(file_upload)
+        shutil.rmtree(filter1.txt)
 
 #
 
