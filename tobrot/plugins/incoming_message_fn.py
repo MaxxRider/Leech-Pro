@@ -134,7 +134,7 @@ async def incoming_gdrive_message_f(client, message):
             os.makedirs(new_download_location)
         await i_m_sefg.edit_text("trying to download")
         # try to download the "link"
-        await call_apropriate_function_g(
+        sagtus, err_message = await call_apropriate_function_g(
             aria_i_p,
             dl_url,
             new_download_location,
@@ -145,6 +145,9 @@ async def incoming_gdrive_message_f(client, message):
             is_unrar,
             is_untar
         )
+        if not sagtus:
+            # if FAILED, display the error message
+            await i_m_sefg.edit_text(err_message)
     else:
         await i_m_sefg.edit_text(
             "**FCUK**! wat have you entered. \nPlease read /help \n"
