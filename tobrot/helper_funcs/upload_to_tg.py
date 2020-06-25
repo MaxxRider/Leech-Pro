@@ -141,7 +141,7 @@ async def upload_to_gdrive(file_upload, message):
         print(popi)
         p = popi.decode("utf-8")
         print(p)
-        os.remove("filter.txt")
+        #os.remove("filter.txt")
         gauti = f"https://drive.google.com/file/d/{p}/view?usp=drivesdk"
         gau_link = gau_link = re.search("(?P<url>https?://[^\s]+)", gauti).group("url")
         print(gau_link)
@@ -166,9 +166,9 @@ async def upload_to_gdrive(file_upload, message):
         print(popie)
         p = popie.decode("utf-8")
         print(p)
-        os.remove("filter1.txt")
+        #os.remove("filter1.txt")
         gautii = f"https://drive.google.com/folderview?id={p}"
-        gau_link = gau_link = re.search("(?P<url>https?://[^\s]+)", gautii).group("url")
+        gau_link = re.search("(?P<url>https?://[^\s]+)", gautii).group("url")
         print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}/"
         tam_link = requote_uri(indexurl)
