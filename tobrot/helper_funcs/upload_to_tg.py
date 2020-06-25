@@ -13,7 +13,6 @@ LOGGER = logging.getLogger(__name__)
 
 import asyncio
 import os
-import re
 import time
 import subprocess
 import shutil
@@ -122,8 +121,7 @@ async def upload_to_tg(
                 dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
     # await message.delete()
     return dict_contatining_uploaded_files
-
-#(c)gautamajay52
+#
 
 async def upload_to_gdrive(file_upload, message):
     subprocess.Popen(('touch', 'rclone.conf'), stdout = subprocess.PIPE)
@@ -133,33 +131,23 @@ async def upload_to_gdrive(file_upload, message):
     destination = f'{DESTINATION_FOLDER}'
     if os.path.isfile(file_upload):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
-        pro, cess = tmp.communicate()
-        process1 = subprocess.Popen(['rclone', 'link', '--config=rclone.conf', 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        gau, tam = process1.communicate()
-        print(pro)
-        l_nk = gau.decode("utf-8")
-        gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
+        out = tmp.communicate()
+        print(out)
         indexurl = f"{INDEX_LINK}/{file_upload}"
-        tam_link = requote_uri(indexurl)
-        #s_tr = '-'*40
-        await asyncio.sleep(3)
-        await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FileLink</a>\nℹ️ Direct URL:  <a href="{tam_link}">IndexLink</a>""")
+        g_link = requote_uri(indexurl)
+        time.sleep(4)
+        await message.edit_text(f'{file_upload} has been Uploaded successfully to your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         os.remove(file_upload)
     else:
         tt= os.path.join(destination, file_upload)
         print(tt)
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
-        pro, cess = tmp.communicate()
-        print(pro)
-        process1 = subprocess.Popen(['rclone', 'link', '--config=/data/data/com.termux/files/home/.config/rclone/rclone.conf', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
-        gau, tam  = process1.communicate()
-        l_nk = gau.decode("utf-8")
-        gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
+        out = tmp.communicate()
+        print(out)
         indexurl = f"{INDEX_LINK}/{file_upload}/"
-        tam_link = requote_uri(indexurl)
-        #s_tr = '-'*40
-        await asyncio.sleep(3)
-        await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\n '-'*10\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
+        g_link = requote_uri(indexurl)
+        time.sleep(4)
+        await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
         shutil.rmtree(file_upload)
 
 #
