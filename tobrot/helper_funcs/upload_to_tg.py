@@ -131,23 +131,27 @@ async def upload_to_gdrive(file_upload, message):
     destination = f'{DESTINATION_FOLDER}'
     if os.path.isfile(file_upload):
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{destination}', '-v'], stdout = subprocess.PIPE)
-        out = tmp.communicate()
-        print(out)
+        gau, tam = tmp.communicate()
+        print(gau)
+        l_nk = gau.decode("utf-8")
+        gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
         indexurl = f"{INDEX_LINK}/{file_upload}"
-        g_link = requote_uri(indexurl)
-        time.sleep(4)
-        await message.edit_text(f'{file_upload} has been Uploaded successfully to your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
+        tam_link = requote_uri(indexurl)
+        await asyncio.sleep(4)
+        await message.edit_text(f'{file_upload} has been Uploaded successfully to your cloud 🤒\n\n Drive Link: <a href="{gau_link}">DriveUrl</a>\n\n Index Url: <a href="{tam_link}">Index</a>')
         os.remove(file_upload)
     else:
         tt= os.path.join(destination, file_upload)
         print(tt)
         tmp = subprocess.Popen(['rclone', 'copy', '--config=rclone.conf', f'{file_upload}', 'DRIVE:'f'{tt}', '-v'], stdout = subprocess.PIPE)
-        out = tmp.communicate()
-        print(out)
+        gau, tam = tmp.communicate()
+        print(gau)
+        l_nk = gau.decode("utf-8")
+        gau_link = re.search("(?P<url>https?://[^\s]+)", l_nk).group("url")
         indexurl = f"{INDEX_LINK}/{file_upload}/"
         g_link = requote_uri(indexurl)
-        time.sleep(4)
-        await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Index Url: <a href="{g_link}">here</a>')
+        await asyncio.sleep(4)
+        await message.edit_text(f'Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n Drive Link: <a href="{gau_link}">DriveUrl</a>\n\n Index Url: <a href="{g_link}">here</a>')
         shutil.rmtree(file_upload)
 
 #
