@@ -136,7 +136,7 @@ async def upload_to_gdrive(file_upload, message):
         pro, cess = tmp.communicate()
         with open('filter.txt', 'w+') as filter:
             print(f"+ {file_upload}\n- *", file=filter)
-        process1 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter.txt", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        process1 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter.txt", "--files-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         popi, popp = process1.communicate()
         print(popi)
         p = popi.decode("utf-8")
@@ -157,8 +157,8 @@ async def upload_to_gdrive(file_upload, message):
         pro, cess = tmp.communicate()
         print(pro)
         with open('filter1.txt', 'w+') as filter1:
-            print(f"+ {file_upload}\n- *", file=filter1)
-        process12 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter1.txt", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+            print(f"+ {file_upload}/\n- *", file=filter1)
+        process12 = subprocess.Popen(['rclone', 'lsf', '--config=rclone.conf', '-F', 'i', "--filter-from=filter1.txt", "--dirs-only", 'DRIVE:'f'{destination}'], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         popie, popp = process12.communicate()
         print(popie)
         p = popie.decode("utf-8")
