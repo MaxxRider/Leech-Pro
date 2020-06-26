@@ -47,8 +47,8 @@ async def down_load_media_f(client, message):
         end_t = datetime.now()
         ms = (end_t - start_t).seconds
         print(the_real_download_location)
-        time.sleep(2)
-        await mess_age.edit(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
+        await asyncio.sleep(5)
+        await mess_age.edit_text(f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds")
         gk = subprocess.Popen(['mv', f'{the_real_download_location}', '/app/'], stdout = subprocess.PIPE)
         out = gk.communicate()
         the_real_download_location_g = os.path.basename(the_real_download_location)
@@ -74,5 +74,5 @@ async def down_load_media_f(client, message):
             gaut_response = await upload_to_gdrive(the_real_download_location_g, mess_age)
             LOGGER.info(gaut_response)
     else:
-        time.sleep(1)
-        await message.edit("Reply to a Telegram Media, to upload to the Cloud Drive.")
+        await asyncio.sleep(4)
+        await mess_age.edit_text("Reply to a Telegram Media, to upload to the Cloud Drive.")
