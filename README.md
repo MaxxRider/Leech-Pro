@@ -152,6 +152,8 @@ and everythin except `[NAME]`
 
 * `/gleech`: This command should be used as reply to a magnetic link, a torrent link, or a direct link. And this will download the files from the given link or torrent and will upload to the drive using rclone.
 
+* `/gleech archive` This command will compress the folder/file and will upload to your google drive.
+
 * `/leech unzip`: This will unzip the .zip file and dupload to telegram.
 
 * `/gleech unzip`: This will unzip the .zip file and upload to drive.
