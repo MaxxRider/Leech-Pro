@@ -125,6 +125,7 @@ async def upload_to_tg(
 #
 
 async def upload_to_gdrive(file_upload, message):
+    await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
     await message.edit_text("🔊 Now Uploading to ☁️ cloud...")
     subprocess.Popen(('touch', 'rclone.conf'), stdout = subprocess.PIPE)
     with open('rclone.conf', 'a', newline="\n") as fole:
@@ -151,7 +152,7 @@ async def upload_to_gdrive(file_upload, message):
         indexurl = f"{INDEX_LINK}/{file_upload}"
         tam_link = requote_uri(indexurl)
         #s_tr = '-'*40
-        await asyncio.sleep(3)
+        await asyncio.sleep(10)
         await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FileLink</a>\nℹ️ Direct URL:  <a href="{tam_link}">IndexLink</a>""")
         os.remove(file_upload)
     else:
@@ -177,7 +178,7 @@ async def upload_to_gdrive(file_upload, message):
         indexurl = f"{INDEX_LINK}/{file_upload}/"
         tam_link = requote_uri(indexurl)
         #s_tr = '-'*40
-        await asyncio.sleep(3)
+        await asyncio.sleep(10)
         await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
         shutil.rmtree(file_upload)
 
