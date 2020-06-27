@@ -19,7 +19,7 @@ from tobrot import (
 )
 
 
-async def progress_for_pyrogram(
+async def progress_for_pyrogram_g(
     current,
     total,
     ud_type,
