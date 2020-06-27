@@ -14,7 +14,8 @@ import time
 
 from tobrot import (
     FINISHED_PROGRESS_STR,
-    UN_FINISHED_PROGRESS_STR
+    UN_FINISHED_PROGRESS_STR,
+    EDIT_SLEEP_TIME_OUT
 )
 
 
@@ -52,6 +53,7 @@ async def progress_for_pyrogram(
             estimated_total_time if estimated_total_time != '' else "0 s"
         )
         try:
+            await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await message.edit(
                 "{}\n {}".format(
                     ud_type,
