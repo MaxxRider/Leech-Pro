@@ -39,7 +39,7 @@ async def down_load_media_f(client, message):
         the_real_download_location = await client.download_media(
             message=message.reply_to_message,
             file_name=download_location,
-            progress=progress_for_pyrogram,
+            progress=progress_for_pyrogram_g,
             progress_args=(
                 "trying to download", mess_age, c_time
             )
