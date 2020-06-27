@@ -16,6 +16,7 @@ import os
 import time
 import subprocess
 import re
+import requests
 import shutil
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -150,7 +151,7 @@ async def upload_to_gdrive(file_upload, message):
         gau_link = re.search("(?P<url>https?://[^\s]+)", gauti).group("url")
         print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}"
-        tam_link = requote_uri(indexurl)
+        tam_link = requests.utils.requote_uri(indexurl)
         #s_tr = '-'*40
         await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
         await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FileLink</a>\nℹ️ Direct URL:  <a href="{tam_link}">IndexLink</a>""")
@@ -176,7 +177,7 @@ async def upload_to_gdrive(file_upload, message):
         gau_link = re.search("(?P<url>https?://[^\s]+)", gautii).group("url")
         print(gau_link)
         indexurl = f"{INDEX_LINK}/{file_upload}/"
-        tam_link = requote_uri(indexurl)
+        tam_link = requests.utils.requote_uri(indexurl)
         #s_tr = '-'*40
         await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
         await message.edit_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
