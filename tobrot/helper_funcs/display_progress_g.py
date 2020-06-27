@@ -53,7 +53,6 @@ async def progress_for_pyrogram_g(
             estimated_total_time if estimated_total_time != '' else "0 s"
         )
         try:
-            await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             await message.edit(
                 "{}\n {}".format(
                     ud_type,
