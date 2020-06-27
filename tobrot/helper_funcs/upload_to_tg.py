@@ -247,6 +247,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
                 thumb = thumb_image_path
             # send video
             if edit_media and message.photo:
+                await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
                 sent_message = await message.edit_media(
                     media=InputMediaVideo(
                         media=local_file_name,
@@ -304,6 +305,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
                 thumb = thumb_image_path
             # send audio
             if edit_media and message.photo:
+                await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
                 sent_message = await message.edit_media(
                     media=InputMediaAudio(
                         media=local_file_name,
