@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K | gautamajay52
-
+# (c) MaxxRider
+ 
 # the logging things
 import logging
 logging.basicConfig(
@@ -11,12 +11,12 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
-
+ 
 import os
 import io
 import sys
 import traceback
-
+ 
 from tobrot import (
     DOWNLOAD_LOCATION,
     TG_BOT_TOKEN,
@@ -28,11 +28,12 @@ from tobrot import (
     GLEECH_COMMAND,
     TELEGRAM_LEECH_COMMAND_G
 )
-
+ 
 from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
-
+ 
 from tobrot.plugins.new_join_fn import new_join_f, help_message_f, rename_message_f
 from tobrot.plugins.incoming_message_fn import incoming_message_f, incoming_youtube_dl_f, incoming_purge_message_f, incoming_gdrive_message_f
+from tobrot.plugins.rclone_size import check_size_g
 from tobrot.plugins.status_message_fn import (
     status_message_f,
     cancel_message_f,
@@ -46,8 +47,8 @@ from tobrot.plugins.custom_thumbnail import (
     clear_thumb_nail
 )
 from tobrot.helper_funcs.download import down_load_media_f
-
-
+ 
+ 
 if __name__ == "__main__" :
     # create download directory, if not exist
     if not os.path.isdir(DOWNLOAD_LOCATION):
@@ -85,6 +86,12 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_purge_message_handler)
     #
+    incoming_size_checker_handler = MessageHandler(
+        check_size_g,
+        filters=Filters.command(["getsize"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_size_checker_handler)
+    #
     incoming_youtube_dl_handler = MessageHandler(
         incoming_youtube_dl_f,
         filters=Filters.command([f"{YTDL_COMMAND}"]) & Filters.chat(chats=AUTH_CHANNEL)
@@ -112,26 +119,26 @@ if __name__ == "__main__" :
     '''
     eval_message_handler = MessageHandler(
         eval_message_f,
-        filters=Filters.command(["eval"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["eval@MaxxLeechPro_bot"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(eval_message_handler)
     '''
     #
     rename_message_handler = MessageHandler(
         rename_message_f,
-        filters=Filters.command(["rename"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["rename@MaxxLeechPro_bot"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(rename_message_handler)
     #
     upload_document_handler = MessageHandler(
         upload_document_f,
-        filters=Filters.command(["upload@MaxxLeechPro_Bot"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["upload@MaxxLeechPro_bot"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(upload_document_handler)
-
+ 
     help_text_handler = MessageHandler(
         help_message_f,
-        filters=Filters.command(["help@MaxxLeechPro_Bot"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["help@MaxxLeechPro_bot"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(help_text_handler)
     #
@@ -154,13 +161,13 @@ if __name__ == "__main__" :
     #
     save_thumb_nail_handler = MessageHandler(
         save_thumb_nail,
-        filters=Filters.command(["savethumbnail@MaxxLeechPro_Bot"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["savethumbnail@MaxxLeechPro_bot"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_thumb_nail_handler)
     #
     clear_thumb_nail_handler = MessageHandler(
         clear_thumb_nail,
-        filters=Filters.command(["clearthumbnail@MaxxLeechPro_Bot"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command(["clearthumbnail@MaxxLeechPro_bot"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
     #
