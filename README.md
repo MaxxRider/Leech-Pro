@@ -197,9 +197,5 @@ the file will be uploaded as `new.txt`.
 * if file is a TAR archive, [read this](https://t.me/c/1434259219/104) to know how to uncompress.
 
 
-## Credits, and Thanks to
-* [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
-* [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
-* [@AjeeshNair](https://telegram.dog/AjeeshNait) for his [torrent.ajee.sh](https://torrent.ajee.sh)
-* [@gotstc](https://telegram.dog/gotstc), @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir) for their TORRENT groups
-* [![CopyLeft](https://telegra.ph/file/b514ed14d994557a724cb.jpg)](https://telegra.ph/file/fab1017e21c42a5c1e613.mp4 "CopyLeft Credit Video")
+## JOIN MY ALL CHANNEL
+* [MOVIE HINDII](https://t.me/joinchat/AAAAAFfWz-izyEXi-mpiQQ) 
