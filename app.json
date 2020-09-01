@@ -2,17 +2,7 @@
   "name": "Telegram Torrent Leecher",
   "description": "A Telegram Torrent (and youtube-dl) Leecher based on Pyrogram. Powered by @torrentleechgdrivesupport!",
   "keywords": [
-    "telegram",
-    "best",
-    "indian",
-    "pyrogram",
-    "torrent",
-    "3",
-    "plugin",
-    "modular",
-    "productivity",
-    "youtube-dl",
-    "leecher"
+    "telegram"
   ],
   "repository": "https://github.com/gautamajay52/TorrentLeech-Gdrive",
   "success_url": "https://t.me/torrentleechgdrivesupport",
@@ -37,6 +27,14 @@
     "AUTH_CHANNEL": {
       "description": "should be an integer. The BOT API ID of the Telegram Group, where the Leecher should work.",
       "value": ""
+    },
+    "OWNER_ID": {
+      "description": "should be an integer. ID of owner of bot",
+      "value": ""
+    },
+    "UPLOAD_AS_DOC": {
+      "description": "True/False. If true all files will be uploaded as documents. Default is False.",
+      "required": false
     },
     "CHUNK_SIZE": {
       "description": "should be an integer",
@@ -89,12 +87,24 @@
       "description": "Enter your custom ytdl command like ytdl1@urgroupname and so on. Default is /ytdl.",
       "required": false
     },
+    "PYTDL_COMMAND_G": {
+      "description": "Enter your custom pytdl command like pytdl1@urgroupname and so on. Default is /pytdl.",
+      "required": false
+    },
+    "CANCEL_COMMAND_G": {
+      "description": "Enter your custom cancel command like cancel@urgroupname and so on. Default is /cancel.",
+      "required": false
+    },
+    "GET_SIZE_G": {
+      "description": "Enter your custom getsize command like getsize@urgroupname and so on. Default is /getsize.",
+      "required": false
+    },
     "RCLONE_CONFIG": {
       "description": "Enter your copied text from rclone config. Compulsory for /gleech as well as /tleech command ",
       "required": false
     },
     "DESTINATION_FOLDER": {
-      "description": "Enter your Destination folder in which you want to upload yoyr file.",
+      "description": "Enter your Cloud folder NAME(not ID😅) in which you want to upload/store your files.",
       "required": false
     },
     "CUSTOM_FILE_NAME": {
@@ -102,23 +112,5 @@
       "required": false
     }
   },
-  "addons": [
-  ],
-  "buildpacks": [{
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-  }, {
-    "url": "https://github.com/SayanthD/aria2-heroku"
-  }, {
-    "url": "https://github.com/amivin/rclone-heroku"
-  }, {
-    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
-  }, {
-    "url": "heroku/python"
-  }],
-  "formation": {
-    "worker": {
-      "quantity": 1,
-      "size": "free"
-    }
-  }
+  "stack": "container"
 }
