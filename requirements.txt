@@ -2,7 +2,7 @@ aiohttp
 aria2p
 hachoir
 Pillow
-pySmartDL
-https://github.com/pyrogram/pyrogram/archive/asyncio-dev.zip
+pyrogram
 tgcrypto
-git+https://github.com/FaArIsH/youtube-dl
+git+https://github.com/gautamajay52/youtube-dl
+hurry.filesize
