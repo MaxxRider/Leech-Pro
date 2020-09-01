@@ -2,3 +2,4 @@ venv
 config.py
 __pycache__
 *.session
+config.py
