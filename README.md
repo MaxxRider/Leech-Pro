@@ -23,7 +23,7 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     
 
 
-[DEPLOY IN HEROKU](https://heroku.com/deploy?template=https://github.com/MxxRider2/tree/master/Max-Torrent-Leech-V2) #Revived
+[DEPLOY IN HEROKU](https://heroku.com/deploy)
 
 
 
