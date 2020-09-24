@@ -20,10 +20,10 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     ✓ Added /renewme command to clear the downloads which are not deleted automatically.
     ✓ Added support for youtube playlist 😐
     ✓
-    
+    ===========[MaxxRider]=========
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-[Test](https://dashboard.heroku.com/new?button-url=https://github.com/MaxxRider2/master/Max-Torrent-Leech-V2)
 
 ## Credits, and Thanks to
 * [GautamKumar(me)](https://github.com/gautamajay52/TorrentLeech-Gdrive) 😬
