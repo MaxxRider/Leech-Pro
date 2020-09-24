@@ -23,9 +23,7 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     
 
 
-[DEPLOY IN HEROKU](https://heroku.com/deploy)
-
-[Test](https://dashboard.heroku.com/new?button-url=https://github.com/MaxxRider2/Max-Torrent-Leech-V2)
+[Test](https://dashboard.heroku.com/new?button-url=https://github.com/MaxxRider2/master/Max-Torrent-Leech-V2)
 
 ## Credits, and Thanks to
 * [GautamKumar(me)](https://github.com/gautamajay52/TorrentLeech-Gdrive) 😬
