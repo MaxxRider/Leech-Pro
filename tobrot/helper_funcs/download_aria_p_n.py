@@ -445,25 +445,25 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                     pass
                 #
                 if is_file is None :
-                   msgg = f"Conn: {file.connections} <b>|</b> GID: <code>{gid}</code>"
+                   msgg = f"Conn: {file.connections} <b>|</b> GID: <code>/cancel {gid}</code>"
                 else :
-                   msgg = f"P: {file.connections} | S: {file.num_seeders} <b>|</b> GID: <code>{gid}</code>"
+                   msgg = f"P: {file.connections} | S: {file.num_seeders} <b>|</b> GID: <code>/cancel {gid}</code>"
                 msg = f"\n`{downloading_dir_name}`"
                 msg += f"\n<b>Speed</b>: {file.download_speed_string()}"
-                msg += f"\n<b>Status</b>: {file.progress_string()} <b>of</b> {file.total_length_string()} <b>|</b> {file.eta_string()} <b>|</b> {msgg}"
+                msg += f"\n<b>Status</b>: {file.progress_string()} of {file.total_length_string()} <b>|</b> {file.eta_string()} <b>|</b> {msgg}"
                 #msg += f"\nSize: {file.total_length_string()}"
 
                 #if is_file is None :
-                   #msg += f"\n<b>Conn:</b> {file.connections}, GID: <code>{gid}</code>"
+                   #msg += f"\n<b>Conn:</b> {file.connections}, GID: <code>/cancel {gid}</code>"
                 #else :
                    #msg += f"\n<b>Info:</b>[ P : {file.connections} | S : {file.num_seeders} ], GID: <code>{gid}</code>"
 
                 #msg += f"\nStatus: {file.status}"
                 #msg += f"\nETA: {file.eta_string()}"
-                #msg += f"\nGID: <code>{gid}</code>"
+                #msg += f"\nGID: <code>/cancel {gid}</code>"
                 inline_keyboard = []
                 ikeyboard = []
-                ikeyboard.append(InlineKeyboardButton("Cancel 🚫", callback_data=(f"cancel {gid}").encode("UTF-8")))
+                ikeyboard.append(InlineKeyboardButton("📌Cancel Downloading✂️", callback_data=(f"cancel {gid}").encode("UTF-8")))
                 inline_keyboard.append(ikeyboard)
                 reply_markup = InlineKeyboardMarkup(inline_keyboard)
                 #msg += reply_markup
