@@ -44,7 +44,7 @@ e)It should look like `app.json`. 🎉
 
 f)Then tap 👇👇
 
-[https://heroku.com/deploy?template=https://github.com/MxxRider2//tree/Max-Torrent-Leech-V2) #Revived
+[DEPLOY TO HEROKU](https://heroku.com/deploy?template=https://github.com/MxxRider2//tree/Max-Torrent-Leech-V2) #Revived
 
 Better buy a vps 😐 and follow [this](https://github.com/gautamajay52/TorrentLeech-Gdrive#process-to-run-this-bot-on-vps)
 
