@@ -38,7 +38,7 @@ async def progress_for_pyrogram_g(
         estimated_total_time = elapsed_time + time_to_completion
 
         elapsed_time = time_formatter(milliseconds=elapsed_time)
-        estimated_total_time = time_formatter(milliseconds=estimated_total_time)
+        time_to_completion = TimeFormatter(milliseconds=time_to_completion)
 
         progress = "[{0}{1}] \n<b>Percentage:</b> <code>〘 {2}% 〙</code>\n".format(
             ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 5))]),
@@ -50,7 +50,7 @@ async def progress_for_pyrogram_g(
             humanbytes(total),
             humanbytes(speed),
             # elapsed_time if elapsed_time != '' else "0 s",
-            estimated_total_time if estimated_total_time != '' else "0 s"
+            time_to_completion if time_to_completion != '' else "0 s"
         )
         try:
             await message.edit(
@@ -73,9 +73,9 @@ def humanbytes(size: int) -> str:
     number = 0
     dict_power_n = {
         0: " ",
-        1: "Ki",
-        2: "Mi",
-        3: "Gi",
+        1: "K",
+        2: "M",
+        3: "G",
         4: "Ti"
     }
     while size > power:
