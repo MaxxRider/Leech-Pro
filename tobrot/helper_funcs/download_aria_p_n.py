@@ -242,7 +242,7 @@ async def call_apropriate_function(
         if message_to_send != "":
             mention_req_user = f"<a href='tg://user?id={user_id}'>Your Requested Files</a>\n\n"
             message_to_send = mention_req_user + message_to_send
-            message_to_send = message_to_send + "\n\n" + "#uploads"
+            message_to_send = message_to_send + "\n\n" + "#File Uploaded Successfully\n\n🌀<b>Thanks For Using Me😁</b>"
         else:
             message_to_send = "<i>FAILED</i> to upload files. 😞😞"
         await user_message.reply_text(
@@ -403,7 +403,7 @@ async def call_apropriate_function_t(
         message_id = final_response[key_f_res_se]
         channel_id = str(AUTH_CHANNEL)[4:]
         private_link = f"https://t.me/c/{channel_id}/{message_id}"
-        message_to_send += "👉 <a href='"
+        message_to_send += "📔<a href='"
         message_to_send += private_link
         message_to_send += "'>"
         message_to_send += local_file_name
@@ -412,7 +412,7 @@ async def call_apropriate_function_t(
     if message_to_send != "":
         mention_req_user = f"<a href='tg://user?id={user_id}'>Your Requested Files</a>\n\n"
         message_to_send = mention_req_user + message_to_send
-        message_to_send = message_to_send + "\n\n" + "#uploads"
+        message_to_send = message_to_send + "\n\n" + "#File Uploaded Successfully\n\n🌀<b>Thanks For Using Me 😁</b>"
     else:
         message_to_send = "<i>FAILED</i> to upload files. 😞😞"
     await sent_message_to_update_tg_p.reply_to_message.reply_text(
@@ -444,28 +444,22 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 except:
                     pass
                 #
+                msg = f"\n<b>○File:</b> `<code>{downloading_dir_name}</code>`"
+                msg += f"\n<b>○Progress:</b> <code>〘 {file.progress_string()} 〙</code> <b>Of</b> <code>〘 {file.total_length_string()} 〙</code>"
+                msg += f"\n<b>○Speed:</b> <code>{file.download_speed_string()} ▲| {file.upload_speed_string()} ▼</code>"
                 if is_file is None :
-                   msgg = f"Conn: {file.connections} <b>|</b> GID: <code>/cancel {gid}</code>"
+                   msg += f"\n<b>○Connections:</b> {file.connections}"
                 else :
-                   msgg = f"P: {file.connections} | S: {file.num_seeders} <b>|</b> GID: <code>/cancel {gid}</code>"
-                msg = f"\n`{downloading_dir_name}`"
-                msg += f"\n<b>Speed</b>: {file.download_speed_string()}"
-                msg += f"\n<b>Status</b>: {file.progress_string()} of {file.total_length_string()} <b>|</b> {file.eta_string()} <b>|</b> {msgg}"
-                #msg += f"\nSize: {file.total_length_string()}"
-
-                #if is_file is None :
-                   #msg += f"\n<b>Conn:</b> {file.connections}, GID: <code>/cancel {gid}</code>"
-                #else :
-                   #msg += f"\n<b>Info:</b>[ P : {file.connections} | S : {file.num_seeders} ], GID: <code>{gid}</code>"
-
-                #msg += f"\nStatus: {file.status}"
-                #msg += f"\nETA: {file.eta_string()}"
-                #msg += f"\nGID: <code>/cancel {gid}</code>"
+                   msg += f"\n<b>○Peers:</b> <code>{file.connections}</code> || <b>○Seeders:</b> <code>{file.num_seeders}</code>"
+ 
+                # msg += f"\n<b>○Status:</b> {file.status}"
+                msg += f"\n<b>○Left:</b> {file.eta_string()}"
+                msg += f"\n<b>○GID:</b> <code>{gid}</code>\n\n<b>©:📭Please Do One By One</b>"
                 inline_keyboard = []
                 ikeyboard = []
-                ikeyboard.append(InlineKeyboardButton("📌Cancel Downloading✂️", callback_data=(f"cancel {gid}").encode("UTF-8")))
+                ikeyboard.append(InlineKeyboardButton("📍Cancel Processing ⛔", callback_data=(f"cancel {gid}").encode("UTF-8")))
                 inline_keyboard.append(ikeyboard)
-                reply_markup = InlineKeyboardMarkup(inline_keyboard)
+                reply_markup = InlineKeyboardMarkup(inline_keyboard
                 #msg += reply_markup
                 LOGGER.info(msg)
                 if msg != previous_message:
