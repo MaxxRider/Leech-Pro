@@ -38,12 +38,12 @@ async def progress_for_pyrogram(
         elapsed_time = TimeFormatter(milliseconds=elapsed_time)
         time_to_completion = TimeFormatter(milliseconds=time_to_completion)
 
-        progress = "[{0}{1}] \n<b>🔹Percentage:</b> <code>〘 {2}% 〙</code>\n".format(
-            ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 5))]),
-            ''.join([UN_FINISHED_PROGRESS_STR for i in range(15 - math.floor(percentage / 5))]),
+        progress = "[{0}{1}] \n<b>➭Percentage:</b> <code>〘 {2}% 〙</code>\n".format(
+            ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 12))]),
+            ''.join([UN_FINISHED_PROGRESS_STR for i in range(12 - math.floor(percentage / 12))]),
             round(percentage, 2))
 
-        tmp = progress + "<b>🔹Complete</b> <code> 〘 {0} 〙</code>\n<b>🔹Total:</b> <code>〘 {1} 〙</code>\n🔹<b>Speed:</b> <code>〘 {2}/s 〙</code>\n🔹<b>Remaining</b>: <code>〘 {3} 〙</code>\n".format(
+        tmp = progress + "<b>➭Done✓:</b> <code> 〘 {0} 〙</code>\n<b>➭Total:</b> <code>〘 {1} 〙</code>\n<b>➭Speed:</b> <code>〘 {2}/s 〙</code>\n<b>➭Remaining</b>: <code>〘 {3} 〙</code>\n".format(
             humanbytes(current),
             humanbytes(total),
             humanbytes(speed),
@@ -76,7 +76,7 @@ def humanbytes(size):
         return ""
     power = 2**10
     n = 0
-    Dic_powerN = {0: ' ', 1: 'K', 2: 'M', 3: 'G', 4: 'Ti'}
+    Dic_powerN = {0: ' ', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
     while size > power:
         size /= power
         n += 1
