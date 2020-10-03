@@ -110,7 +110,7 @@ async def upload_to_tg(
             await i_m_s_g.edit_text(
                 f"Detected File Size: {d_f_s} 😡\n"
                 f"<code>{ba_se_file_name}</code> splitted into {number_of_files} files.\n"
-                "trying to upload to Telegram, now ..."
+                "<b>Try to UploadinG on TG</b>."
             )
             for le_file in totlaa_sleif:
                 # recursion: will this FAIL somewhere?
@@ -179,7 +179,7 @@ async def upload_to_gdrive(file_upload, message, messa_ge, g_id):
             button.append([pyrogram.InlineKeyboardButton(text="⚡INDEX LINK⚡", url=f"{tam_link}")])
         button_markup = pyrogram.InlineKeyboardMarkup(button)
         await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
-        await messa_ge.reply_text(f"🤖: {file_upload} <b>has been Uploaded successfully to your Cloud</b> <a href='tg://user?id={g_id}'>😋</a>\n<b>Total Size😯</b>: {gjay}", reply_markup=button_markup)
+        await messa_ge.reply_text(f"🤖: {file_upload} <b>has been Uploaded successfully to your Cloud</b> <a href='tg://user?id={g_id}'>😋</a>\n<b>➭Total Size😯</b>: {gjay}", reply_markup=button_markup)
         #await message.edit_text(f"""🤖: {file_upload} has been Uploaded successfully to your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FileLink</a>\nℹ️ Direct URL:  <a href="{tam_link}">IndexLink</a>""")
         os.remove(file_upload)
         await del_it.delete()
@@ -222,7 +222,7 @@ async def upload_to_gdrive(file_upload, message, messa_ge, g_id):
             button.append([pyrogram.InlineKeyboardButton(text="⚡ INDEX LINK ⚡", url=f"{tam_link}")])
         button_markup = pyrogram.InlineKeyboardMarkup(button)
         await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
-        await messa_ge.reply_text(f"🤖: <b>Folder has been Uploaded successfully to {tt} in your Cloud</b> <a href='tg://user?id={g_id}'>😋</a>\n<b>Total Size😯</b>: {gjay}", reply_markup=button_markup)
+        await messa_ge.reply_text(f"🤖: <b>Folder has been Uploaded successfully to {tt} in your Cloud</b> <a href='tg://user?id={g_id}'>😋</a>\n<b>➭Total Size😯</b>: {gjay}", reply_markup=button_markup)
         #await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
         #await messa_ge.reply_text(f"""🤖: Folder has been Uploaded successfully to {tt} in your cloud 🤒\n\n☁️ Cloud URL:  <a href="{gau_link}">FolderLink</a>\nℹ️ Index Url:. <a href="{tam_link}">IndexLink</a>""")
         shutil.rmtree(file_upload)
@@ -263,7 +263,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
     	    #reply_to_message_id=message.reply_to_message.message_id,
             progress=progress_for_pyrogram,
             progress_args=(
-                "trying to upload",
+                "<b>Try to UploadinG on TG</b>",
                 message_for_progress_display,
                 start_time
             )
@@ -351,7 +351,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
                         #reply_to_message_id=message.reply_to_message.message_id,
                         progress=progress_for_pyrogram,
                         progress_args=(
-                            "trying to upload",
+                            "<b>Try to UploadinG on TG</b>",
                             message_for_progress_display,
                             start_time
                         )
@@ -449,7 +449,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
                         #reply_to_message_id=message.reply_to_message.message_id,
                         progress=progress_for_pyrogram,
                         progress_args=(
-                            "trying to upload",
+                            "<b>Try to UploadinG on TG</b>",
                             message_for_progress_display,
                             start_time
                         )
