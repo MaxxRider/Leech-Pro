@@ -46,6 +46,4 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
 * [@gotstc](https://telegram.dog/gotstc), @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir) for their TORRENT groups
 
 
- ⚡Visit: [
-█▀▀ █░░ █ █▀▀ █▄▀   █▀▄▀█ █▀▀
-█▄▄ █▄▄ █ █▄▄ █░█   █░▀░█ ██▄](https://telegram.dog/MaxWizard)
+ ⚡Visit: [ⲘᗩⲬ](https://telegram.dog/MaxWizard)
