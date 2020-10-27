@@ -1,5 +1,16 @@
-# Help and Support [Admin](https://telegram.dog/MaxxRider)
-# working example group [Leech Here](https://telegram.dog/joinchat/OV5y_FarWaGaNYUIYr6J9w)
+
+███╗░░░███╗░█████╗░██╗░░██╗██╗░░██╗
+████╗░████║██╔══██╗╚██╗██╔╝╚██╗██╔╝
+██╔████╔██║███████║░╚███╔╝░░╚███╔╝░
+██║╚██╔╝██║██╔══██║░██╔██╗░░██╔██╗░
+██║░╚═╝░██║██║░░██║██╔╝╚██╗██╔╝╚██╗
+╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝
+
+🛡️𝙎𝙐𝙋𝙋𝙊𝙍𝙏 𝙂𝙍𝙊𝙐𝙋:[📮𝗕𝗢𝗧 𝗦𝗨𝗣𝗣𝗢𝗥𝗧 𝗚𝗥𝗢𝗨𝗣📮](https://telegram.dog/MaxxBotChat)
+
+📬𝙇𝙀𝙀𝘾𝙃 𝙂𝙍𝙊𝙐𝙋:[📮𝗠𝗔𝗫𝗫 𝗟𝗘𝗘𝗖𝗛 𝗣𝗥𝗢📮](https://telegram.dog/joinchat/OV5y_FarWaGaNYUIYr6J9w)
+
+🔥𝕄𝔸𝕏𝕏 𝔹𝕆𝕋 ℙℝ𝕆𝕁𝔼ℂ𝕋🔥:[𝗠𝗔𝗫𝗫 𝗕𝗢𝗧𝗦](https://telegram.dog/MaxxBots)
 
 # Telegram Torrent Leecher 🔥🤖
 
@@ -22,7 +33,7 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     ✓
     ===========[MaxxRider]=========
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) 𝐃𝐞𝐩𝐥𝐨𝐲 𝐲𝐨𝐮𝐫 𝐨𝐰𝐧 𝐑𝐢𝐬𝐤😑🤷
 
 
 ## Credits, and Thanks to
@@ -33,4 +44,3 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
 * [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
 * [@AjeeshNair](https://telegram.dog/AjeeshNait) for his [torrent.ajee.sh](https://torrent.ajee.sh)
 * [@gotstc](https://telegram.dog/gotstc), @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir) for their TORRENT groups
-* [![CopyLeft](https://telegra.ph/file/b514ed14d994557a724cb.jpg)](https://telegra.ph/file/fab1017e21c42a5c1e613.mp4 "CopyLeft Credit Video")
