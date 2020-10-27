@@ -4,5 +4,5 @@ hachoir
 Pillow
 pyrogram
 tgcrypto
-git+https://github.com/gautamajay52/youtube-dl
+youtube-dl
 hurry.filesize
