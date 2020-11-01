@@ -450,16 +450,16 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 if is_file is None :
                    msg += f"\n<b>○Connections:</b> {file.connections}"
                 else :
-                   msg += f"\n<b>○Peers:</b> <code>{file.connections}</code> || <b>○Seeders:</b> <code>{file.num_seeders}</code>"
+                   msg += f"\n<b>○Peers:</b> <code>{file.connections}</code> | <b>○ Seeders:</b> <code>{file.num_seeders}</code>"
  
                 # msg += f"\n<b>○Status:</b> {file.status}"
                 msg += f"\n<b>○Left:</b> {file.eta_string()}"
-                msg += f"\n<b>○GID:</b> <code>{gid}</code>\n\n<b>©:📭Please Do One By One</b>"
+                msg += f"\n<b>○GID:</b> <code>{gid}</code>\n\n<b>©:@MAXXBOTS || @MDH_HINDI</b>"
                 inline_keyboard = []
                 ikeyboard = []
                 ikeyboard.append(InlineKeyboardButton("📍Cancel Processing ⛔", callback_data=(f"cancel {gid}").encode("UTF-8")))
                 inline_keyboard.append(ikeyboard)
-                reply_markup = InlineKeyboardMarkup(inline_keyboard
+                reply_markup = InlineKeyboardMarkup(inline_keyboard)
                 #msg += reply_markup
                 LOGGER.info(msg)
                 if msg != previous_message:
