@@ -30,7 +30,7 @@ A Telegram Torrent (and youtube-dl) Leecher based on [Pyrogram](https://github.c
     ✓
     ===========[MaxxRider]=========
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) 𝐃𝐞𝐩𝐥𝐨𝐲 𝐲𝐨𝐮𝐫 𝐨𝐰𝐧 𝐑𝐢𝐬𝐤😑🤷
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MaxxRider/Max-Torrent-Leech-V2) 𝐃𝐞𝐩𝐥𝐨𝐲 𝐲𝐨𝐮𝐫 𝐨𝐰𝐧 𝐑𝐢𝐬𝐤😑🤷
 
 
 ## Credits, and Thanks to
