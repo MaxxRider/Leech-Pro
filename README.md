@@ -1,14 +1,11 @@
+![MAXX LEECH V2](https://telegra.ph/file/af8f0596124714a17e4e2.png)
 
-███╗░░░███╗░█████╗░██╗░░██╗██╗░░██╗
-████╗░████║██╔══██╗╚██╗██╔╝╚██╗██╔╝
-██╔████╔██║███████║░╚███╔╝░░╚███╔╝░
-██║╚██╔╝██║██╔══██║░██╔██╗░░██╔██╗░
-██║░╚═╝░██║██║░░██║██╔╝╚██╗██╔╝╚██╗
-╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝
 
-🛡️𝙎𝙐𝙋𝙋𝙊𝙍𝙏 𝙂𝙍𝙊𝙐𝙋:[📮𝗕𝗢𝗧 𝗦𝗨𝗣𝗣𝗢𝗥𝗧 𝗚𝗥𝗢𝗨𝗣📮](https://telegram.dog/MaxxBotChat)
 
-📬𝙇𝙀𝙀𝘾𝙃 𝙂𝙍𝙊𝙐𝙋:[📮𝗠𝗔𝗫𝗫 𝗟𝗘𝗘𝗖𝗛 𝗣𝗥𝗢📮](https://telegram.dog/joinchat/OV5y_FarWaGaNYUIYr6J9w)
+
+🛡️𝙎𝙐𝙋𝙋𝙊𝙍𝙏 𝙂𝙍𝙊𝙐𝙋:[𝗦𝗨𝗣𝗣𝗢𝗥𝗧 𝗚𝗥𝗢𝗨𝗣](https://telegram.dog/MaxxBotChat)
+
+📬𝙇𝙀𝙀𝘾𝙃 𝙂𝙍𝙊𝙐𝙋:[𝗠𝗔𝗫𝗫 𝗟𝗘𝗘𝗖𝗛 ](https://telegram.dog/joinchat/OV5y_FarWaGaNYUIYr6J9w)
 
 🔥𝕄𝔸𝕏𝕏 𝔹𝕆𝕋 ℙℝ𝕆𝕁𝔼ℂ𝕋🔥:[𝗠𝗔𝗫𝗫 𝗕𝗢𝗧𝗦](https://telegram.dog/MaxxBots)
 
