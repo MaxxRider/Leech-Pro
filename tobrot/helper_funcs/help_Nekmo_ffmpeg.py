@@ -2,28 +2,18 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
 
-# the logging things
-import logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-LOGGER = logging.getLogger(__name__)
-
-
 import asyncio
+import logging
 import os
 import time
+
 from tobrot.helper_funcs.copy_similar_file import copy_file
+from tobrot import LOGGER
 
 
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = os.path.join(
-        output_directory,
-        str(time.time()) + ".jpg"
-    )
+    out_put_file_name = os.path.join(output_directory, str(time.time()) + ".jpg")
     if video_file.upper().endswith(("MKV", "MP4", "WEBM")):
         file_genertor_command = [
             "ffmpeg",
@@ -33,7 +23,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
             video_file,
             "-vframes",
             "1",
-            out_put_file_name
+            out_put_file_name,
         ]
         # width = "90"
         process = await asyncio.create_subprocess_exec(

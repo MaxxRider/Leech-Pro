@@ -2,22 +2,11 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K
 
-# the logging things
 import logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-LOGGER = logging.getLogger(__name__)
 
 import aiohttp
-
 from pyrogram.types import MessageEntity
-
-from tobrot import (
-    TG_OFFENSIVE_API
-)
+from tobrot import TG_OFFENSIVE_API, LOGGER
 
 
 def extract_url_from_entity(entities: MessageEntity, text: str):
@@ -28,9 +17,8 @@ def extract_url_from_entity(entities: MessageEntity, text: str):
         elif entity.type == "url":
             o = entity.offset
             l = entity.length
-            url = text[o:o + l]
+            url = text[o : o + l]
     return url
-
 
 
 async def extract_link(message, type_o_request):
@@ -90,7 +78,6 @@ async def extract_link(message, type_o_request):
     elif message.entities is not None:
         url = message.text
 
-
     # trim blank spaces from the URL
     # might have some issues with #45
     if url is not None:
@@ -103,7 +90,6 @@ async def extract_link(message, type_o_request):
     if youtube_dl_password is not None:
         youtube_dl_password = youtube_dl_password.strip()
 
-
     # additional conditional check,
     # here to FILTER out BAD URLs
     LOGGER.info(TG_OFFENSIVE_API)
@@ -111,9 +97,7 @@ async def extract_link(message, type_o_request):
         try:
             async with aiohttp.ClientSession() as session:
                 api_url = TG_OFFENSIVE_API.format(
-                    i=url,
-                    m=custom_file_name,
-                    t=type_o_request
+                    i=url, m=custom_file_name, t=type_o_request
                 )
                 LOGGER.info(api_url)
                 async with session.get(api_url) as resp:

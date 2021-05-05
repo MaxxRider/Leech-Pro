@@ -1,36 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
-
-# the logging things
-import logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-LOGGER = logging.getLogger(__name__)
-
+# (c) Shrimadhav U K | MaxxRider
 
 import asyncio
-from tobrot.helper_funcs.display_progress import humanbytes
 import json
+import logging
 import os
+
 import pyrogram.types as pyrogram
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
-from tobrot import (
-    DEF_THUMB_NAIL_VID_S
-)
+from tobrot import DEF_THUMB_NAIL_VID_S, LOGGER
+from tobrot.helper_funcs.display_progress import humanbytes
 
 
-async def extract_youtube_dl_formats(url, cf_name, yt_dl_user_name, yt_dl_pass_word, user_working_dir):
+async def extract_youtube_dl_formats(
+    url, cf_name, yt_dl_user_name, yt_dl_pass_word, user_working_dir
+):
     command_to_exec = [
         "youtube-dl",
         "--no-warnings",
         "--youtube-skip-dash-manifest",
+        "--no-check-certificate",
         "-j",
-        url
+        url,
     ]
     if "hotstar" in url:
         command_to_exec.append("--geo-bypass-country")
@@ -55,12 +46,13 @@ async def extract_youtube_dl_formats(url, cf_name, yt_dl_user_name, yt_dl_pass_w
     e_response = stderr.decode().strip()
     LOGGER.info(e_response)
     t_response = stdout.decode().strip()
-    LOGGER.info(t_response)
+    # LOGGER.info(t_response)
     # https://github.com/rg3/youtube-dl/issues/2630#issuecomment-38635239
     if e_response:
         # logger.warn("Status : FAIL", exc.returncode, exc.output)
         error_message = e_response.replace(
-            "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.", ""
+            "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.",
+            "",
         )
         return None, error_message, None
     if t_response:
@@ -73,8 +65,7 @@ async def extract_youtube_dl_formats(url, cf_name, yt_dl_user_name, yt_dl_pass_w
         else:
             response_json.append(json.loads(x_reponse))
         # response_json = json.loads(x_reponse)
-        save_ytdl_json_path = user_working_dir + \
-            "/" + str("ytdleech") + ".json"
+        save_ytdl_json_path = user_working_dir + "/" + str("ytdleech") + ".json"
         with open(save_ytdl_json_path, "w", encoding="utf8") as outfile:
             json.dump(response_json, outfile, ensure_ascii=False)
         # logger.info(response_json)
@@ -82,6 +73,7 @@ async def extract_youtube_dl_formats(url, cf_name, yt_dl_user_name, yt_dl_pass_w
         #
         thumb_image = DEF_THUMB_NAIL_VID_S
         #
+        # LOGGER.info(response_json)
         for current_r_json in response_json:
             #
             thumb_image = current_r_json.get("thumbnail", thumb_image)
@@ -99,34 +91,42 @@ async def extract_youtube_dl_formats(url, cf_name, yt_dl_user_name, yt_dl_pass_w
                     approx_file_size = ""
                     if "filesize" in formats:
                         approx_file_size = humanbytes(formats["filesize"])
-                    dipslay_str_uon = " " + format_string + " (" + format_ext.upper() + ") " + approx_file_size + " "
-                    cb_string_video = "{}|{}|{}".format(
-                        "video", format_id, format_ext)
+                    dipslay_str_uon = (
+                        " "
+                        + format_string
+                        + " ("
+                        + format_ext.upper()
+                        + ") "
+                        + approx_file_size
+                        + " "
+                    )
+                    cb_string_video = "{}|{}|{}".format("video", format_id, format_ext)
                     ikeyboard = []
                     if "drive.google.com" in url:
                         if format_id == "source":
                             ikeyboard = [
                                 pyrogram.InlineKeyboardButton(
                                     dipslay_str_uon,
-                                    callback_data=(cb_string_video).encode("UTF-8")
+                                    callback_data=(cb_string_video).encode("UTF-8"),
                                 )
                             ]
                     else:
-                        if format_string is not None and not "audio only" in format_string:
+                        if (
+                            format_string is not None
+                            and not "audio only" in format_string
+                        ):
                             ikeyboard = [
                                 pyrogram.InlineKeyboardButton(
                                     dipslay_str_uon,
-                                    callback_data=(cb_string_video).encode("UTF-8")
+                                    callback_data=(cb_string_video).encode("UTF-8"),
                                 )
                             ]
                         else:
                             # special weird case :\
                             ikeyboard = [
                                 pyrogram.InlineKeyboardButton(
-                                    "SVideo [" +
-                                    "] ( " +
-                                    approx_file_size + " )",
-                                    callback_data=(cb_string_video).encode("UTF-8")
+                                    "SVideo [" + "] ( " + approx_file_size + " )",
+                                    callback_data=(cb_string_video).encode("UTF-8"),
                                 )
                             ]
                     inline_keyboard.append(ikeyboard)
@@ -134,27 +134,37 @@ async def extract_youtube_dl_formats(url, cf_name, yt_dl_user_name, yt_dl_pass_w
                     cb_string_64 = "{}|{}|{}".format("audio", "64k", "mp3")
                     cb_string_128 = "{}|{}|{}".format("audio", "128k", "mp3")
                     cb_string = "{}|{}|{}".format("audio", "320k", "mp3")
-                    inline_keyboard.append([
-                        pyrogram.InlineKeyboardButton(
-                            "MP3 " + "(" + "64 kbps" + ")", callback_data=cb_string_64.encode("UTF-8")),
-                        pyrogram.InlineKeyboardButton(
-                            "MP3 " + "(" + "128 kbps" + ")", callback_data=cb_string_128.encode("UTF-8"))
-                    ])
-                    inline_keyboard.append([
-                        pyrogram.InlineKeyboardButton(
-                            "MP3 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
-                    ])
+                    inline_keyboard.append(
+                        [
+                            pyrogram.InlineKeyboardButton(
+                                "MP3 " + "(" + "64 kbps" + ")",
+                                callback_data=cb_string_64.encode("UTF-8"),
+                            ),
+                            pyrogram.InlineKeyboardButton(
+                                "MP3 " + "(" + "128 kbps" + ")",
+                                callback_data=cb_string_128.encode("UTF-8"),
+                            ),
+                        ]
+                    )
+                    inline_keyboard.append(
+                        [
+                            pyrogram.InlineKeyboardButton(
+                                "MP3 " + "(" + "320 kbps" + ")",
+                                callback_data=cb_string.encode("UTF-8"),
+                            )
+                        ]
+                    )
             else:
                 format_id = current_r_json["format_id"]
                 format_ext = current_r_json["ext"]
-                cb_string_video = "{}|{}|{}".format(
-                    "video", format_id, format_ext)
-                inline_keyboard.append([
-                    pyrogram.InlineKeyboardButton(
-                        "SVideo",
-                        callback_data=(cb_string_video).encode("UTF-8")
-                    )
-                ])
+                cb_string_video = "{}|{}|{}".format("video", format_id, format_ext)
+                inline_keyboard.append(
+                    [
+                        pyrogram.InlineKeyboardButton(
+                            "SVideo", callback_data=(cb_string_video).encode("UTF-8")
+                        )
+                    ]
+                )
             break
         reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
         # LOGGER.info(reply_markup)
