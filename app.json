@@ -1,12 +1,13 @@
 {
   "name": "Telegram Torrent Leecher",
-  "description": "A Telegram Torrent (and youtube-dl) Leecher based on Pyrogram. Powered by @maxxBotChat!",
+  "description": "A Telegram Torrent (and youtube-dl) Leecher based on Pyrogram. Powered by @MaxxBots",
+  "logo": "https://telegra.ph/file/101a7d52e02772152c6e3.jpg",
   "keywords": [
     "telegram"
   ],
-  "repository": "https://github.com/MaxxRider/Max-Torrent-Leech-V2",
-  "success_url": "https://t.me/MaxxLeechPro",
-  "website": "https://github.com/MaxxRider/Max-Torrent-Leech-V2",
+  "repository": "https://github.com/MaxxRider/Leech-Pro",
+  "success_url": "https://t.me/MaxxBotChat",
+  "website": "https://github.com/MaxxRider/Leech-Pro",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode",
@@ -25,7 +26,7 @@
       "value": ""
     },
     "AUTH_CHANNEL": {
-      "description": "should be an integer. The BOT API ID of the Telegram Group, where the Leecher should work.",
+      "description": "should be an integer. The BOT API ID of the Telegram Group, where the Leecher should work., Put Group ID",
       "value": ""
     },
     "OWNER_ID": {
@@ -68,7 +69,15 @@
       "required": false
     },
     "LEECH_COMMAND": {
-      "description": "Enter your custom leech command like /leech@urgroupname and so on. Default is /leech",
+      "description": "Enter your custom leech command like /leech@botname and so on. Default is /leech",
+      "required": false
+    },
+    "SAVE_THUMBNAIL": {
+      "description": "For custom thumbnail Command. default is /savethumbnail",
+      "required": false
+    },
+    "CLEAR_THUMBNAIL": {
+      "description": "For Delete Thumbnail Command. Default is /clearthumbnail",
       "required": false
     },
     "INDEX_LINK": {
