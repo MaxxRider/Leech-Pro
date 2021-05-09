@@ -41,6 +41,7 @@ from tobrot import (
     GPYTDL_COMMAND,
     TOGGLE_VID,
     TOGGLE_DOC,
+    RENAME_COMMAND,
 )
 from tobrot.helper_funcs.download import down_load_media_f
 from tobrot.plugins.call_back_button_handler import button
@@ -244,5 +245,11 @@ if __name__ == "__main__":
         filters=filters.command([f"{TOGGLE_VID}"]) & filters.chat(chats=AUTH_CHANNEL), 
     )
     app.add_handler(upload_as_video_handler)
+    #
+    rename_tg_file_handler = MessageHandler(
+        rename_tg_file,
+        filters=filters.command([f"{RENAME_COMMAND}"]) & filters.chat(chats=AUTH_CHANNEL), 
+    )
+    app.add_handler(rename_tg_file_handler)
     #
     app.run()
