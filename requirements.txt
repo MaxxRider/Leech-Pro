@@ -12,3 +12,4 @@ bs4
 lxml
 requests
 messages
+js2py
