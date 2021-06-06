@@ -101,6 +101,7 @@ async def button(bot, update: CallbackQuery):
                 "_config.yml",
                 "COPYING",
                 "Dockerfile",
+                "extract",
                 "Procfile",
                 ".heroku",
                 ".profile.d",
