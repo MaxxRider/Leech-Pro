@@ -3,16 +3,14 @@
 # -*- coding: utf-8 -*-
 # (c) xiaoqi-beta | gautamajay52
 
-import configparser  # buildin package
 import logging
 import os
 import re
+from configparser import ConfigParser
 
 import pyrogram.types as pyrogram
 from pyrogram.types import CallbackQuery
 from tobrot import LOGGER, OWNER_ID
-
-config = configparser.ConfigParser()
 
 
 async def rclone_command_f(client, message):
@@ -21,6 +19,7 @@ async def rclone_command_f(client, message):
         f"rclone command from chatid:{message.chat.id}, userid:{message.from_user.id}"
     )
     if message.from_user.id == OWNER_ID and message.chat.type == "private":
+        config = ConfigParser()
         config.read("rclone_bak.conf")
         sections = list(config.sections())
         inline_keyboard = []
@@ -31,6 +30,7 @@ async def rclone_command_f(client, message):
                 )
             ]
             inline_keyboard.append(ikeyboard)
+        config = ConfigParser()
         config.read("rclone.conf")
         section = config.sections()[0]
         msg_text = f"""Default section of rclone config is: **{section}**\n\n
@@ -54,6 +54,7 @@ please choose which section you want to use:"""
 async def rclone_button_callback(bot, update: CallbackQuery):
     """rclone button callback"""
     if update.data == "rcloneCancel":
+        config = ConfigParser()
         config.read("rclone.conf")
         section = config.sections()[0]
         await update.message.edit_text(
@@ -65,8 +66,9 @@ async def rclone_button_callback(bot, update: CallbackQuery):
     else:
         section = update.data.split("_", maxsplit=1)[1]
         with open("rclone.conf", "w", newline="\n", encoding="utf-8") as f:
+            config = ConfigParser()
             config.read("rclone_bak.conf")
-            temp = configparser.ConfigParser()
+            temp = ConfigParser()
             temp[section] = config[section]
             temp.write(f)
         await update.message.edit_text(
