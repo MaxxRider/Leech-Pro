@@ -121,6 +121,8 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://telegra.ph/-05-17-1922)
 
+<p><a href="https://heroku.com/deploy"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
+
 
 [![MaxxRider](https://telegra.ph/file/aac59f2f35ee73b63019e.png)](https://telegram.dog/MaxxRiderz)
 
