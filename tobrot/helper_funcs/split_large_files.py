@@ -21,7 +21,7 @@ async def split_large_files(input_file):
     # if input_file.upper().endswith(("MKV", "MP4", "WEBM", "MP3", "M4A", "FLAC", "WAV")):
     """The below logic is DERPed, so removing temporarily
     """
-    if input_file.upper().endswith(("MKV", "MP4", "WEBM")):
+    if input_file.upper().endswith(("MKV", "MP4", "WEBM", "AVI", "MOV", "OGG", "WMV", "M4V", "TS", "MPG", "MTS", "M2TS", "3GP")):
         # handle video / audio files here
         metadata = extractMetadata(createParser(input_file))
         total_duration = 0

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K | gautamajay52
- 
+
 import asyncio
 import logging
 import os
@@ -11,7 +11,7 @@ import subprocess
 import time
 from functools import partial
 from pathlib import Path
- 
+
 import pyrogram.types as pyrogram
 import requests
 from hachoir.metadata import extractMetadata
@@ -32,12 +32,13 @@ from tobrot import (
     TG_MAX_FILE_SIZE,
     UPLOAD_AS_DOC,
     gDict,
+    user_specific_config,
 )
 from tobrot.helper_funcs.copy_similar_file import copy_file
 from tobrot.helper_funcs.display_progress import humanbytes, Progress
 from tobrot.helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 from tobrot.helper_funcs.split_large_files import split_large_files
- 
+
 # stackoverflow🤐
 def getFolderSize(p):
     prepend = partial(os.path.join, p)
@@ -47,8 +48,8 @@ def getFolderSize(p):
             for f in map(prepend, os.listdir(p))
         ]
     )
- 
- 
+
+
 async def upload_to_tg(
     message,
     local_file_name,
@@ -71,7 +72,7 @@ async def upload_to_tg(
         new_m_esg = message
         if not message.photo:
             new_m_esg = await message.reply_text(
-                f"Found {len(directory_contents)} files <a href='tg://user?id={from_user}'>🤒</a>",
+                f"<b>Found</b> <code>{len(directory_contents)}</code> <b>Files <a href='tg://user?id={from_user}'>📡</a></b>",
                 quote=True
                 # reply_to_message_id=message.message_id
             )
@@ -104,7 +105,7 @@ async def upload_to_tg(
             await i_m_s_g.edit_text(
                 f"Detected File Size: {d_f_s} 😡\n"
                 f"<code>{ba_se_file_name}</code> splitted into {number_of_files} files.\n"
-                "trying to upload to Telegram, now ..."
+                "Trying to upload to Telegram, now ..."
             )
             for le_file in totlaa_sleif:
                 # recursion: will this FAIL somewhere?
@@ -136,11 +137,11 @@ async def upload_to_tg(
                 return
     # await message.delete()
     return dict_contatining_uploaded_files
- 
- 
+
+
 # © gautamajay52 thanks to Rclone team for this wonderful tool.🧘
- 
- 
+
+
 async def upload_to_gdrive(file_upload, message, messa_ge, g_id):
     await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
     del_it = await message.edit_text(
@@ -177,7 +178,7 @@ async def upload_to_gdrive(file_upload, message, messa_ge, g_id):
         LOGGER.info(gk_file)
         with open("filter.txt", "w+", encoding="utf-8") as filter:
             print(f"+ {gk_file}\n- *", file=filter)
- 
+
         t_a_m = [
             "rclone",
             "lsf",
@@ -244,7 +245,7 @@ async def upload_to_gdrive(file_upload, message, messa_ge, g_id):
         LOGGER.info(g_file)
         with open("filter1.txt", "w+", encoding="utf-8") as filter1:
             print(f"+ {g_file}/\n- *", file=filter1)
- 
+
         g_a_u = [
             "rclone",
             "lsf",
@@ -290,11 +291,11 @@ async def upload_to_gdrive(file_upload, message, messa_ge, g_id):
         )
         shutil.rmtree(file_upload)
         await del_it.delete()
- 
- 
-#
- 
- 
+
+
+
+
+
 async def upload_single_file(
     message, local_file_name, caption_str, from_user, client, edit_media, yt_thumb
 ):
@@ -307,7 +308,14 @@ async def upload_single_file(
         DOWNLOAD_LOCATION, "thumbnails", str(from_user) + ".jpg"
     )
     # LOGGER.info(thumbnail_location)
-    if UPLOAD_AS_DOC.upper() == "TRUE":  # todo
+    dyna_user_config_upload_as_doc = False
+    for key in iter(user_specific_config):
+        if key == from_user:
+            dyna_user_config_upload_as_doc=user_specific_config[key].upload_as_doc
+            LOGGER.info(f'Found dyanamic config for user {from_user}')
+    #
+    if UPLOAD_AS_DOC.upper() == "TRUE" or dyna_user_config_upload_as_doc: 
+    # todo
         thumb = None
         thumb_image_path = None
         if os.path.exists(thumbnail_location):
@@ -318,7 +326,7 @@ async def upload_single_file(
         message_for_progress_display = message
         if not edit_media:
             message_for_progress_display = await message.reply_text(
-                "<b>Trying to upload</b>\n\n📙<b> File Name</b>: <code>{}</code>".format(os.path.basename(local_file_name))
+                "**Status :** `Starting Uploading 📤`\n\n**• FileName :** `{}`".format(os.path.basename(local_file_name))
             )
             prog = Progress(from_user, client, message_for_progress_display)
         sent_message = await message.reply_document(
@@ -329,7 +337,7 @@ async def upload_single_file(
             disable_notification=True,
             progress=prog.progress_for_pyrogram,
             progress_args=(
-                "",
+                f"**• Uploading :** `{os.path.basename(local_file_name)}`",
                 start_time,
             ),
         )
@@ -348,10 +356,10 @@ async def upload_single_file(
             message_for_progress_display = message
             if not edit_media:
                 message_for_progress_display = await message.reply_text(
-                    "<b>Trying to upload</b>\n\n📙<b> File Name</b>: <code>{}</code>".format(os.path.basename(local_file_name))
+                    "**Status :** `Starting Uploading 📤`\n\n**• FileName :** `{}`".format(os.path.basename(local_file_name))
                 )
                 prog = Progress(from_user, client, message_for_progress_display)
-            if local_file_name.upper().endswith(("MKV", "MP4", "WEBM", "M4V", "3GP")):
+            if local_file_name.upper().endswith(("MKV", "MP4", "WEBM", "FLV", "3GP", "AVI", "MOV", "OGG", "WMV", "M4V", "TS", "MPG", "MTS", "M2TS")):
                 duration = 0
                 try:
                     metadata = extractMetadata(createParser(local_file_name))
@@ -369,6 +377,7 @@ async def upload_single_file(
                     )
                 else:
                     if not yt_thumb:
+                        LOGGER.info("Taking Screenshot..")
                         thumb_image_path = await take_screen_shot(
                             local_file_name,
                             os.path.dirname(os.path.abspath(local_file_name)),
@@ -434,7 +443,7 @@ async def upload_single_file(
                         disable_notification=True,
                         progress=prog.progress_for_pyrogram,
                         progress_args=(
-                            "",
+                            f"**• Uploading :** `{os.path.basename(local_file_name)}`",
                             start_time,
                         ),
                     )
@@ -486,7 +495,7 @@ async def upload_single_file(
                         disable_notification=True,
                         progress=prog.progress_for_pyrogram,
                         progress_args=(
-                            "",
+                            f"**• Uploading :** `{os.path.basename(local_file_name)}`",
                             start_time,
                         ),
                     )
@@ -524,13 +533,13 @@ async def upload_single_file(
                         disable_notification=True,
                         progress=prog.progress_for_pyrogram,
                         progress_args=(
-                            "",
+                            f"**• Uploading :** `{os.path.basename(local_file_name)}`",
                             start_time,
                         ),
                     )
                 if thumb is not None:
                     os.remove(thumb)
- 
+
         except MessageNotModified as oY:
             LOGGER.info(oY)
         except FloodWait as g:

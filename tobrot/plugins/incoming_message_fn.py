@@ -52,29 +52,37 @@ async def incoming_purge_message_f(client, message):
 async def incoming_message_f(client, message):
     """/leech command or /gleech command"""
     user_command = message.command[0]
-    #g_id = message.from_user.id
-   # u_men = message.from_user.mention
-    #credit = await message.reply_text(
-        #f"<b>⚙ Leeching For :</b> {u_men}", parse_mode="html"
-    #)
-    i_m_sefg = await message.reply_text("`Processing...`", quote=True)
+    g_id = message.from_user.id
     # get link from the incoming message
-    if message.reply_to_message:
-        dl_url, cf_name, _, _ = await extract_link(message.reply_to_message, "LEECH")
-        LOGGER.info(dl_url)
-        LOGGER.info(cf_name)
+    i_m_sefg = await message.reply_text("Processing...", quote=True)
+    rep_mess = message.reply_to_message
+    is_file = False
+    dl_url = ''
+    cf_name = ''
+    if rep_mess:
+        file_name = ''
+        if rep_mess.media:
+            file = [rep_mess.document, rep_mess.video, rep_mess.audio]
+            file_name = [fi for fi in file if fi is not None][0].file_name
+        if not rep_mess.media or str(file_name).lower().endswith(".torrent"):
+            dl_url, cf_name, _, _ = await extract_link(message.reply_to_message, "LEECH")
+            LOGGER.info(dl_url)
+            LOGGER.info(cf_name)
+        else:
+            if user_command == LEECH_COMMAND.lower():
+                await i_m_sefg.edit("No download source provided 🙄")
+                return
+            is_file = True
+            dl_url = rep_mess
     elif len(message.command) == 2:
         dl_url = message.command[1]
         LOGGER.info(dl_url)
-        cf_name = None
+
     else:
         await i_m_sefg.edit("<b>Hey Dude !</b>\n\n 🐈 <code>Reply with Direct /Torrent Link</code>")
         return
     if dl_url is not None:
-        await i_m_sefg.edit_text("<b>Extracting Link..🤐</b>")
-        # start the aria2c daemon
-        aria_i_p = await aria_start()
-        # LOGGER.info(aria_i_p)
+
         current_user_id = message.from_user.id
         # create an unique directory
         new_download_location = os.path.join(
@@ -83,7 +91,14 @@ async def incoming_message_f(client, message):
         # create download directory, if not exist
         if not os.path.isdir(new_download_location):
             os.makedirs(new_download_location)
-        await i_m_sefg.edit_text("<b>Trying To Download....📥</b>")
+        aria_i_p = ''
+        if not is_file:
+            await i_m_sefg.edit_text("Extracting links...")
+            # start the aria2c daemon
+            aria_i_p = await aria_start()
+            # LOGGER.info(aria_i_p)
+
+        await i_m_sefg.edit_text("Added to downloads. Send /status")
         # try to download the "link"
         is_zip = False
         is_cloud = False
@@ -111,6 +126,7 @@ async def incoming_message_f(client, message):
             cf_name,
             is_cloud,
             is_unzip,
+            is_file,
             message,
             client,
         )
@@ -119,19 +135,14 @@ async def incoming_message_f(client, message):
             await i_m_sefg.edit_text(err_message)
     else:
         await i_m_sefg.edit_text(
-            "**FCUK**! wat have you entered. \n"
-            f"<b>API Error</b>: {cf_name}"
+            f"**FCUK**! wat have you entered. \n<b>API Error</b>: {cf_name}"
         )
 
 
 async def incoming_youtube_dl_f(client, message):
     """ /ytdl command """
     current_user_id = message.from_user.id
-    #u_men = message.from_user.mention
-    #credit = await message.reply_text(
-        #f"<b>⚙ Leeching For :</b> {u_men}",
-        #parse_mode="html",
-    #)
+
     i_m_sefg = await message.reply_text("<code>Prrocessing...🔃</code>", quote=True)
     # LOGGER.info(message)
     # extract link from message
@@ -149,10 +160,10 @@ async def incoming_youtube_dl_f(client, message):
         yt_dl_pass_word = None
         cf_name = None
     else:
-        await i_m_sefg.edit("🐈 𝐎𝐩𝐩𝐬 𝐑𝐞𝐩𝐥𝐲 𝐰𝐢𝐭𝐡 𝐘𝐨𝐮𝐓𝐮𝐛𝐞 𝐕𝐢𝐝𝐞𝐨𝐬 𝐋𝐢𝐧𝐤.")
+        await i_m_sefg.edit("<b>🐈 Oops Reply To YTDL Supported Link.</b>")
         return
     if dl_url is not None:
-        await i_m_sefg.edit_text("𝑬𝒙𝒕𝒓𝒂𝒄𝒕𝒊𝒏𝒈 𝑳𝒊𝒏𝒌𝒔..")
+        await i_m_sefg.edit_text("Extracting Links...")
         # create an unique directory
         user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
         # create download directory, if not exist
@@ -179,7 +190,7 @@ async def incoming_youtube_dl_f(client, message):
             await i_m_sefg.edit_text(text=text_message, reply_markup=reply_markup)
     else:
         await i_m_sefg.edit_text(
-            "**FCUK**! wat have you entered \n"
+            "**FCUK**! wat have you entered.\n"
             f"<b>API Error</b>: {cf_name}"
         )
 
@@ -200,7 +211,7 @@ async def g_yt_playlist(client, message):
         if user_command == GPYTDL_COMMAND.lower():
             is_cloud = True
     else:
-        await message.reply_text("<b> Reply with Playlist link</b>", quote=True)
+        await message.reply_text("<b> Reply with Youtube Playlist link</b>", quote=True)
         return
     if "youtube.com/playlist" in url:
         u_men = message.from_user.mention
@@ -214,6 +225,8 @@ async def g_yt_playlist(client, message):
         await message.reply_text("<b>YouTube playlist link only 🙄</b>", quote=True)
 
  #
+
+
 async def g_clonee(client, message):
     """ /gclone command """
     g_id = message.from_user.id
@@ -231,6 +244,7 @@ async def g_clonee(client, message):
             "You should reply to a message, which format should be [ID of Gdrive file/folder Name of the file/folder]\nOr read Github for detailled information"
         )
 
+
 async def rename_tg_file(client, message):
     usr_id = message.from_user.id
     if not message.reply_to_message:
@@ -238,7 +252,8 @@ async def rename_tg_file(client, message):
         return
     if len(message.command) > 1:
         new_name = (
-            str(Path().resolve()) + "/" + message.text.split(" ", maxsplit=1)[1].strip()
+            str(Path().resolve()) + "/" +
+            message.text.split(" ", maxsplit=1)[1].strip()
         )
         file, mess_age = await download_tg(client, message)
         try:

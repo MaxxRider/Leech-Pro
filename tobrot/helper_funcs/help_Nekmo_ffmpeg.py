@@ -14,7 +14,7 @@ from tobrot import LOGGER
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
     out_put_file_name = os.path.join(output_directory, str(time.time()) + ".jpg")
-    if video_file.upper().endswith(("MKV", "MP4", "WEBM", "M4V", "3GP")):
+    if video_file.upper().endswith(("MKV", "MP4", "WEBM", "AVI", "MOV", "OGG", "WMV", "M4V", "TS", "MPG", "MTS", "M2TS", "3GP")):
         file_genertor_command = [
             "ffmpeg",
             "-ss",

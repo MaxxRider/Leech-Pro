@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (c) gautamajay52 | Shrimadhav U K
- 
+
 import asyncio
 import logging
 import math
@@ -11,48 +11,20 @@ import subprocess
 import time
 from datetime import datetime
 from pathlib import Path
- 
+
 from pyrogram import Client, filters
 from tobrot import DOWNLOAD_LOCATION, LOGGER, TELEGRAM_LEECH_UNZIP_COMMAND
 from tobrot.helper_funcs.create_compressed_archive import unzip_me, get_base_name
 from tobrot.helper_funcs.display_progress import Progress
 from tobrot.helper_funcs.upload_to_tg import upload_to_gdrive
- 
- 
-async def down_load_media_f(client, message):
+
+
+async def down_load_media_f(client, message):  # to be removed
     user_command = message.command[0]
     user_id = message.from_user.id
-    LOGGER.info(user_id)
-    mess_age = await message.reply_text("**Renaming**...🐈", quote=True)
-    if not os.path.isdir(DOWNLOAD_LOCATION):
-        os.makedirs(DOWNLOAD_LOCATION)
+
     if message.reply_to_message is not None:
-        start_t = datetime.now()
-        download_location = str(Path().resolve()) + "/"
-        c_time = time.time()
-        prog = Progress(user_id, client, mess_age)
-        try:
-            the_real_download_location = await client.download_media(
-                message=message.reply_to_message,
-                file_name=download_location,
-                progress=prog.progress_for_pyrogram,
-                progress_args=("trying to download", c_time),
-            )
-        except Exception as g_e:
-            await mess_age.edit(str(g_e))
-            LOGGER.error(g_e)
-            return
-        end_t = datetime.now()
-        ms = (end_t - start_t).seconds
-        LOGGER.info(the_real_download_location)
-        await asyncio.sleep(10)
-        if the_real_download_location:
-            await mess_age.edit_text(
-                f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds"
-            )
-        else:
-            await mess_age.edit_text("😔 Download Cancelled or some error happened")
-            return
+        the_real_download_location, mess_age = await download_tg(client, message)
         the_real_download_location_g = the_real_download_location
         if user_command == TELEGRAM_LEECH_UNZIP_COMMAND.lower():
             try:
@@ -70,15 +42,18 @@ async def down_load_media_f(client, message):
         await mess_age.edit_text(
             "Reply to a Telegram Media, to upload to the Cloud Drive."
         )
- 
- 
+
+
 async def download_tg(client, message):
     user_id = message.from_user.id
     LOGGER.info(user_id)
     mess_age = await message.reply_text("**DownloadinG...**", quote=True)
     if not os.path.isdir(DOWNLOAD_LOCATION):
         os.makedirs(DOWNLOAD_LOCATION)
-    if message.reply_to_message is not None:
+    rep_mess = message.reply_to_message
+    if rep_mess is not None:
+        file = [rep_mess.document, rep_mess.video, rep_mess.audio]
+        file_name = [fi for fi in file if fi is not None][0].file_name
         start_t = datetime.now()
         download_location = str(Path("./").resolve()) + "/"
         c_time = time.time()
@@ -88,7 +63,7 @@ async def download_tg(client, message):
                 message=message.reply_to_message,
                 file_name=download_location,
                 progress=prog.progress_for_pyrogram,
-                progress_args=("trying to download", c_time),
+                progress_args=(f"**• Downloading :** `{file_name}`", c_time)
             )
         except Exception as g_e:
             await mess_age.edit(str(g_e))
@@ -97,12 +72,12 @@ async def download_tg(client, message):
         end_t = datetime.now()
         ms = (end_t - start_t).seconds
         LOGGER.info(the_real_download_location)
-        await asyncio.sleep(5)
+        await asyncio.sleep(2)
         if the_real_download_location:
             await mess_age.edit_text(
                 f"Downloaded to <code>{the_real_download_location}</code> in <u>{ms}</u> seconds"
             )
         else:
             await mess_age.edit_text("😔 Download Cancelled or some error happened")
-            return
+            return None, mess_age
     return the_real_download_location, mess_age

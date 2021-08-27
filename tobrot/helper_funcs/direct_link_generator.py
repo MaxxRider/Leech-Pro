@@ -28,14 +28,14 @@ def direct_link_generator(text_url: str):
         return zippy_share(text_url)
     elif 'yadi.sk' in text_url:
         return yandex_disk(text_url)
-    # elif 'cloud.mail.ru' in text_url:
-        # return cm_ru(text_url)
+    elif 'cloud.mail.ru' in text_url:
+        return cm_ru(text_url)
     elif 'mediafire.com' in text_url:
         return mediafire(text_url)
     elif 'osdn.net' in text_url:
         return osdn(text_url)
-    # elif 'github.com' in text_url:
-        # return github(text_url)
+    elif 'github.com' in text_url:
+        return github(text_url)
     elif 'racaty.net' in text_url:
         return racaty(text_url)
     else:
@@ -82,7 +82,7 @@ def yandex_disk(url: str) -> str:
     except KeyError:
         raise DirectDownloadLinkException("`Error: File not found / Download limit reached`\n")
 
-'''
+
 def cm_ru(url: str) -> str:
     """ cloud.mail.ru direct links generator
     Using https://github.com/JrMasterModelBuilder/cmrudl.py"""
@@ -100,7 +100,7 @@ def cm_ru(url: str) -> str:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
     dl_url = data['download']
     return dl_url
-'''
+
 
 def mediafire(url: str) -> str:
     """ MediaFire direct links generator """
@@ -132,7 +132,7 @@ def osdn(url: str) -> str:
         urls.append(re.sub(r'm=(.*)&f', f'm={mirror}&f', text_url))
     return urls[0]
 
-'''
+
 def github(url: str) -> str:
     """ GitHub direct links generator """
     try:
@@ -145,7 +145,7 @@ def github(url: str) -> str:
         return dl_url
     except KeyError:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
-'''
+
 
 def useragent():
     """

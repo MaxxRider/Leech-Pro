@@ -13,7 +13,6 @@ from tobrot.helper_funcs.download_aria_p_n import aria_start
 from tobrot.helper_funcs.youtube_dl_button import youtube_dl_call_back
 from tobrot.plugins.choose_rclone_config import rclone_button_callback
 from tobrot.plugins.status_message_fn import cancel_message_f
-from tobrot.helper_funcs.display_progress import Progress
 
 
 async def button(bot, update: CallbackQuery):
@@ -27,13 +26,13 @@ async def button(bot, update: CallbackQuery):
         chat_id, mes_id, from_usr = cmf[1], cmf[2], cmf[3]
         if (int(update.from_user.id) == int(from_usr)) or g:
             await bot.answer_callback_query(
-                update.id, text="trying to cancel...", show_alert=False
+                update.id, text="Trying to cancel...", show_alert=False
             )
             gDict[int(chat_id)].append(int(mes_id))
         else:
             await bot.answer_callback_query(
                 callback_query_id=update.id,
-                text="who are you? 🤪🤔🤔🤔",
+                text="This Is Not Your Leech. So, dont touch on this...😡😡",
                 show_alert=True,
                 cache_time=0,
             )
@@ -50,6 +49,7 @@ async def button(bot, update: CallbackQuery):
         )
         await rclone_button_callback(bot, update)
         return
+    # todo - remove this code if not needed in future
     if cb_data.startswith("cancel"):
         if (update.from_user.id == update.message.reply_to_message.from_user.id) or g:
             await bot.answer_callback_query(
@@ -129,7 +129,7 @@ async def button(bot, update: CallbackQuery):
                         os.remove(f)
                     else:
                         shutil.rmtree(f)
-                await update.message.edit_text(f"Deleted {len(g_del_list)} objects 😬")
+                await update.message.edit_text(f"Deleted {len(g_del_list)} objects 🚮")
             else:
                 await update.message.edit_text("Nothing to clear 🙄")
         else:
