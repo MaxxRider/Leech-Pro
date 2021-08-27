@@ -7,7 +7,9 @@ tgcrypto
 youtube_dl
 hurry.filesize
 python-dotenv
-beautifulsoup4>=4.8.2,<4.8.10
+psutil
+pyprog
+beautifulsoup4
 bs4
 lxml
 requests

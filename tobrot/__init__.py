@@ -2,14 +2,17 @@
 # -*- coding: utf-8 -*-
 # (c) Shrimadhav U K | gautamajay52 | MaxxRider
 
+import asyncio
 import logging
 import os
 import time
-from logging.handlers import RotatingFileHandler
 from collections import defaultdict
+from logging.handlers import RotatingFileHandler
 from sys import exit
-
+import urllib.request
 import dotenv
+
+from pyrogram import Client
 
 if os.path.exists("TorrentLeech-Gdrive.txt"):
     with open("Torrentleech-Gdrive.txt", "r+") as f_d:
@@ -27,7 +30,7 @@ logging.basicConfig(
         logging.StreamHandler(),
     ],
 )
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 logging.getLogger("PIL").setLevel(logging.WARNING)
 
@@ -68,9 +71,7 @@ AUTH_CHANNEL.append(OWNER_ID)
 # chunk size that should be used with requests
 CHUNK_SIZE = int(os.environ.get("CHUNK_SIZE", "128"))
 # default thumbnail to be used in the videos
-DEF_THUMB_NAIL_VID_S = os.environ.get(
-    "DEF_THUMB_NAIL_VID_S", "https://telegra.ph/file/3a7f09b89943b51cdba38.jpg"
-)
+DEF_THUMB_NAIL_VID_S = os.environ.get("DEF_THUMB_NAIL_VID_S", "https://telegra.ph/file/3a7f09b89943b51cdba38.jpg")
 # maximum message length in Telegram
 MAX_MESSAGE_LENGTH = 4096
 # set timeout for subprocess
@@ -79,10 +80,8 @@ PROCESS_MAX_TIMEOUT = 3600
 SP_LIT_ALGO_RITH_M = os.environ.get("SP_LIT_ALGO_RITH_M", "hjs")
 ARIA_TWO_STARTED_PORT = int(os.environ.get("ARIA_TWO_STARTED_PORT", "6800"))
 EDIT_SLEEP_TIME_OUT = int(os.environ.get("EDIT_SLEEP_TIME_OUT", "15"))
-MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START = int(
-    os.environ.get("MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START", 300)
-)
-MAX_TG_SPLIT_FILE_SIZE = int(os.environ.get("MAX_TG_SPLIT_FILE_SIZE", "2097152000"))
+MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START = int(os.environ.get("MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START", 600))
+MAX_TG_SPLIT_FILE_SIZE = int(os.environ.get("MAX_TG_SPLIT_FILE_SIZE", "1072864000"))
 # add config vars for the display progress
 FINISHED_PROGRESS_STR = os.environ.get("FINISHED_PROGRESS_STR", "█")
 UN_FINISHED_PROGRESS_STR = os.environ.get("UN_FINISHED_PROGRESS_STR", "░")
@@ -90,20 +89,18 @@ UN_FINISHED_PROGRESS_STR = os.environ.get("UN_FINISHED_PROGRESS_STR", "░")
 TG_OFFENSIVE_API = os.environ.get("TG_OFFENSIVE_API", None)
 CUSTOM_FILE_NAME = os.environ.get("CUSTOM_FILE_NAME", "")
 LEECH_COMMAND = os.environ.get("LEECH_COMMAND", "leech")
-LEECH_UNZIP_COMMAND = os.environ.get("LEECH_UNZIP_COMMAND", "extract")
-LEECH_ZIP_COMMAND = os.environ.get("LEECH_ZIP_COMMAND", "archive")
+LEECH_UNZIP_COMMAND = os.environ.get("LEECH_UNZIP_COMMAND", "leechunzip")
+LEECH_ZIP_COMMAND = os.environ.get("LEECH_ZIP_COMMAND", "leechzip")
 GLEECH_COMMAND = os.environ.get("GLEECH_COMMAND", "gleech")
 GLEECH_UNZIP_COMMAND = os.environ.get("GLEECH_UNZIP_COMMAND", "gleechunzip")
 GLEECH_ZIP_COMMAND = os.environ.get("GLEECH_ZIP_COMMAND", "gleechzip")
 YTDL_COMMAND = os.environ.get("YTDL_COMMAND", "ytdl")
 GYTDL_COMMAND = os.environ.get("GYTDL_COMMAND", "gytdl")
 RCLONE_CONFIG = os.environ.get("RCLONE_CONFIG", "")
-DESTINATION_FOLDER = os.environ.get("DESTINATION_FOLDER", "Maxx TD")
+DESTINATION_FOLDER = os.environ.get("DESTINATION_FOLDER", "Maxx-TD")
 INDEX_LINK = os.environ.get("INDEX_LINK", "")
-TELEGRAM_LEECH_COMMAND = os.environ.get("TELEGRAM_LEECH_COMMAND", "tgfile_leech")
-TELEGRAM_LEECH_UNZIP_COMMAND = os.environ.get(
-    "TELEGRAM_LEECH_UNZIP_COMMAND", "tgfile_extract"
-)
+TELEGRAM_LEECH_COMMAND = os.environ.get("TELEGRAM_LEECH_COMMAND", "tleech")
+TELEGRAM_LEECH_UNZIP_COMMAND = os.environ.get("TELEGRAM_LEECH_UNZIP_COMMAND", "tleechunzip")
 CANCEL_COMMAND_G = os.environ.get("CANCEL_COMMAND_G", "cancel")
 GET_SIZE_G = os.environ.get("GET_SIZE_G", "getsize")
 STATUS_COMMAND = os.environ.get("STATUS_COMMAND", "status")
@@ -117,14 +114,29 @@ CLONE_COMMAND_G = os.environ.get("CLONE_COMMAND_G", "gclone")
 UPLOAD_COMMAND = os.environ.get("UPLOAD_COMMAND", "upload")
 RENEWME_COMMAND = os.environ.get("RENEWME_COMMAND", "renewme")
 RENAME_COMMAND = os.environ.get("RENAME_COMMAND", "rename")
-TOGGLE_VID = os.environ.get("TOGGLE_VID", "upload_vid")
-TOGGLE_DOC = os.environ.get("TOGGLE_DOC", "upload_doc")
+TOGGLE_VID = os.environ.get("TOGGLE_VID", "togglevid")
+TOGGLE_DOC = os.environ.get("TOGGLE_DOC", "toggledoc")
+RCLONE_COMMAND = os.environ.get("RCLONE_COMMAND", "rclone")
+HELP_COMMAND = os.environ.get("HELP_COMMAND", "help")
 BOT_START_TIME = time.time()
 # dict to control uploading and downloading
 gDict = defaultdict(lambda: [])
 # user settings dict #ToDo
 user_settings = defaultdict(lambda: {})
+gid_dict = defaultdict(lambda: [])
+_lock = asyncio.Lock()
 
+# Rclone Config Via any raw url
+###########################################################################
+try:                                                                      #
+    RCLONE_CONF_URL = os.environ.get('RCLONE_CONF_URL', "")               #
+    if len(RCLONE_CONF_URL) == 0:                                         #
+        RCLONE_CONF_URL = None                                            #
+    else:                                                                 #
+        urllib.request.urlretrieve(RCLONE_CONF_URL, '/app/rclone.conf')   #
+except KeyError:                                                          #
+    RCLONE_CONF_URL = None                                                #
+###########################################################################
 
 def multi_rclone_init():
     if RCLONE_CONFIG:
@@ -140,3 +152,6 @@ def multi_rclone_init():
 
 
 multi_rclone_init()
+
+app = Client("LeechBot", bot_token=TG_BOT_TOKEN, api_id=APP_ID, api_hash=API_HASH, workers=343)
+

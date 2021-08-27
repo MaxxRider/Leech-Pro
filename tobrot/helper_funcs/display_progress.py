@@ -77,12 +77,12 @@ class Progress:
             elapsed_time = TimeFormatter(milliseconds=elapsed_time)
             estimated_total_time = TimeFormatter(milliseconds=estimated_total_time)
 
-            progress = "<b>╭────── ⌊__UploadinG: 〘{2}%〙 📤__⌉</b>\n│ \n<b>├〖{0}{1}〗</b>\n".format(
+            progress = "\n<code>{0}{1} {2}%</code>\n".format(
                 ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 5))]),
                 ''.join([UN_FINISHED_PROGRESS_STR for i in range(20 - math.floor(percentage / 5))]),
                 round(percentage, 2))
             #cpu = "{psutil.cpu_percent()}%"
-            tmp = progress +"│" + "\n**├Total 📀:**   〘<code>{1}</code>〙\n**├Done ✓ :** 〘<code>{0}</code>〙\n**├Speed** 🚀 :  〘<code>{2}/s</code>〙\n**├ETA** ⏳ :  〘<code>{3}</code>〙\n**│**\n**╰── ⌊ @TGFilmZone ⌉**".format(
+            tmp = progress + "\n**• Total 📀:**`〘{1}〙`\n**• Done ✓ :**` 〘{0}〙`\n**• Speed 🚀 :** `〘{2}〙`\n**• ETA ⏳ :**` 〘{3}〙`".format(
                 humanbytes(current),
                 humanbytes(total),
                 humanbytes(speed),
@@ -113,7 +113,7 @@ def humanbytes(size):
         return ""
     power = 2 ** 10
     n = 0
-    Dic_powerN = {0: " ", 1: "K", 2: "M", 3: "G", 4: "Ti"}
+    Dic_powerN = {0: " ", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
     while size > power:
         size /= power
         n += 1
