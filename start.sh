@@ -8,10 +8,17 @@ ran=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)
 ###### Done Addding Files ######
 
 
-if [[ -n $RCLONE_CONFIG ]]; then
- echo "Rclone config detected"
- echo -e "$RCLONE_CONFIG" > /app/rclone.conf
+if [[ -n $RCLONE_CONFIG_URL ]]; then
+  echo "Rclone config detected 📁📁"
+  wget -q $RCLONE_CONFIG_URL -O /app/rclone.conf
 fi
+
+if [[ -n $CONFIG_ENV_URL ]]; then
+  echo " Found config.env File 📁📁 "
+	wget -q $CONFIG_ENV_URL -O /app/config.env
+fi
+
+
 
 echo "Starting Your Bot... 👾👾"
 python3 -m tobrot
