@@ -126,8 +126,15 @@
 [![MaxxRider](https://telegra.ph/file/aac59f2f35ee73b63019e.png)](https://telegram.dog/MaxxRiderz)]
 
     
-# CREDITS
-    Will Give Credits To All Soon 
-    please don't misunderstand us
+## CREDITS
+
+ - [GautamKumar](https://github.com/gautamajay52/TorrentLeech-Gdrive) 😬
+ - [SpEcHiDe](https://github.com/SpEcHiDe/PublicLeech) for his wonderful code😚
+ - [Rclone Team](https://rclone.org) for theirs awesome tool☁️
+ - [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
+ - [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
+ - [@AjeeshNair](https://telegram.dog/AjeeshNait) for his [torrent.ajee.sh](https://torrent.ajee.sh)
+ - [@gotstc](https://telegram.dog/gotstc), @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir) for their TORRENT groups
+ - [XcodersHub](https://github.com/XcodersHub) For The Aria2 Config & Little More
 
    
