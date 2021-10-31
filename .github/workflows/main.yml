@@ -19,4 +19,4 @@ jobs:
           stack: "container"
           region: "eu"
         env:
-          HD_CONFIG_ENV_URL: ${{secrets.CONFIG_ENV_URL}}
+          HD_CONFIG_ENV_URL: ${{secrets.CONFIG_FILE_URL}}
