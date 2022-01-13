@@ -26,7 +26,7 @@ async def yt_playlist_downg(message, i_m_sefg, client, G_DRIVE):
     except:
         pass
     cmd = [
-        "youtube-dl",
+        "yt-dlp",
         "-i",
         "-f",
         "bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4",
