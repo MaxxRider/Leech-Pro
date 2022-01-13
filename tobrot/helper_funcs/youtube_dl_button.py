@@ -96,7 +96,7 @@ async def youtube_dl_call_back(bot, update):
     thumb_image = response_json.get("thumbnail", thumb_image)
     if tg_send_type == "audio":
         command_to_exec = [
-            "youtube-dl",
+            "yt-dlp",
             "-c",
             "--prefer-ffmpeg",
             "--extract-audio",
@@ -118,7 +118,7 @@ async def youtube_dl_call_back(bot, update):
                 break
 
         command_to_exec = [
-            "youtube-dl",
+            "yt-dlp",
             "-c",
             "--embed-subs",
             "-f",
