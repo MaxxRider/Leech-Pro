@@ -113,24 +113,24 @@
 
 ## Default Command (if you not put Optional vars in Heroku)
 
-• `/leech`
-• `/ytdl`
-• `/extract`
-• `/savethumbnail`
-• `/deletethumbnail`
-• `/playlist`
-• `/archive`
-• `/togglefile`
-• `/togglevideo`
-• `/rename`
-• `/renewme`
-• `/gleech`
-• `/gpytdl`
-• `/gleech_archive`
-• `/gleech_extract`
-• `/gclone`
-• `/cancel`
-• `/status`
+`/leech`
+`/ytdl`
+`/extract`
+`/savethumbnail`
+`/deletethumbnail`
+`/playlist`
+`/archive`
+`/togglefile`
+`/togglevideo`
+`/rename`
+`/renewme`
+`/gleech`
+`/gpytdl`
+`/gleech_archive`
+`/gleech_extract`
+`/gclone`
+`/cancel`
+`/status`
 
 
 [![Maxx](https://telegra.ph/file/3066ec5102c94b8135e09.png)](https://t.me/MaxxBotChat)
