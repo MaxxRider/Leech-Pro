@@ -2,9 +2,9 @@ aiohttp
 aria2p==0.9.1
 hachoir
 Pillow
-pyrogram
+pyrogram==1.3.0
 tgcrypto
-youtube_dl
+yt_dlp
 hurry.filesize
 python-dotenv
 psutil

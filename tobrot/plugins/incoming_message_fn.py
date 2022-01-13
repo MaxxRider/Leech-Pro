@@ -163,7 +163,7 @@ async def incoming_youtube_dl_f(client, message):
         await i_m_sefg.edit("<b>🐈 Oops Reply To YTDL Supported Link.</b>")
         return
     if dl_url is not None:
-        await i_m_sefg.edit_text("Extracting Links...")
+        await i_m_sefg.edit_text("<b>Getting Available Formate</b>...")
         # create an unique directory
         user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
         # create download directory, if not exist

@@ -16,7 +16,7 @@ async def extract_youtube_dl_formats(
     url, cf_name, yt_dl_user_name, yt_dl_pass_word, user_working_dir
 ):
     command_to_exec = [
-        "youtube-dl",
+        "yt-dlp",
         "--no-warnings",
         "--youtube-skip-dash-manifest",
         "--no-check-certificate",

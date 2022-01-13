@@ -110,6 +110,46 @@
 
 * `DESTINATION_FOLDER`: Name of your folder in ur respective drive where you want to upload the files using the bot.
 
+
+## Default Command (if you not put Optional vars in Heroku)
+
+➢ `/leech`
+
+➢ `/ytdl`
+
+➢ `/extract`
+
+➢ `/savethumbnail`
+
+➢ `/deletethumbnail`
+
+➢ `/playlist`
+
+➢ `/archive`
+
+➢ `/togglefile`
+
+➢ `/togglevideo`
+
+➢ `/rename`
+
+➢ `/renewme`
+
+➢ `/gleech`
+
+➢ `/gpytdl`
+
+➢ `/gleech_archive`
+
+➢ `/gleech_extract`
+
+➢ `/gclone`
+
+➢ `/cancel`
+
+➢ `/status`
+
+
 [![Maxx](https://telegra.ph/file/3066ec5102c94b8135e09.png)](https://t.me/MaxxBotChat)
 
 🔴 <b> Currently Support HEORKO . But not permanent ☹️🤧 Coz Heroku won't allow Torrent Things</b>.
@@ -123,7 +163,7 @@
 <p><a href="https://github.com/MaxxRider/Leech-Pro/wiki/Deploy-To-Heroku"> <img src=https://img.shields.io/badge/Deploy%20Guide-blueviolet?style=for-the-badge&logo=heroku" width="200"</a></p>
 
 
-[![MaxxRider](https://telegra.ph/file/aac59f2f35ee73b63019e.png)](https://telegram.dog/MaxxRiderz)]
+[![MaxxRider](https://telegra.ph/file/aac59f2f35ee73b63019e.png)](https://telegram.dog/MaxxRiderz)
 
     
 ## CREDITS
