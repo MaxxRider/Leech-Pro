@@ -79,7 +79,7 @@ async def incoming_message_f(client, message):
         LOGGER.info(dl_url)
 
     else:
-        await i_m_sefg.edit("<b>Hey Dude !</b>\n\n 🐈 <code>Reply with Direct /Torrent Link</code>")
+        await i_m_sefg.edit("<b>Hey Dude !</b>\n\n 😎 <code>Reply with Direct /Torrent Link</code>")
         return
     if dl_url is not None:
 
