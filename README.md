@@ -1,8 +1,7 @@
 ![MAXX LEECH V2](https://telegra.ph/file/af8f0596124714a17e4e2.png)
 
-╔══════════════════════════════════════════╗
-       🚀 MAXX LEECH V2 — ULTRA MIRROR BOT
-╚══════════════════════════════════════════╝
+╔══════════════════════════════╗       🚀 MAXX LEECH V2 — BOT
+╚══════════════════════════════╝
 
 ## 👉 **Original Repository**
 https://github.com/gautamajay52/TorrentLeech-Gdrive
@@ -45,17 +44,17 @@ https://github.com/gautamajay52/TorrentLeech-Gdrive
 # 🔑 **Mandatory Variables**
 
 ### `TG_BOT_TOKEN`
-Create bot → Get token via **@BotFather**.
+Get via **@BotFather**.
 
 ### `APP_ID` & `API_HASH`
-Get them from: https://my.telegram.org/apps  
-> If Telegram is blocked: https://telegram.dog/UseTGXBot
+https://my.telegram.org/apps  
+> If Telegram blocked → https://telegram.dog/UseTGXBot
 
 ### `AUTH_CHANNEL`
 Create Supergroup → Add **@GoogleIMGBot** → Send `/id`.
 
 ### `OWNER_ID`
-Bot owner’s Telegram ID.
+Bot owner's Telegram ID.
 
 ---
 
@@ -63,7 +62,13 @@ Bot owner’s Telegram ID.
 
 ---
 
-# 🛠️ **Optional Configuration Variables**
+# 🛠️ **Optional Configuration Variables**  
+### *(Tap to Expand — Makes README Short & Clean)*
+
+<details>
+<summary>CLICK HERE TO VIEW OPTIONAL VARIABLES</summary>
+
+<br>
 
 * `DOWNLOAD_LOCATION`
 
@@ -127,9 +132,17 @@ Bot owner’s Telegram ID.
 
 * `DESTINATION_FOLDER`: Name of your folder in ur respective drive where you want to upload the files using the bot.
 
+</details>
+
 ---
 
-# 📌 **Default Commands (when optional vars not set)**
+# 📌 **Default Commands (when optional vars not set)**  
+### *(Tap to Expand)*
+
+<details>
+<summary>CLICK HERE TO VIEW DEFAULT COMMANDS</summary>
+
+<br>
 
 
 ➢ `/leech`
@@ -169,6 +182,8 @@ Bot owner’s Telegram ID.
 ➢ `/status`
 
 
+</details>
+
 ---
 
 [![Maxx](https://telegra.ph/file/3066ec5102c94b8135e09.png)](https://t.me/MaxxBotChat)
@@ -176,8 +191,8 @@ Bot owner’s Telegram ID.
 ---
 
 # 🔴 **Heroku Support Notice**
-Heroku is supported **for now**, but NOT permanent —  
-Torrents violate Heroku policy.
+Heroku works **for now**, but not guaranteed forever because  
+**torrent workloads violate Heroku policies**.
 
 ---
 
@@ -187,8 +202,7 @@ Torrents violate Heroku policy.
 ---
 
 # ⭐ **Support the Project**
-Give a ★ star on GitHub —  
-It supports the developer 😄
+**Please give a ★ on GitHub — it motivates the developer! 😄**
 
 ---
 
@@ -198,24 +212,10 @@ It supports the developer 😄
 </a>
 </p>
 
-[![MaxxRider](https://telegra.ph/file/aac59f2f35ee73b63019e.png)](https://telegram.dog/MaxxRiderz)
-
 ---
 
-# 👑 **Credits**
-
-- [GautamKumar](https://github.com/gautamajay52/TorrentLeech-Gdrive)  
-- [SpEcHiDe](https://github.com/SpEcHiDe/PublicLeech)  
-- [Rclone Team](https://rclone.org)  
-- [Dan Tès](https://telegram.dog/haskell) — Creator of Pyrogram  
-- [Robots](https://telegram.dog/Robots) — Creator of **@UploadBot**  
-- [@AjeeshNair](https://telegram.dog/AjeeshNait) — https://torrent.ajee.sh  
-- @gotstc, @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir)
-
----
-
-# 🛰️ **REPOSITORY DASHBOARD**  
-### *Auto-updating analytics panel*
+# 🛰️ **DIGITAL REPOSITORY DASHBOARD**  
+### *Auto-updating futuristic analytics panel*
 
 <p align="center">
 
@@ -242,3 +242,12 @@ It supports the developer 😄
 </p>
 
 ---
+
+# 👑 **Credits**
+- [GautamKumar](https://github.com/gautamajay52/TorrentLeech-Gdrive)  
+- [SpEcHiDe](https://github.com/SpEcHiDe/PublicLeech)  
+- [Rclone Team](https://rclone.org)  
+- [Dan Tès](https://telegram.dog/haskell) — Creator of Pyrogram  
+- [Robots](https://telegram.dog/Robots) — Creator of @UploadBot  
+- [@AjeeshNair](https://telegram.dog/AjeeshNait) — https://torrent.ajee.sh  
+- @gotstc, @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir)
