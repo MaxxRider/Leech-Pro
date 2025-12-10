@@ -1,7 +1,6 @@
 ![MAXX LEECH V2](https://telegra.ph/file/af8f0596124714a17e4e2.png)
 
-╔══════════════════════════════╗       🚀 MAXX LEECH V2 — BOT
-╚══════════════════════════════╝
+# 🧲 MAXX LEECH PRO 
 
 ## 👉 **Original Repository**
 https://github.com/gautamajay52/TorrentLeech-Gdrive
@@ -63,10 +62,10 @@ Bot owner's Telegram ID.
 ---
 
 # 🛠️ **Optional Configuration Variables**  
-### *(Tap to Expand — Makes README Short & Clean)*
+### *(Tap to Expand *
 
 <details>
-<summary>CLICK HERE TO VIEW OPTIONAL VARIABLES</summary>
+<summary>🔘 CLICK HERE TO VIEW OPTIONAL VARIABLES</summary>
 
 <br>
 
@@ -140,7 +139,7 @@ Bot owner's Telegram ID.
 ### *(Tap to Expand)*
 
 <details>
-<summary>CLICK HERE TO VIEW DEFAULT COMMANDS</summary>
+<summary>🔘 CLICK HERE TO VIEW DEFAULT COMMANDS</summary>
 
 <br>
 
@@ -251,3 +250,27 @@ Heroku works **for now**, but not guaranteed forever because
 - [Robots](https://telegram.dog/Robots) — Creator of @UploadBot  
 - [@AjeeshNair](https://telegram.dog/AjeeshNait) — https://torrent.ajee.sh  
 - @gotstc, @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir)
+
+
+
+## 🔗 Connect With Me
+
+<p align="left">
+
+<a href="https://instagram.com/hanif_max">
+  <img src="https://img.shields.io/badge/Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
+</a>
+
+<a href="https://x.com/MaxxBots">
+  <img src="https://img.shields.io/badge/Twitter(X)-000000?style=for-the-badge&logo=x&logoColor=white" />
+</a>
+
+<a href="https://t.me/maxxbots">
+  <img src="https://img.shields.io/badge/Telegram%20Channel-0088cc?style=for-the-badge&logo=telegram&logoColor=white" />
+</a>
+
+<a href="https://github.com/MaxxRider">
+  <img src="https://img.shields.io/badge/GitHub-171515?style=for-the-badge&logo=github&logoColor=white" />
+</a>
+
+</p>
