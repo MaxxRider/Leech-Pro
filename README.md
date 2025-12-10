@@ -1,16 +1,23 @@
 ![MAXX LEECH V2](https://telegra.ph/file/af8f0596124714a17e4e2.png)
 
-## 👉 [Orginal Repository](https://github.com/gautamajay52/TorrentLeech-Gdrive)
+╔══════════════════════════════════════════╗
+       🚀 MAXX LEECH V2 — ULTRA MIRROR BOT
+╚══════════════════════════════════════════╝
+
+## 👉 **Original Repository**
+https://github.com/gautamajay52/TorrentLeech-Gdrive
 
 ![Maxx](https://telegra.ph/file/d18fa7fa33f26f733adb9.png)
 
-## **Don't Kill Heroku please ☹️**
+---
 
+## ⚠️ **Please Don't Kill Heroku ☹️**
 [![MAXX LEECH](https://telegra.ph/file/29d788a656dd517eafd0a.png)](https://telegram.dog/MaxxBots)
 
+---
 
+# ✨ **Features & Benefits** :-
 
-# Benefits :-
     ✓ Google Drive link cloning using gclone.(wip)
     ✓ Telegram File mirrorring to cloud along with its unzipping, unrar and untar
     ✓ Drive/Teamdrive support/All other cloud services rclone.org supports
@@ -29,24 +36,34 @@
     ✓ Changing rclone destination config on fly (By using `/rlcone` in private mode)
     ✓
 
-[![Maxx](https://telegra.ph/file/f3f3b950c2904756bb201.png)](https://t.me/MaxxRiderz) 👇
+---
 
-##### Mandatory Variables
+[![Maxx](https://telegra.ph/file/f3f3b950c2904756bb201.png)](https://t.me/MaxxRiderz)
 
-* `TG_BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
+---
 
-* `APP_ID`
-* `API_HASH`: Get these two values from [my.telegram.org/apps](https://my.telegram.org/apps).
-  * N.B.: if Telegram is blocked by your ISP, try our [Telegram bot](https://telegram.dog/UseTGXBot) to get the IDs.
+# 🔑 **Mandatory Variables**
 
-* `AUTH_CHANNEL`: Create a Super Group in Telegram, add `@GoogleIMGBot` to the group, and send /id in the chat, to get this value.
+### `TG_BOT_TOKEN`
+Create bot → Get token via **@BotFather**.
 
-* `OWNER_ID`: ID of the bot owner, He/she can be abled to access bot in bot only mode too(private mode).
+### `APP_ID` & `API_HASH`
+Get them from: https://my.telegram.org/apps  
+> If Telegram is blocked: https://telegram.dog/UseTGXBot
 
+### `AUTH_CHANNEL`
+Create Supergroup → Add **@GoogleIMGBot** → Send `/id`.
+
+### `OWNER_ID`
+Bot owner’s Telegram ID.
+
+---
 
 [![Maxx](https://telegra.ph/file/7e3a50f29f871defe0bcb.png)](https://t.me/MaxxBots)
 
-##### Optional Configuration Variables
+---
+
+# 🛠️ **Optional Configuration Variables**
 
 * `DOWNLOAD_LOCATION`
 
@@ -110,8 +127,10 @@
 
 * `DESTINATION_FOLDER`: Name of your folder in ur respective drive where you want to upload the files using the bot.
 
+---
 
-## Default Command (if you not put Optional vars in Heroku)
+# 📌 **Default Commands (when optional vars not set)**
+
 
 ➢ `/leech`
 
@@ -150,28 +169,76 @@
 ➢ `/status`
 
 
+---
+
 [![Maxx](https://telegra.ph/file/3066ec5102c94b8135e09.png)](https://t.me/MaxxBotChat)
 
-🔴 <b> Currently Support HEORKO . But not permanent ☹️🤧 Coz Heroku won't allow Torrent Things</b>.
+---
 
-## ARE YOU NEW ??? Then READ Full 👉 [Instructions](https://GitHub.com/MaxxRider/About-Leech)
+# 🔴 **Heroku Support Notice**
+Heroku is supported **for now**, but NOT permanent —  
+Torrents violate Heroku policy.
 
+---
 
-🤧 <b> Before Deploy 𝗣𝗹𝗲𝗮𝘀𝗲 𝗛𝗶𝘁 𝗦𝘁𝗮𝗿 ★ else you are Gay</b>
+# 📘 **New User? Read Full Guide**
+👉 https://GitHub.com/MaxxRider/About-Leech
 
+---
 
-<p><a href="https://github.com/MaxxRider/Leech-Pro/wiki/Deploy-To-Heroku"> <img src=https://img.shields.io/badge/Deploy%20Guide-blueviolet?style=for-the-badge&logo=heroku" width="200"</a></p>
+# ⭐ **Support the Project**
+Give a ★ star on GitHub —  
+It supports the developer 😄
 
+---
+
+<p>
+<a href="https://github.com/MaxxRider/Leech-Pro/wiki/Deploy-To-Heroku">
+  <img src="https://img.shields.io/badge/Deploy%20Guide-blueviolet?style=for-the-badge&logo=heroku" width="200">
+</a>
+</p>
 
 [![MaxxRider](https://telegra.ph/file/aac59f2f35ee73b63019e.png)](https://telegram.dog/MaxxRiderz)
 
-    
-## CREDITS
+---
 
- - [GautamKumar](https://github.com/gautamajay52/TorrentLeech-Gdrive) 😬
- - [SpEcHiDe](https://github.com/SpEcHiDe/PublicLeech) for his wonderful code😚
- - [Rclone Team](https://rclone.org) for theirs awesome tool☁️
- - [Dan Tès](https://telegram.dog/haskell) for his [Pyrogram Library](https://github.com/pyrogram/pyrogram)
- - [Robots](https://telegram.dog/Robots) for their [@UploadBot](https://telegram.dog/UploadBot)
- - [@AjeeshNair](https://telegram.dog/AjeeshNait) for his [torrent.ajee.sh](https://torrent.ajee.sh)
- - [@gotstc](https://telegram.dog/gotstc), @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir) for their TORRENT groups
+# 👑 **Credits**
+
+- [GautamKumar](https://github.com/gautamajay52/TorrentLeech-Gdrive)  
+- [SpEcHiDe](https://github.com/SpEcHiDe/PublicLeech)  
+- [Rclone Team](https://rclone.org)  
+- [Dan Tès](https://telegram.dog/haskell) — Creator of Pyrogram  
+- [Robots](https://telegram.dog/Robots) — Creator of **@UploadBot**  
+- [@AjeeshNair](https://telegram.dog/AjeeshNait) — https://torrent.ajee.sh  
+- @gotstc, @aryanvikash, [@HasibulKabir](https://telegram.dog/HasibulKabir)
+
+---
+
+# 🛰️ **REPOSITORY DASHBOARD**  
+### *Auto-updating analytics panel*
+
+<p align="center">
+
+<!-- Repo Stats -->
+<img src="https://github-readme-stats.vercel.app/api/pin/?username=MaxxRider&repo=Leech-Pro&theme=tokyonight&hide_border=true" height="150px"/>
+
+<br>
+
+<!-- Repo Activity Graph -->
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=MaxxRider&repo=Leech-Pro&theme=react-dark&hide_border=true&area=true"/>
+
+<br>
+
+<!-- Contribution + Streak -->
+<img src="https://github-readme-stats.vercel.app/api?username=MaxxRider&show_icons=true&theme=tokyonight&hide_border=true" height="160px"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=MaxxRider&theme=tokyonight&hide_border=true" height="160px"/>
+
+<br>
+
+<!-- Views & Clones -->
+<img src="https://img.shields.io/github/views/MaxxRider/Leech-Pro?label=Repo%20Views&style=for-the-badge&color=00eaff"/>
+<img src="https://img.shields.io/github/clones/MaxxRider/Leech-Pro?label=Repo%20Clones&style=for-the-badge&color=ff00d4"/>
+
+</p>
+
+---
